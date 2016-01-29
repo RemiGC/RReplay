@@ -1,0 +1,72 @@
+﻿<Window x:Class="RDReplay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="685.2" Width="1134.162">
+    <Window.Resources>
+        <DataTemplate x:Key="HeaderTemplateArrowUp">
+            <DockPanel LastChildFill="True" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GridViewColumnHeader}}}">
+                <Path x:Name="arrowUp" StrokeThickness="1" Fill="Gray" Data="M 5,10 L 15,10 L 10,5 L 5,10" DockPanel.Dock="Right" Width="20" HorizontalAlignment="Right" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+                <TextBlock Text="{Binding }" />
+            </DockPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="HeaderTemplateArrowDown">
+            <DockPanel LastChildFill="True" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GridViewColumnHeader}}}">
+                <Path x:Name="arrowDown" StrokeThickness="1" Fill="Gray"  Data="M 5,5 L 10,10 L 15,5 L 5,5" DockPanel.Dock="Right" Width="20" HorizontalAlignment="Right" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+                <TextBlock Text="{Binding }" />
+            </DockPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ListView Name="lstReplays" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" SelectionChanged="lstReplays_SelectionChanged" GridViewColumnHeader.Click="lstReplays_ColumnHeaderClickedHandler">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Filename}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Filename" HorizontalContentAlignment="Left" MinWidth="150" Name="Filename" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Date" HorizontalContentAlignment="Left" MinWidth="150" Name="Date" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=GameMap}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Map" HorizontalContentAlignment="Left" MinWidth="150" Name="GameMap" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Players Count" HorizontalContentAlignment="Left" MinWidth="50" Name="PlayerCount" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=GameServerName}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="ServerName" HorizontalContentAlignment="Left" MinWidth="150" Name="GameServerName" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Name="lstPlayers" Grid.Column="1" Grid.Row="0"  GridViewColumnHeader.Click="lstPlayers_ColumnHeaderClickedHandler" MouseDoubleClick="lstPlayers_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="PlayerName" DisplayMemberBinding="{Binding PlayerName}"/>
+                    <GridViewColumn Header="PlayerDeckName" DisplayMemberBinding="{Binding PlayerDeckName}"/>
+                    <GridViewColumn Header="PlayerDeckContent" DisplayMemberBinding="{Binding PlayerDeckContent}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
