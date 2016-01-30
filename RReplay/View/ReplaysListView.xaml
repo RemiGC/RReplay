@@ -1,0 +1,27 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="RReplay.View.ReplaysListView"
+        mc:Ignorable="d ignore" Height="105" Width="719"
+    MinHeight="200"
+    MinWidth="600">
+
+    <UserControl.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Replays}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="File Name"/>
+                <DataGridTextColumn Binding="{Binding Date, Mode=OneWay, StringFormat=\{0:g\}}" Header="Date"/>
+                <DataGridTextColumn Binding="{Binding Map, Mode=OneWay}" Header="Map"/>
+                <DataGridTextColumn Binding="{Binding ServerName, Mode=OneWay}"  Header="Server"/>
+                <DataGridTextColumn Binding="{Binding GameType}" Header="Game Type"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
