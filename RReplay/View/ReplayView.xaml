@@ -6,6 +6,7 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         MinHeight="340"
+        Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RowDefinition}}, Path=Height}"
         DataContext="{Binding Main.SelectedReplay, Source={StaticResource Locator}}" >
     <UserControl.Resources>
         <DataTemplate x:Key="PlayerTemplate" >
@@ -42,11 +43,15 @@
 
 
     <Grid Margin="10,10,10,10">
-        <StackPanel >
-        <Label FontSize="16">Team 1</Label>
-        <ListBox x:Name="firstTeamListBox" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding FirstTeamPlayers}"  Height="160" VerticalAlignment="Top" />
-         <Label FontSize="16">Team 2</Label>
-        <ListBox x:Name="secondTeamListBox" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding SecondTeamPlayers}"  Height="160" VerticalAlignment="Top"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31.28"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="31.28"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" FontSize="16">Team 1</Label>
+        <ListBox Grid.Row="1" x:Name="firstTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding FirstTeamPlayers}"/>
+        <Label Grid.Row="2" FontSize="16">Team 2</Label>
+        <ListBox Grid.Row="3" x:Name="secondTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding SecondTeamPlayers}"/>
     </Grid>
 </UserControl>

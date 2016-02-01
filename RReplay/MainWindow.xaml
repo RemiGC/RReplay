@@ -9,6 +9,7 @@
         xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d ignore"
         Height="724.5"
+        MinHeight="680"
         Width="796.915"
         Title="RReplay"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -30,7 +31,7 @@
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="380"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <views:ReplaysListView Grid.Column="0" Grid.Row="0" Height="Auto" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
         <views:ReplayView Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,0,0" />
