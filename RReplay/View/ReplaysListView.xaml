@@ -15,6 +15,12 @@
 
     <Grid>
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Replays}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}"/>
+                    <MenuItem Header="Save JSON..." />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="File Name"/>
                 <DataGridTextColumn Binding="{Binding Date, Mode=OneWay, StringFormat=\{0:g\}}" Header="Date"/>

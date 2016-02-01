@@ -37,6 +37,15 @@ namespace RReplay.Model
             }
         }
 
+        public string JSONDumbFromFile
+        {
+            get
+            {
+                JObject jo = JObject.Parse(ExtractJSONFromReplayFile(CompletePath));
+                return jo.ToString(Newtonsoft.Json.Formatting.Indented);
+            }
+        }
+
         public List<Player> Players
         {
             private set;

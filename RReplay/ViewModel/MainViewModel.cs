@@ -1,7 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using RReplay.Model;
+using RReplay.Properties;
+using RReplay.View;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace RReplay.ViewModel
@@ -21,19 +24,34 @@ namespace RReplay.ViewModel
         public const string SelectedReplayPropertyName = "SelectedReplay";
         private Replay _selectedReplay;
 
+        public RelayCommand<CancelEventArgs> WindowClosingCommand { get; private set; }
+
+
         private RelayCommand<string> _copyDeckCodeCommand;
         public RelayCommand<string> CopyDeckCodeCommand
         {
             get
             {
-                return _copyDeckCodeCommand ?? (_copyDeckCodeCommand = new RelayCommand<string>(CopyDeckCodeToClipboard));
+                return _copyDeckCodeCommand ?? (_copyDeckCodeCommand = new RelayCommand<string>( (value) =>
+                {
+                    Clipboard.SetData(DataFormats.Text, value);
+                }));
             }
         }
 
-        /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
+        private RelayCommand _openReplayJSONView;
+        public RelayCommand OpenReplayJSONView
+        {
+            get
+            {
+                return _openReplayJSONView ?? (_openReplayJSONView = new RelayCommand( () =>
+                {
+                    ReplayJSONView replayJSONView = new ReplayJSONView();
+                    replayJSONView.Show();
+                }));
+            }
+        }
+
         public ObservableCollection<Replay> Replays
         {
             get
@@ -46,16 +64,14 @@ namespace RReplay.ViewModel
             }
         }
 
-        private void CopyDeckCodeToClipboard(string deckCode)
-        {
-            Clipboard.SetData(DataFormats.Text, deckCode);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
         public MainViewModel( IReplayRepository dataService )
         {
+            // Window Closing
+            WindowClosingCommand = new RelayCommand<CancelEventArgs>( (args) =>
+            {
+                Settings.Default.Save();
+            });
+
             _dataService = dataService;
             _dataService.GetData(
                 ( item, error ) =>

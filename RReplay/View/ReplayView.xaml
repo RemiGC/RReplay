@@ -12,19 +12,19 @@
             <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Label FontSize="16" >Name :</Label>
+                        <Label FontSize="14" >Name :</Label>
                         <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
-                        <Label FontSize="16">Player User ID :</Label>
+                        <Label FontSize="14">Player User ID :</Label>
                         <TextBlock FontWeight="Bold" Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label FontSize="16" >Deck :</Label>
+                        <Label FontSize="14" >Deck :</Label>
                         <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label FontSize="16" >Code :</Label>
+                        <Label FontSize="14" >Code :</Label>
                         <TextBlock Width="450"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
                         <Button Width="75" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}">Copy Code</Button>
                     </StackPanel>
