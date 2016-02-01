@@ -14,8 +14,14 @@
                     <StackPanel Orientation="Horizontal">
                         <Label FontSize="14" >Name :</Label>
                         <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
-                        <Label FontSize="14">Player User ID :</Label>
-                        <TextBlock FontWeight="Bold" Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">ID :</Label>
+                        <TextBlock Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">LVL:</Label>
+                        <TextBlock Text="{Binding PlayerLevel, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">Rank:</Label>
+                        <TextBlock Text="{Binding PlayerRank, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">ELO:</Label>
+                        <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label FontSize="14" >Deck :</Label>

@@ -53,6 +53,13 @@ namespace RReplay.Model
             get;
             private set;
         }
+        
+        [JsonProperty]
+        public uint PlayerRank
+        {
+            get;
+            private set;
+        }
 
         [JsonProperty]
         public string PlayerName
