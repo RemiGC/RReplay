@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -6,7 +7,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("RReplay")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple application to see the deck code from other user from a Red Dragon replay file")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("RReplay")]
 [assembly: AssemblyCompany("")]
@@ -49,5 +50,6 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.0.1")]
-[assembly: AssemblyFileVersion("0.0.0.1")]
+[assembly: AssemblyVersion("0.1.*")]
+[assembly: NeutralResourcesLanguage("en")]
+
