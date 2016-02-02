@@ -22,7 +22,11 @@
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Replays}" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}"/>
+                    <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}">
+                        <!-- <MenuItem.Icon>
+                           <Image Source=""></Image>
+                        </MenuItem.Icon>-->
+                    </MenuItem>
                     <MenuItem Header="Browse To" Command="{Binding BrowseToReplayFileCommand}" CommandParameter="{Binding SelectedReplay.CompletePath}"/>
                     <MenuItem Header="Save JSON..." />
                 </ContextMenu>
@@ -31,6 +35,7 @@
                 <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="File Name"/>
                 <DataGridTextColumn Binding="{Binding Date, Mode=OneWay, StringFormat=\{0:g\}}" Header="Date"/>
                 <DataGridTextColumn Binding="{Binding Map, Mode=OneWay}" Header="Map"/>
+                <DataGridTextColumn Binding="{Binding PlayerCount, Mode=OneWay}"  Header="Nb Players"/>
                 <DataGridTextColumn Binding="{Binding ServerName, Mode=OneWay}"  Header="Server"/>
                 <DataGridTextColumn Binding="{Binding GameType, Converter={StaticResource ResourceKey=GameTypeToString}}" Header="Game Type"/>
                 <DataGridTextColumn Binding="{Binding GameMode}" Header="Game Mode"/>

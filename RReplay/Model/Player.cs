@@ -82,6 +82,14 @@ namespace RReplay.Model
             private set;
         }
 
+        public ulong SteamID
+        {
+            get
+            {
+                return UInt64.Parse(this.PlayerAvatar.Remove(0, 25));
+            }
+        }
+
         [JsonProperty]
         public string PlayerDeckName
         {

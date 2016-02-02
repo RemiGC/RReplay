@@ -12,8 +12,8 @@
         <TextBlock Text="{Binding Name, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label>Map :</Label>
         <TextBlock Text="{Binding Map, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label>Map :</Label>
-        <TextBlock Text="{Binding Map, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label>Server Name :</Label>
+        <TextBlock Text="{Binding Game.ServerName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
     </StackPanel>
 </UserControl>

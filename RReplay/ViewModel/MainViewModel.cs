@@ -40,6 +40,20 @@ namespace RReplay.ViewModel
             }
         }
 
+        private RelayCommand<ulong> _openSteamCommunityPageCommand;
+        public RelayCommand<ulong> OpenSteamCommunityPageCommand
+        {
+            get
+            {
+                return _openSteamCommunityPageCommand ?? (_openSteamCommunityPageCommand = new RelayCommand<ulong>(( value ) =>
+                {
+                    string uri = @"http://steamcommunity.com/profiles/" + value.ToString();
+                    System.Diagnostics.Process.Start(uri);
+                }));
+            }
+        }
+
+        //OpenSteamCommunityPage
         private RelayCommand<string> _browseToReplayFileCommand;
         public RelayCommand<string> BrowseToReplayFileCommand
         {
