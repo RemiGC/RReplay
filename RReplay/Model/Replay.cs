@@ -80,6 +80,14 @@ namespace RReplay.Model
         {
             get
             {
+                return Game.GameType;
+            }
+        }
+
+        public int GameMode
+        {
+            get
+            {
                 return Game.GameMode;
             }
         }

@@ -4,29 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="RReplay.View.ReplaysListView"
-        mc:Ignorable="d ignore" Height="105" Width="719"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" xmlns:Converters="clr-namespace:RReplay.Converters" x:Class="RReplay.View.ReplaysListView"
+        mc:Ignorable="d ignore" Height="105" Width="879"
     MinHeight="200"
     MinWidth="600">
+
+    <UserControl.Resources>
+        <Converters:GameModeToString x:Key="GameModeToString"/>
+        <Converters:GameTypeToString x:Key="GameTypeToString"/>
+    </UserControl.Resources>
 
     <UserControl.DataContext>
         <Binding Path="Main" Source="{StaticResource Locator}"/>
     </UserControl.DataContext>
 
     <Grid>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Replays}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Replays}" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}"/>
+                    <MenuItem Header="Browse To" Command="{Binding BrowseToReplayFileCommand}" CommandParameter="{Binding SelectedReplay.CompletePath}"/>
                     <MenuItem Header="Save JSON..." />
                 </ContextMenu>
-            </DataGrid.ContextMenu>
+            </DataGrid.ContextMenu> 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="File Name"/>
                 <DataGridTextColumn Binding="{Binding Date, Mode=OneWay, StringFormat=\{0:g\}}" Header="Date"/>
                 <DataGridTextColumn Binding="{Binding Map, Mode=OneWay}" Header="Map"/>
                 <DataGridTextColumn Binding="{Binding ServerName, Mode=OneWay}"  Header="Server"/>
-                <DataGridTextColumn Binding="{Binding GameType}" Header="Game Type"/>
+                <DataGridTextColumn Binding="{Binding GameType, Converter={StaticResource ResourceKey=GameTypeToString}}" Header="Game Type"/>
+                <DataGridTextColumn Binding="{Binding GameMode}" Header="Game Mode"/>
+                <DataGridTextColumn Binding="{Binding Game.VictoryCond, Mode=OneWay}" Header="Victory"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

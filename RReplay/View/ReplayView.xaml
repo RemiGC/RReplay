@@ -14,7 +14,7 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label FontSize="14" >Name :</Label>
-                        <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+                        <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" ToolTip="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
                         <Label FontSize      ="14">ID :</Label>
                         <TextBlock Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                         <Label FontSize      ="14">LVL:</Label>
@@ -49,6 +49,7 @@
             <RowDefinition Height="31.28"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
         <Label Grid.Row="0" FontSize="16">Team 1</Label>
         <ListBox Grid.Row="1" x:Name="firstTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding FirstTeamPlayers}"/>
         <Label Grid.Row="2" FontSize="16">Team 2</Label>

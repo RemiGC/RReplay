@@ -5,6 +5,7 @@ using RReplay.Properties;
 using RReplay.View;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 
 namespace RReplay.ViewModel
@@ -35,6 +36,18 @@ namespace RReplay.ViewModel
                 return _copyDeckCodeCommand ?? (_copyDeckCodeCommand = new RelayCommand<string>( (value) =>
                 {
                     Clipboard.SetData(DataFormats.Text, value);
+                }));
+            }
+        }
+
+        private RelayCommand<string> _browseToReplayFileCommand;
+        public RelayCommand<string> BrowseToReplayFileCommand
+        {
+            get
+            {
+                return _browseToReplayFileCommand ?? (_browseToReplayFileCommand = new RelayCommand<string>(( value ) =>
+                {
+                    Process.Start("explorer.exe", string.Format("/select,\"{0}\"", value));
                 }));
             }
         }
