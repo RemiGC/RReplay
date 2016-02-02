@@ -5,20 +5,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace RReplay.Model
 {
     public class ReplayRepository : IReplayRepository
     {
-        [DllImport("shell32.dll")]
-        static extern int SHGetKnownFolderPath(
-                                                [MarshalAs(UnmanagedType.LPStruct)] Guid rfid,
-                                                uint dwFlags,
-                                                IntPtr hToken,
-                                                out IntPtr pszPath
-                                                );
-
         public void GetData( Action<ObservableCollection<Replay>, Exception> callback )
         {
             if (ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
@@ -108,7 +99,7 @@ namespace RReplay.Model
             td.Controls.Add(exitApplicationCMDLink);
             td.Icon = TaskDialogStandardIcon.Error;
             td.InstructionText = String.Format("The Replay folder is empty.");
-            td.Text = String.Format("The folder {0} doesn't countains any .wargamerpl2 files.", oldPath);
+            td.Text = String.Format("The folder {0} doesn't contains any .wargamerpl2 files.", oldPath);
 
 
             TaskDialogResult tdResult = td.Show();
