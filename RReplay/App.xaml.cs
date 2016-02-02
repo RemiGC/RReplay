@@ -1,9 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Threading;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using RReplay.Model;
 using RReplay.Properties;
-using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace RReplay
@@ -26,6 +23,15 @@ namespace RReplay
                 Settings.Default.firstRun = false;
                 Settings.Default.replaysFolder = ReplayRepository.GetDefaultReplayGamesFolder();
             }
+            if(!ReplayRepository.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
+            {
+                if(!ReplayRepository.GetNewReplayFolder(Settings.Default.replaysFolder))
+                {
+                    //TODO Find how to force shutdown of the apps.
+                }
+            }
+
+
         }
     }
 }

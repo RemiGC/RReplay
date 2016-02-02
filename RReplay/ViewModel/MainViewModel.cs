@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using RReplay.Model;
 using RReplay.Properties;
 using RReplay.View;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -100,17 +101,7 @@ namespace RReplay.ViewModel
             });
 
             _dataService = dataService;
-            _dataService.GetData(
-                ( item, error ) =>
-                {
-                    if ( error != null )
-                    {
-                        // Report error here
-                        return;
-                    }
-
-                    _Replays = item;
-                });
+            _dataService.GetData(ReceiveData);
 
             if ( IsInDesignMode )
             {
@@ -118,6 +109,29 @@ namespace RReplay.ViewModel
             }
         }
 
+        private void ReceiveData( ObservableCollection<Replay> item, Exception error)
+        {
+            if ( error != null )
+            {
+                if ( error.Message == "EmptyReplaysPath" )
+                {
+                    if ( ReplayRepository.GetNewReplayFolder(Settings.Default.replaysFolder) )
+                    {
+                        _dataService.GetData(ReceiveData);
+                    }
+                    else
+                    {
+                        //TODO Find how to exit the application.
+                    }
+                }
+                else
+                {
+                    //TODO Find how to exit the application.
+                }
+            }
+
+            _Replays = item;
+        }
 
         public Replay SelectedReplay
         {
