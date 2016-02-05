@@ -6,8 +6,8 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         MinHeight="340"
-        Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RowDefinition}}, Path=Height}"
         DataContext="{Binding Main.SelectedReplay, Source={StaticResource Locator}}" >
+
     <UserControl.Resources>
         <DataTemplate x:Key="PlayerTemplate" >
             <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
@@ -23,7 +23,8 @@
                         <TextBlock Text="{Binding PlayerRank, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                         <Label FontSize      ="14">ELO:</Label>
                         <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <Button Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding SteamID}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">Steam
+                        <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,5,0" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding SteamID}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">
+                            <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
                         </Button>
                     </DockPanel>
                     <DockPanel>
@@ -33,8 +34,10 @@
 
                     <DockPanel>
                         <Label FontSize="14" >Code :</Label>
-                        <TextBlock Width="450"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
-                        <Button Width="75"  HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >Copy Code</Button>
+                        <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
+                        <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
+                            <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+                        </Button>
                     </DockPanel>
 
                 </StackPanel>
