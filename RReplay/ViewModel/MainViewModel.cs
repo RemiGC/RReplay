@@ -115,22 +115,28 @@ namespace RReplay.ViewModel
             {
                 if ( error.Message == "EmptyReplaysPath" )
                 {
-                    if ( ReplayRepository.GetNewReplayFolder(Settings.Default.replaysFolder) )
+                    // set the empty list anyway
+                    _Replays = item;
+                    string newPath;
+                    if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder,out newPath) )
                     {
+                        Settings.Default.replaysFolder = newPath;
                         _dataService.GetData(ReceiveData);
                     }
                     else
                     {
-                        //TODO Find how to exit the application.
+                        Application.Current.Shutdown();
                     }
                 }
                 else
                 {
-                    //TODO Find how to exit the application.
+                    Application.Current.Shutdown();
                 }
             }
-
-            _Replays = item;
+             else
+            {
+                _Replays = item;
+            }
         }
 
         public Replay SelectedReplay
