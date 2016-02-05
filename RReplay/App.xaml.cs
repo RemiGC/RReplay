@@ -31,6 +31,11 @@ namespace RReplay
 
         private bool Setup()
         {
+            if ( Settings.Default.UpgradeRequired )
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+            }
             if ( Settings.Default.firstRun )
             {
                 Settings.Default.firstRun = false;
