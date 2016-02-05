@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        DataContext="{Binding Main.SelectedReplay, Mode=OneWay, Source={StaticResource Locator}}" Width="500" Height="600">
+        DataContext="{Binding Main.SelectedReplay, Mode=OneWay, Source={StaticResource Locator}}" Width="500" Height="600" Icon="/RReplay;component/Ressources/comodo_dragon.ico">
 
     <Grid>
         <TextBox x:Name="textBox" Margin="10" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding JSONDumbFromFile, Mode=OneTime}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"/>

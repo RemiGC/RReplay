@@ -13,7 +13,7 @@
         MinWidth="900"
         Width="796.915"
         Title="RReplay"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" Icon="Ressources/comodo_dragon.ico">
 
     <Window.Resources>
         <ResourceDictionary>
