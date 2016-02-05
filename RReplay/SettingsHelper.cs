@@ -29,7 +29,7 @@ namespace RReplay
                 _buttonPressed = "exitApplication";
                 var s2 = (TaskDialogCommandLink)s;
                 var taskDialog = (TaskDialog)(s2.HostingDialog);
-                taskDialog.Close(TaskDialogResult.CustomButtonClicked);
+                //taskDialog.Close(TaskDialogResult.CustomButtonClicked);
             };
 
             // Task Dialog settings
