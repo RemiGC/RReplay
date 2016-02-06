@@ -92,6 +92,18 @@ namespace RReplay.ViewModel
             }
         }
 
+        private RelayCommand _refreshReplays;
+        public RelayCommand RefreshReplay
+        {
+            get
+            {
+                return _refreshReplays ?? (_refreshReplays = new RelayCommand(() =>
+                {
+                    _dataService.GetData(ReceiveData);
+                }));
+            }
+        }
+
         public MainViewModel( IReplayRepository dataService )
         {
             // Window Closing
@@ -105,7 +117,7 @@ namespace RReplay.ViewModel
 
             if ( IsInDesignMode )
             {
-                SelectedReplay = Replays[0];
+                SelectedReplay = Replays[1];
             }
         }
 
@@ -115,22 +127,28 @@ namespace RReplay.ViewModel
             {
                 if ( error.Message == "EmptyReplaysPath" )
                 {
-                    if ( ReplayRepository.GetNewReplayFolder(Settings.Default.replaysFolder) )
+                    // set the empty list anyway
+                    _Replays = item;
+                    string newPath;
+                    if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder,out newPath) )
                     {
+                        Settings.Default.replaysFolder = newPath;
                         _dataService.GetData(ReceiveData);
                     }
                     else
                     {
-                        //TODO Find how to exit the application.
+                        Application.Current.Shutdown();
                     }
                 }
                 else
                 {
-                    //TODO Find how to exit the application.
+                    Application.Current.Shutdown();
                 }
             }
-
-            _Replays = item;
+             else
+            {
+                Replays = item;
+            }
         }
 
         public Replay SelectedReplay

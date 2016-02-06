@@ -53,7 +53,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -80,11 +81,11 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -124,6 +125,7 @@
     <Compile Include="Model\Replay.cs" />
     <Compile Include="Model\ReplayRepository.cs" />
     <Compile Include="Model\IReplayRepository.cs" />
+    <Compile Include="SettingsHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DetailReplayView.xaml.cs">
@@ -222,6 +224,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\comodo_dragon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\CopyToClipboard.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Bokehlicia-Pacifica-Steam.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\FolderOpen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\JSONDocumentOutline_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\ItemUpdatedAssociation_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Threading;
 using RReplay.Model;
 using RReplay.Properties;
+using System.IO;
 using System.Windows;
 
 namespace RReplay
@@ -12,26 +13,50 @@ namespace RReplay
     {
         static App()
         {
-            Setup();
             DispatcherHelper.Initialize();
         }
 
-        private static void Setup()
+        private void Application_Startup( object sender, StartupEventArgs e )
         {
-            if (Settings.Default.firstRun)
+            if ( Setup() )
+            {
+                var window = new MainWindow();
+                window.Show();
+            }
+            else
+            {
+                this.Shutdown();
+            }
+        }
+
+        private bool Setup()
+        {
+            if ( Settings.Default.UpgradeRequired )
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+            }
+
+            if ( Settings.Default.firstRun )
             {
                 Settings.Default.firstRun = false;
-                Settings.Default.replaysFolder = ReplayRepository.GetDefaultReplayGamesFolder();
+                Settings.Default.replaysFolder = ReplayFolderPicker.GetDefaultReplayGamesFolder();
             }
-            if(!ReplayRepository.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
+
+            if ( !ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
-                if(!ReplayRepository.GetNewReplayFolder(Settings.Default.replaysFolder))
+                string newPath;
+                if ( !ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder, out newPath) )
                 {
-                    //TODO Find how to force shutdown of the apps.
+                    return false;
+                }
+                else
+                {
+                    Settings.Default.replaysFolder = newPath;
                 }
             }
 
-
+            return true;
         }
     }
 }
