@@ -92,6 +92,18 @@ namespace RReplay.ViewModel
             }
         }
 
+        private RelayCommand _refreshReplays;
+        public RelayCommand RefreshReplay
+        {
+            get
+            {
+                return _refreshReplays ?? (_refreshReplays = new RelayCommand(() =>
+                {
+                    _dataService.GetData(ReceiveData);
+                }));
+            }
+        }
+
         public MainViewModel( IReplayRepository dataService )
         {
             // Window Closing
@@ -135,7 +147,7 @@ namespace RReplay.ViewModel
             }
              else
             {
-                _Replays = item;
+                Replays = item;
             }
         }
 
