@@ -13,7 +13,8 @@
         MinWidth="900"
         Width="796.915"
         Title="RReplay"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" Icon="Ressources/comodo_dragon.ico">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" 
+        Icon="Ressources/comodo_dragon.ico">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -31,15 +32,17 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition MinHeight="150"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition MinHeight="350"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="660"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <views:ReplaysListView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Height="Auto" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-        <views:ReplayView Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,0,0" />
-        <views:DetailReplayView Grid.Column="1" Grid.Row="1" Width="Auto" Margin="0,0,0,0" />
+        <GridSplitter Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Height="5" Background="Black" ShowsPreview="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+        <views:ReplayView Grid.Column="0" Grid.Row="2" Width="Auto" Margin="0,0,0,0" />
+        <views:DetailReplayView Grid.Column="1" Grid.Row="2" Width="Auto" Margin="0,0,0,0" />
     </Grid>
 </Window>

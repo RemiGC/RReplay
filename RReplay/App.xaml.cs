@@ -36,19 +36,21 @@ namespace RReplay
                 Settings.Default.Upgrade();
                 Settings.Default.UpgradeRequired = false;
             }
+
             if ( Settings.Default.firstRun )
             {
                 Settings.Default.firstRun = false;
-                Settings.Default.replaysFolder = ReplayRepository.GetDefaultReplayGamesFolder();
+                Settings.Default.replaysFolder = ReplayFolderPicker.GetDefaultReplayGamesFolder();
             }
 
-            if ( !ReplayRepository.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
+            if ( !ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
                 string newPath;
                 if ( !ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder, out newPath) )
                 {
                     return false;
-                } else
+                }
+                else
                 {
                     Settings.Default.replaysFolder = newPath;
                 }
