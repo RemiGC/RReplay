@@ -1,6 +1,8 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using RReplay.Model;
+using Microsoft.WindowsAPICodePack.Shell;
 using System;
+using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace RReplay
@@ -82,7 +84,7 @@ namespace RReplay
             openFolderDialog.FileOk += ( sender, parameter ) =>
             {
                 var dialog = (CommonOpenFileDialog)sender;
-                if ( !ReplayRepository.ReplaysPathContainsReplay(dialog.FileName) )
+                if ( !ReplayFolderPicker.ReplaysPathContainsReplay(dialog.FileName) )
                 {
                     parameter.Cancel = true;
                     MessageBox.Show("This folder doesn't contain any .wargamerpl2 files", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
@@ -98,6 +100,31 @@ namespace RReplay
                 var taskDialog = (TaskDialog)(s2.HostingDialog);
                 //taskDialog.Close(TaskDialogResult.CustomButtonClicked);
             }
+        }
+
+
+        public static string GetDefaultReplayGamesFolder()
+        {
+            IKnownFolder folder = KnownFolders.SavedGames;
+            return AddGameToSavedGamesFolder(folder.Path);
+        }
+
+        public static string AddGameToSavedGamesFolder( string savedGamesPath )
+        {
+            return Path.Combine(savedGamesPath, "EugenSystems\\WarGame3");
+        }
+
+        public static bool ReplaysPathContainsReplay( string path )
+        {
+            if ( Directory.Exists(path) )
+            {
+                return (from file in Directory.GetFiles(path, "*.wargamerpl2", SearchOption.TopDirectoryOnly) select file).Count() > 0;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

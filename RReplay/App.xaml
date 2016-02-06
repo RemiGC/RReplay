@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
-            Startup="Application_Startup"    
+             Startup="Application_Startup"    
              ShutdownMode="OnMainWindowClose"
              mc:Ignorable="d ignore">
              <!--StartupUri="MainWindow.xaml"-->

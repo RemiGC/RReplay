@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Shell;
-using RReplay.Properties;
+﻿using RReplay.Properties;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -11,7 +10,7 @@ namespace RReplay.Model
     {
         public void GetData( Action<ObservableCollection<Replay>, Exception> callback )
         {
-            if ( ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
+            if ( ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
                 ObservableCollection<Replay> replayList = new ObservableCollection<Replay>();
 
@@ -29,29 +28,6 @@ namespace RReplay.Model
                 ObservableCollection<Replay> replayList = new ObservableCollection<Replay>();
                 callback(replayList, new ApplicationException("EmptyReplaysPath"));
             }
-        }
-
-        public static string GetDefaultReplayGamesFolder()
-        {
-            IKnownFolder folder = KnownFolders.SavedGames;
-            return AddGameToSavedGamesFolder(folder.Path);
-        }
-
-        public static string AddGameToSavedGamesFolder(string savedGamesPath)
-        {
-            return Path.Combine(savedGamesPath, "EugenSystems\\WarGame3");
-        }
-
-        public static bool ReplaysPathContainsReplay( string path )
-        {
-            if (Directory.Exists(path) )
-            {
-                return (from file in Directory.GetFiles(path, "*.wargamerpl2", SearchOption.TopDirectoryOnly) select file).Count() > 0;
-            } else
-            {
-                return false;
-            }
-            
         }
     }
 }
