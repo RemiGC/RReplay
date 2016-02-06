@@ -105,7 +105,7 @@ namespace RReplay.ViewModel
 
             if ( IsInDesignMode )
             {
-                SelectedReplay = Replays[0];
+                SelectedReplay = Replays[1];
             }
         }
 
