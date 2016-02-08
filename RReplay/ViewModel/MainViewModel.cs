@@ -65,12 +65,13 @@ namespace RReplay.ViewModel
         /// Fonction that receive the replays from the Repository
         /// </summary>
         /// <param name="item">An ObservableCollection of replays</param>
+        /// <param name="parsingError">A list of replays that couldn't be parsed from Json</param>
         /// <param name="error">An exception if the repository couldn't get the replays</param>
         private void ReceiveData( ObservableCollection<Replay> item, List<Tuple<string, string>> parsingError, Exception error)
         {
             if ( error != null )
             {
-                if ( error.Message == "EmptyReplaysPath" )
+                if ( error is EmptyReplaysPathException )
                 {
                     // set the empty list anyway
                     _Replays = item;
