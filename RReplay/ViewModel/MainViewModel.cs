@@ -19,11 +19,19 @@ namespace RReplay.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        // The selected replay property Name
+        // property Name
         public const string SelectedReplayPropertyName = "SelectedReplay";
+        public const string SelectedReplayTeam1ViewPropertyName = "SelectedPlayerTeam1View";
+        public const string SelectedReplayTeam2ViewPropertyName = "SelectedPlayerTeam2View";
+        public const string NameFilterPropertyName = "NameFilter";
+        public const string ReplayViewPropertyName = "ReplaysView";
 
-        public ICollectionView ReplaysView { get; private set; }
-        
+        private ICollectionView _replaysView;
+        private ICollectionView _selectedPlayerTeam1View;
+        private ICollectionView _selectedPlayerTeam2View;
+
+        private string _nameFilter;
+
         // All public Command
         public RelayCommand<CancelEventArgs> WindowClosingCommand { get; private set; }
 
@@ -40,17 +48,17 @@ namespace RReplay.ViewModel
         private RelayCommand _refreshReplays;
         private RelayCommand<string> _copyDeckCodeCommand;
         private RelayCommand<ulong> _openSteamCommunityPageCommand;
-        private RelayCommand<string> _browseToReplayFileCommand;
+        private RelayCommand _browseToReplayFileCommand;
         private RelayCommand _openReplayJSONView;
 
 
         public MainViewModel( IReplayRepository dataService )
         {
             // Window Closing
-            WindowClosingCommand = new RelayCommand<CancelEventArgs>( (args) =>
-            {
-                Settings.Default.Save();
-            });
+            WindowClosingCommand = new RelayCommand<CancelEventArgs>(( args ) =>
+           {
+               Settings.Default.Save();
+           });
 
             _dataService = dataService;
             _dataService.GetData(ReceiveData);
@@ -67,7 +75,7 @@ namespace RReplay.ViewModel
         /// <param name="item">An ObservableCollection of replays</param>
         /// <param name="parsingError">A list of replays that couldn't be parsed from Json</param>
         /// <param name="error">An exception if the repository couldn't get the replays</param>
-        private void ReceiveData( ObservableCollection<Replay> item, List<Tuple<string, string>> parsingError, Exception error)
+        private void ReceiveData( ObservableCollection<Replay> item, List<Tuple<string, string>> parsingError, Exception error )
         {
             if ( error != null )
             {
@@ -91,14 +99,14 @@ namespace RReplay.ViewModel
                     Application.Current.Shutdown();
                 }
             }
-             else
+            else
             {
                 Replays = item;
-                if (parsingError.Count > 0)
+                if ( parsingError.Count > 0 )
                 {
-                    foreach(var fileNotParsed in parsingError)
+                    foreach ( var fileNotParsed in parsingError )
                     {
-                        MessageBox.Show(String.Format("The replay {0} couldn't be parsed. Error is:\n{1}",fileNotParsed.Item1,fileNotParsed.Item2));
+                        MessageBox.Show(String.Format("The replay {0} couldn't be parsed. Error is:\n{1}", fileNotParsed.Item1, fileNotParsed.Item2));
                     }
                 }
             }
@@ -117,10 +125,8 @@ namespace RReplay.ViewModel
             }
             set
             {
-                //Filter filtre = new Filter();
                 Set(ref _Replays, value);
                 ReplaysView = CollectionViewSource.GetDefaultView(_Replays);
-                //ReplaysView.Filter = PlayerFilter;
             }
         }
 
@@ -130,10 +136,16 @@ namespace RReplay.ViewModel
             return replay.Map.Contains("Conquete");
         }
 
-        private bool PlayerFilter( object item )
+        private bool PlayerNameInReplayFilter( object item )
         {
             Replay replay = item as Replay;
-            return replay.Players.Exists(x => x.PlayerName.Contains("Canadian"));
+            return replay.Players.Exists(x => x.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private bool PlayerNameInGameFilter( object item )
+        {
+            Player player = item as Player;
+            return player.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
@@ -148,8 +160,122 @@ namespace RReplay.ViewModel
             set
             {
                 Set(SelectedReplayPropertyName, ref _selectedReplay, value);
+
+                // Refresh the view for the two teams.
+                SelectedPlayerTeam1View = CollectionViewSource.GetDefaultView(SelectedReplay.FirstTeamPlayers);
+                SelectedPlayerTeam2View = CollectionViewSource.GetDefaultView(SelectedReplay.SecondTeamPlayers);
             }
         }
+
+        public string NameFilter
+        {
+            get
+            {
+                return _nameFilter;
+            }
+            set
+            {
+                if ( _nameFilter == value )
+                {
+                    return;
+                }
+                else
+                {
+                    _nameFilter = value;
+
+                    ReplaysView = CollectionViewSource.GetDefaultView(Replays);
+
+                    // Refresh the view for the two teams.
+                    if ( SelectedReplay != null )
+                    {
+                        SelectedPlayerTeam1View = CollectionViewSource.GetDefaultView(SelectedReplay.FirstTeamPlayers);
+                        SelectedPlayerTeam2View = CollectionViewSource.GetDefaultView(SelectedReplay.SecondTeamPlayers);
+
+                        // If the selected replay doesn't contain the searched name unselect it.
+                        if ( SelectedPlayerTeam1View.IsEmpty && SelectedPlayerTeam2View.IsEmpty )
+                        {
+                            SelectedReplay = null;
+                        }
+                    }
+
+                    RaisePropertyChanged(NameFilterPropertyName);
+                }
+            }
+        }
+
+
+        public ICollectionView ReplaysView
+        {
+            get
+            {
+                return _replaysView;
+            }
+            set
+            {
+                _replaysView = value;
+
+                if ( !string.IsNullOrEmpty(NameFilter) )
+                {
+                    _replaysView.Filter = PlayerNameInReplayFilter;
+                }
+                else
+                {
+                    _replaysView.Filter = null;
+                }
+                RaisePropertyChanged(ReplayViewPropertyName);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollectionView SelectedPlayerTeam1View
+        {
+            get
+            {
+                return _selectedPlayerTeam1View;
+            }
+            set
+            {
+                _selectedPlayerTeam1View = value;
+
+                if ( !string.IsNullOrEmpty(NameFilter) )
+                {
+                    _selectedPlayerTeam1View.Filter = PlayerNameInGameFilter;
+
+                }
+                else
+                {
+                    _selectedPlayerTeam1View.Filter = null;
+                }
+                RaisePropertyChanged(SelectedReplayTeam1ViewPropertyName);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollectionView SelectedPlayerTeam2View
+        {
+            get
+            {
+                return _selectedPlayerTeam2View;
+            }
+            set
+            {
+                _selectedPlayerTeam2View = value;
+                if ( !string.IsNullOrEmpty(NameFilter) )
+                {
+                    _selectedPlayerTeam2View.Filter = PlayerNameInGameFilter;
+                }
+                else
+                {
+                    _selectedPlayerTeam2View.Filter = null;
+                }
+                RaisePropertyChanged(SelectedReplayTeam2ViewPropertyName);
+            }
+        }
+
         #endregion
 
         #region Public Command
@@ -186,13 +312,13 @@ namespace RReplay.ViewModel
         /// <summary>
         /// Command to open explorer to the current file
         /// </summary>
-        public RelayCommand<string> BrowseToReplayFileCommand
+        public RelayCommand BrowseToReplayFileCommand
         {
             get
             {
-                return _browseToReplayFileCommand ?? (_browseToReplayFileCommand = new RelayCommand<string>(( value ) =>
+                return _browseToReplayFileCommand ?? (_browseToReplayFileCommand = new RelayCommand(() =>
                 {
-                    Process.Start("explorer.exe", string.Format("/select,\"{0}\"", value));
+                    Process.Start("explorer.exe", string.Format("/select,\"{0}\"", SelectedReplay.CompletePath));
                 }));
             }
         }
