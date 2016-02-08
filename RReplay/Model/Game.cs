@@ -182,7 +182,7 @@ namespace RReplay.Model
         }
 
         [JsonProperty]
-        public Int32 DeltaMaxTeamSize
+        public int DeltaMaxTeamSize
         {
             get;
             private set;

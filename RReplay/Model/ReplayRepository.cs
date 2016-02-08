@@ -1,32 +1,51 @@
-﻿using RReplay.Properties;
+﻿using Newtonsoft.Json;
+using RReplay.Properties;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace RReplay.Model
 {
     public class ReplayRepository : IReplayRepository
     {
-        public void GetData( Action<ObservableCollection<Replay>, Exception> callback )
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="callback"></param>
+        public void GetData( Action<ObservableCollection<Replay>, List<Tuple<string, string>>, Exception> callback )
         {
             if ( ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
-                ObservableCollection<Replay> replayList = new ObservableCollection<Replay>();
+                var replayList = new ObservableCollection<Replay>();
+                var errorParsing = new List<Tuple<string,string>>();
 
                 var replaysFiles = from file in Directory.GetFiles(Settings.Default.replaysFolder, "*.wargamerpl2", SearchOption.TopDirectoryOnly)
                                     select file;
+
+
                 foreach ( string file in replaysFiles )
                 {
-                    replayList.Add(new Replay(file));
+                    try
+                    {
+                        replayList.Add(new Replay(file));
+                    }
+                    catch ( JsonSerializationException ex )
+                    {
+                        errorParsing.Add(new Tuple<string, string>(file, ex.Message));
+                    }
+
                 }
 
-                callback(replayList, null);
+                callback(replayList, errorParsing, null);
             }
             else
             {
-                ObservableCollection<Replay> replayList = new ObservableCollection<Replay>();
-                callback(replayList, new ApplicationException("EmptyReplaysPath"));
+                var replayList = new ObservableCollection<Replay>();
+                var errorParsing = new List<Tuple<string, string>>();
+                callback(replayList, errorParsing, new ApplicationException("EmptyReplaysPath"));
             }
         }
     }
