@@ -76,7 +76,7 @@ namespace RReplay.ViewModel
                     // set the empty list anyway
                     _Replays = item;
                     string newPath;
-                    if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder,out newPath) )
+                    if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder, out newPath) )
                     {
                         Settings.Default.replaysFolder = newPath;
                         _dataService.GetData(ReceiveData);
