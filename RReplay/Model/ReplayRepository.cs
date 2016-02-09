@@ -49,12 +49,12 @@ namespace RReplay.Model
             {
                 var replayCollection = new ObservableCollection<Replay>();
                 var errorParsing = new List<Tuple<string, string>>();
-                cachedReplays = new List<Replay>();
                 callback(replayCollection, null, errorParsing, new EmptyReplaysPathException(Settings.Default.replaysFolder));
             }
         }
     }
 
+    [SerializableAttribute]
     public class EmptyReplaysPathException : Exception
     {
         public EmptyReplaysPathException()

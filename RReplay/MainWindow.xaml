@@ -47,7 +47,8 @@
             <Label>Player name :</Label>
             <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" Width="125" ></TextBox>
         </StackPanel>
-        <views:ReplaysListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="Auto" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Rectangle Name="sizingElement" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="Transparent" Margin="0"/>
+        <views:ReplaysListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="{Binding ElementName=sizingElement, Path=ActualHeight, FallbackValue=1}" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
         <GridSplitter Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Height="5" Background="Black" ShowsPreview="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
         <views:ReplayView Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=ReplayViewVisible, Converter={StaticResource BoolToVisConverter} }" />
         <views:AllPlayersDeck Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=AllPlayersDeckVisible, Converter={StaticResource BoolToVisConverter} }"/>
