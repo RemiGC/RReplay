@@ -148,18 +148,22 @@ namespace RReplay.ViewModel
             }
         }
 
-        private bool MapFilter( object item )
-        {
-            Replay replay = item as Replay;
-            return replay.Map.Contains("Conquete");
-        }
-
+        /// <summary>
+        /// Filter for an invididual Replay depending on the players name in _nameFilter
+        /// </summary>
+        /// <param name="item">A replay obect</param>
+        /// <returns></returns>
         private bool PlayerNameInReplayFilter( object item )
         {
             Replay replay = item as Replay;
             return replay.Players.Exists(x => x.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
+        /// <summary>
+        /// Filter for player depending on the name in _nameFilter
+        /// </summary>
+        /// <param name="item">A player object</param>
+        /// <returns></returns>
         private bool PlayerNameInGameFilter( object item )
         {
             Player player = item as Player;
@@ -178,11 +182,12 @@ namespace RReplay.ViewModel
             set
             {
                 Set(SelectedReplayPropertyName, ref _selectedReplay, value);
-                //_selectedReplay = value;
-                //RaisePropertyChanged(SelectedReplayPropertyName);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool ReplayViewVisible
         {
             get
@@ -196,6 +201,9 @@ namespace RReplay.ViewModel
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool AllPlayersDeckVisible
         {
             get
@@ -210,6 +218,9 @@ namespace RReplay.ViewModel
         }
 
 
+        /// <summary>
+        /// The PlayerName that will be filtered
+        /// </summary>
         public string NameFilter
         {
             get
@@ -246,6 +257,9 @@ namespace RReplay.ViewModel
         }
 
 
+        /// <summary>
+        /// The View, filtered on _filterName, that will be displayed in the MainList
+        /// </summary>
         public ICollectionView ReplaysView
         {
             get
@@ -268,6 +282,9 @@ namespace RReplay.ViewModel
             }
         }
 
+        /// <summary>
+        /// All the players view filtered on _filterName that will be displayed in the search result
+        /// </summary>
         public ICollectionView PlayersView
         {
             get
