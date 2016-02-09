@@ -21,16 +21,18 @@ namespace RReplay.ViewModel
     {
         // property Name
         public const string SelectedReplayPropertyName = "SelectedReplay";
-        public const string SelectedReplayTeam1ViewPropertyName = "SelectedPlayerTeam1View";
-        public const string SelectedReplayTeam2ViewPropertyName = "SelectedPlayerTeam2View";
         public const string NameFilterPropertyName = "NameFilter";
         public const string ReplayViewPropertyName = "ReplaysView";
+        public const string ReplayViewVisiblePropertyName = "ReplayViewVisible";
+        public const string AllPlayersDeckVisiblePropertyName = "AllPlayersDeckVisible";
 
         private ICollectionView _replaysView;
-        private ICollectionView _selectedPlayerTeam1View;
-        private ICollectionView _selectedPlayerTeam2View;
+        private ICollectionView _playersView;
 
         private string _nameFilter;
+
+        private bool _replayViewVisible;
+        private bool _allPlayersDeckVisible;
 
         // All public Command
         public RelayCommand<CancelEventArgs> WindowClosingCommand { get; private set; }
@@ -40,6 +42,7 @@ namespace RReplay.ViewModel
 
         // ObservableCollection of all Replays
         private ObservableCollection<Replay> _Replays;
+        private List<Player> _players;
 
         // The Replay currently selected
         private Replay _selectedReplay;
@@ -59,6 +62,7 @@ namespace RReplay.ViewModel
            {
                Settings.Default.Save();
            });
+            ReplayViewVisible = true;
 
             _dataService = dataService;
             _dataService.GetData(ReceiveData);
@@ -75,7 +79,7 @@ namespace RReplay.ViewModel
         /// <param name="item">An ObservableCollection of replays</param>
         /// <param name="parsingError">A list of replays that couldn't be parsed from Json</param>
         /// <param name="error">An exception if the repository couldn't get the replays</param>
-        private void ReceiveData( ObservableCollection<Replay> item, List<Tuple<string, string>> parsingError, Exception error )
+        private void ReceiveData( ObservableCollection<Replay> item, List<Player> lstPlayers, List<Tuple<string, string>> parsingError, Exception error )
         {
             if ( error != null )
             {
@@ -102,6 +106,7 @@ namespace RReplay.ViewModel
             else
             {
                 Replays = item;
+                Players = lstPlayers;
                 if ( parsingError.Count > 0 )
                 {
                     foreach ( var fileNotParsed in parsingError )
@@ -127,6 +132,19 @@ namespace RReplay.ViewModel
             {
                 Set(ref _Replays, value);
                 ReplaysView = CollectionViewSource.GetDefaultView(_Replays);
+            }
+        }
+
+        public List<Player> Players
+        {
+            get
+            {
+                return _players;
+            }
+            set
+            {
+                Set(ref _players, value);
+                PlayersView = CollectionViewSource.GetDefaultView(_players);
             }
         }
 
@@ -160,12 +178,37 @@ namespace RReplay.ViewModel
             set
             {
                 Set(SelectedReplayPropertyName, ref _selectedReplay, value);
-
-                // Refresh the view for the two teams.
-                SelectedPlayerTeam1View = CollectionViewSource.GetDefaultView(SelectedReplay.FirstTeamPlayers);
-                SelectedPlayerTeam2View = CollectionViewSource.GetDefaultView(SelectedReplay.SecondTeamPlayers);
+                //_selectedReplay = value;
+                //RaisePropertyChanged(SelectedReplayPropertyName);
             }
         }
+
+        public bool ReplayViewVisible
+        {
+            get
+            {
+                return _replayViewVisible;
+            }
+            set
+            {
+                Set(ReplayViewVisiblePropertyName, ref _replayViewVisible, value);
+                Set(AllPlayersDeckVisiblePropertyName, ref _allPlayersDeckVisible, !value);
+            }
+        }
+
+        public bool AllPlayersDeckVisible
+        {
+            get
+            {
+                return _allPlayersDeckVisible;
+            }
+            set
+            {
+                Set(AllPlayersDeckVisiblePropertyName, ref _allPlayersDeckVisible, value);
+                Set(ReplayViewVisiblePropertyName, ref _replayViewVisible, !value);
+            }
+        }
+
 
         public string NameFilter
         {
@@ -184,18 +227,17 @@ namespace RReplay.ViewModel
                     _nameFilter = value;
 
                     ReplaysView = CollectionViewSource.GetDefaultView(Replays);
+                    PlayersView = CollectionViewSource.GetDefaultView(PlayersView);
 
-                    // Refresh the view for the two teams.
-                    if ( SelectedReplay != null )
+                    // If filter is active, show all the deck for the result
+                    // otherwise show by team for the selected replay
+                    if(string.IsNullOrEmpty(_nameFilter))
                     {
-                        SelectedPlayerTeam1View = CollectionViewSource.GetDefaultView(SelectedReplay.FirstTeamPlayers);
-                        SelectedPlayerTeam2View = CollectionViewSource.GetDefaultView(SelectedReplay.SecondTeamPlayers);
-
-                        // If the selected replay doesn't contain the searched name unselect it.
-                        if ( SelectedPlayerTeam1View.IsEmpty && SelectedPlayerTeam2View.IsEmpty )
-                        {
-                            SelectedReplay = null;
-                        }
+                        ReplayViewVisible = true;
+                    }
+                    else
+                    {
+                        AllPlayersDeckVisible = true;
                     }
 
                     RaisePropertyChanged(NameFilterPropertyName);
@@ -226,53 +268,25 @@ namespace RReplay.ViewModel
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICollectionView SelectedPlayerTeam1View
+        public ICollectionView PlayersView
         {
             get
             {
-                return _selectedPlayerTeam1View;
+                return _playersView;
             }
             set
             {
-                _selectedPlayerTeam1View = value;
-
+                _playersView = value;
                 if ( !string.IsNullOrEmpty(NameFilter) )
                 {
-                    _selectedPlayerTeam1View.Filter = PlayerNameInGameFilter;
+                    _playersView.Filter = PlayerNameInGameFilter;
 
                 }
                 else
                 {
-                    _selectedPlayerTeam1View.Filter = null;
+                    _playersView.Filter = null;
                 }
-                RaisePropertyChanged(SelectedReplayTeam1ViewPropertyName);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICollectionView SelectedPlayerTeam2View
-        {
-            get
-            {
-                return _selectedPlayerTeam2View;
-            }
-            set
-            {
-                _selectedPlayerTeam2View = value;
-                if ( !string.IsNullOrEmpty(NameFilter) )
-                {
-                    _selectedPlayerTeam2View.Filter = PlayerNameInGameFilter;
-                }
-                else
-                {
-                    _selectedPlayerTeam2View.Filter = null;
-                }
-                RaisePropertyChanged(SelectedReplayTeam2ViewPropertyName);
+                RaisePropertyChanged("PlayersView");
             }
         }
 

@@ -11,16 +11,17 @@ namespace RReplay.Model
 {
     public class ReplayRepository : IReplayRepository
     {
+        private List<Replay> cachedReplays;
         /// <summary>
         /// A repository that build an ObservableCollection<Replay> from the replay in the folder in Settings.Default.replaysFolder
         /// Replays that couldn't be parsed will be added to a list
         /// </summary>
         /// <param name="callback"></param>
-        public void GetData( Action<ObservableCollection<Replay>, List<Tuple<string, string>>, Exception> callback )
+        public void GetData( Action<ObservableCollection<Replay>, List<Player>, List<Tuple<string, string>>, Exception> callback )
         {
             if ( ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
-                var replayList = new ObservableCollection<Replay>();
+                var replayCollection = new ObservableCollection<Replay>();
                 var errorParsing = new List<Tuple<string, string>>();
 
                 var replaysFiles = from file in Directory.GetFiles(Settings.Default.replaysFolder, "*.wargamerpl2", SearchOption.TopDirectoryOnly)
@@ -31,7 +32,8 @@ namespace RReplay.Model
                 {
                     try
                     {
-                        replayList.Add(new Replay(file));
+                        var replay = new Replay(file);
+                        replayCollection.Add(replay);
                     }
                     catch ( JsonSerializationException ex )
                     {
@@ -39,14 +41,17 @@ namespace RReplay.Model
                     }
 
                 }
-
-                callback(replayList, errorParsing, null);
+                var collec = from replay in replayCollection
+                             from players in replay.Players
+                             select players;
+                callback(replayCollection, collec.ToList(), errorParsing, null);
             }
             else
             {
-                var replayList = new ObservableCollection<Replay>();
+                var replayCollection = new ObservableCollection<Replay>();
                 var errorParsing = new List<Tuple<string, string>>();
-                callback(replayList, errorParsing, new EmptyReplaysPathException(Settings.Default.replaysFolder));
+                cachedReplays = new List<Replay>();
+                callback(replayCollection, null, errorParsing, new EmptyReplaysPathException(Settings.Default.replaysFolder));
             }
         }
     }

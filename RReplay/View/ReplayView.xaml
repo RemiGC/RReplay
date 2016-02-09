@@ -7,45 +7,15 @@
         mc:Ignorable="d ignore"
         MinHeight="340"
         DataContext="{Binding Main, Source={StaticResource Locator}}" >
-
+    
     <UserControl.Resources>
-        <DataTemplate x:Key="PlayerTemplate" >
-            <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
-                <StackPanel Orientation="Vertical">
-                    <DockPanel >
-                        <Label FontSize="14" >Name :</Label>
-                        <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" ToolTip="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
-                        <Label FontSize      ="14">ID :</Label>
-                        <TextBlock Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <Label FontSize      ="14">LVL:</Label>
-                        <TextBlock Text="{Binding PlayerLevel, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <Label FontSize      ="14">Rank:</Label>
-                        <TextBlock Text="{Binding PlayerRank, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <Label FontSize      ="14">ELO:</Label>
-                        <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,5,0" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding SteamID}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">
-                            <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
-                        </Button>
-                    </DockPanel>
-                    <DockPanel>
-                        <Label FontSize="14" >Deck :</Label>
-                        <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label FontSize="14" >Code :</Label>
-                        <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
-                        <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
-                            <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
-                        </Button>
-                    </DockPanel>
-
-                </StackPanel>
-            </Border>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/RReplay;component/Skins/MainSkin.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
-
-
+    
     <Grid x:Name="grid" Margin="10,10,10,10" SizeChanged="grid_SizeChanged">
         <VisualStateManager.VisualStateGroups >
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -113,10 +83,10 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
                 <Label  FontSize="16">Team 1</Label>
-                <TextBox  DockPanel.Dock="Right" Text="{Binding SelectedPlayerTeam1View.Count, Mode=OneWay}" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,5,0"/>
+                <TextBox  DockPanel.Dock="Right" Text="{Binding SelectedReplay.FirstTeamPlayers.Count, Mode=OneWay}" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Margin="0,0,5,0"/>
                 <Label  FontSize="16" HorizontalAlignment="Right">Players count :</Label>
             </DockPanel>
-            <ListBox Grid.Row="1" x:Name="firstTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding SelectedPlayerTeam1View}"/>
+            <ListBox Grid.Row="1" x:Name="firstTeamListBox" MinHeight="129.22" ItemTemplate="{StaticResource PlayerTemplate}" ItemsSource="{Binding SelectedReplay.FirstTeamPlayers}"/>
         </Grid>
 
         <Grid x:Name="gridTeam2" Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Width="640" HorizontalAlignment="Left">
@@ -126,10 +96,10 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
                 <Label  FontSize="16">Team 2</Label>
-                <TextBox  Text="{Binding SelectedPlayerTeam2View.Count, Mode=OneWay}" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                <TextBox  Text="{Binding SelectedReplay.SecondTeamPlayers.Count, Mode=OneWay}" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" DockPanel.Dock="Right" Margin="0,0,5,0"/>
                 <Label  FontSize="16" HorizontalAlignment="Right"  DockPanel.Dock="Right">Players count :</Label>
             </DockPanel>
-            <ListBox Grid.Row="1" x:Name="secondTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding SelectedPlayerTeam2View}"/>
+            <ListBox Grid.Row="1" x:Name="secondTeamListBox" MinHeight="129.22" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding SelectedReplay.SecondTeamPlayers}"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -6,6 +6,6 @@ namespace RReplay.Model
 {
     public interface IReplayRepository
     {
-        void GetData( Action<ObservableCollection<Replay>, List<Tuple<string, string>>, Exception> callback );
+        void GetData( Action<ObservableCollection<Replay>, List<Player>, List<Tuple<string, string>>, Exception> callback );
     }
 }

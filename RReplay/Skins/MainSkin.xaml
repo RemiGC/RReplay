@@ -1,4 +1,39 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
+    <DataTemplate x:Key="PlayerTemplate" >
+        <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
+            <StackPanel Orientation="Vertical">
+                <DockPanel >
+                    <Label FontSize="14" >Name :</Label>
+                    <TextBlock FontWeight="Bold" Text="{Binding PlayerName, Mode=OneWay}" ToolTip="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+                    <Label FontSize      ="14">ID :</Label>
+                    <TextBlock Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Label FontSize      ="14">LVL:</Label>
+                    <TextBlock Text="{Binding PlayerLevel, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Label FontSize      ="14">Rank:</Label>
+                    <TextBlock Text="{Binding PlayerRank, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Label FontSize      ="14">ELO:</Label>
+                    <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,5,0" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding SteamID}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">
+                        <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
+                    </Button>
+                </DockPanel>
+                <DockPanel>
+                    <Label FontSize="14" >Deck :</Label>
+                    <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </DockPanel>
+
+                <DockPanel>
+                    <Label FontSize="14" >Code :</Label>
+                    <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
+                    <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
+                        <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+                    </Button>
+                </DockPanel>
+
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    
 </ResourceDictionary>

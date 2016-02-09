@@ -19,7 +19,7 @@
     </UserControl.DataContext>
 
     <Grid>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding ReplaysView}" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding ReplaysView}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedReplay, Mode=TwoWay}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}">
