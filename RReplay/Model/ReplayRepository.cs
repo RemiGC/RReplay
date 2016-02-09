@@ -11,7 +11,6 @@ namespace RReplay.Model
 {
     public class ReplayRepository : IReplayRepository
     {
-        private List<Replay> cachedReplays;
         /// <summary>
         /// A repository that build an ObservableCollection<Replay> from the replay in the folder in Settings.Default.replaysFolder
         /// Replays that couldn't be parsed will be added to a list
