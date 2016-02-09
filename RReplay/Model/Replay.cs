@@ -33,6 +33,7 @@ namespace RReplay.Model
             foreach ( var item in players )
             {
                 Player player = item.First.ToObject<Player>();
+                player.GameName = this.Name;
                 Players.Add(player);
             }
         }

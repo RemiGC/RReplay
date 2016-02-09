@@ -5,6 +5,7 @@ namespace RReplay.Model
 {
     public class Player
     {
+        private string gameName;
         [JsonProperty]
         public UInt64 PlayerUserId
         {
@@ -118,7 +119,23 @@ namespace RReplay.Model
             private set;
         }
 
-        private Player()
+        public string GameName
+        {
+            get
+            {
+                return gameName;
+            }
+            set
+            {
+                gameName = value;
+            }
+        }
+
+        private Player(string gameName)
+        {
+            this.gameName = gameName;
+        }
+        private Player( )
         {
 
         }
