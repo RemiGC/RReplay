@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RReplay.View"
              mc:Ignorable="d" 
-             DataContext="{Binding Main, Source={StaticResource Locator}}" Height="312" Width="669">
+             DataContext="{Binding Main, Source={StaticResource Locator}}">
     
     <UserControl.Resources>
         <ResourceDictionary>

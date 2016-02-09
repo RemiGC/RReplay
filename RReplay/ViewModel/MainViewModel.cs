@@ -34,34 +34,28 @@ namespace RReplay.ViewModel
         private bool _replayViewVisible;
         private bool _allPlayersDeckVisible;
 
-        // All public Command
-        public RelayCommand<CancelEventArgs> WindowClosingCommand { get; private set; }
-
-        // The Data service that list of Replays
-        private readonly IReplayRepository _dataService;
-
-        // ObservableCollection of all Replays
-        private ObservableCollection<Replay> _Replays;
-        private List<Player> _players;
-
-        // The Replay currently selected
-        private Replay _selectedReplay;
-
-        // Private Command
+        // All Command
+        private RelayCommand<CancelEventArgs> _windowClosingCommand;
         private RelayCommand _refreshReplays;
         private RelayCommand<string> _copyDeckCodeCommand;
         private RelayCommand<ulong> _openSteamCommunityPageCommand;
         private RelayCommand _browseToReplayFileCommand;
         private RelayCommand _openReplayJSONView;
 
+        // The Data service that collect and return the Replays
+        private readonly IReplayRepository _dataService;
+
+        // ObservableCollection of all Replays
+        private ObservableCollection<Replay> _Replays;
+
+        // The List of all players with the decks for that games
+        private List<Player> _players;
+
+        // The Replay currently selected
+        private Replay _selectedReplay;
 
         public MainViewModel( IReplayRepository dataService )
         {
-            // Window Closing
-            WindowClosingCommand = new RelayCommand<CancelEventArgs>(( args ) =>
-           {
-               Settings.Default.Save();
-           });
             ReplayViewVisible = true;
 
             _dataService = dataService;
@@ -76,17 +70,18 @@ namespace RReplay.ViewModel
         /// <summary>
         /// Fonction that receive the replays from the Repository
         /// </summary>
-        /// <param name="item">An ObservableCollection of replays</param>
-        /// <param name="parsingError">A list of replays that couldn't be parsed from Json</param>
+        /// <param name="replaysCollection">An ObservableCollection of replays</param>
+        /// <param name="playersList">A list of all players with their deck</param>
+        /// <param name="parseErrorList">A list of replays that couldn't be parsed from Json</param>
         /// <param name="error">An exception if the repository couldn't get the replays</param>
-        private void ReceiveData( ObservableCollection<Replay> item, List<Player> lstPlayers, List<Tuple<string, string>> parsingError, Exception error )
+        private void ReceiveData( ObservableCollection<Replay> replaysCollection, List<Player> playersList, List<Tuple<string, string>> parseErrorList, Exception error )
         {
             if ( error != null )
             {
                 if ( error is EmptyReplaysPathException )
                 {
                     // set the empty list anyway
-                    _Replays = item;
+                    _Replays = replaysCollection;
                     string newPath;
                     if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder, out newPath) )
                     {
@@ -105,11 +100,11 @@ namespace RReplay.ViewModel
             }
             else
             {
-                Replays = item;
-                Players = lstPlayers;
-                if ( parsingError.Count > 0 )
+                Replays = replaysCollection;
+                Players = playersList;
+                if ( parseErrorList.Count > 0 )
                 {
-                    foreach ( var fileNotParsed in parsingError )
+                    foreach ( var fileNotParsed in parseErrorList )
                     {
                         MessageBox.Show(String.Format("The replay {0} couldn't be parsed. Error is:\n{1}", fileNotParsed.Item1, fileNotParsed.Item2));
                     }
@@ -146,28 +141,6 @@ namespace RReplay.ViewModel
                 Set(ref _players, value);
                 PlayersView = CollectionViewSource.GetDefaultView(_players);
             }
-        }
-
-        /// <summary>
-        /// Filter for an invididual Replay depending on the players name in _nameFilter
-        /// </summary>
-        /// <param name="item">A replay obect</param>
-        /// <returns></returns>
-        private bool PlayerNameInReplayFilter( object item )
-        {
-            Replay replay = item as Replay;
-            return replay.Players.Exists(x => x.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-
-        /// <summary>
-        /// Filter for player depending on the name in _nameFilter
-        /// </summary>
-        /// <param name="item">A player object</param>
-        /// <returns></returns>
-        private bool PlayerNameInGameFilter( object item )
-        {
-            Player player = item as Player;
-            return player.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
@@ -311,6 +284,17 @@ namespace RReplay.ViewModel
 
         #region Public Command
 
+        public RelayCommand<CancelEventArgs> WindowClosingCommand
+        {
+            get
+            {
+                return _windowClosingCommand ?? (_windowClosingCommand = new RelayCommand<CancelEventArgs>(( value ) =>
+                {
+                    Settings.Default.Save();
+                }));
+            }
+        }
+
         /// <summary>
         /// Command to copy the deck code to the clipboard
         /// </summary>
@@ -383,6 +367,32 @@ namespace RReplay.ViewModel
             }
         }
         #endregion
+
+        #region filter
+
+        /// <summary>
+        /// Filter for an invididual Replay depending on the players name in _nameFilter
+        /// </summary>
+        /// <param name="item">A replay obect</param>
+        /// <returns></returns>
+        private bool PlayerNameInReplayFilter( object item )
+        {
+            Replay replay = item as Replay;
+            return replay.Players.Exists(x => x.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        /// <summary>
+        /// Filter for player depending on the name in _nameFilter
+        /// </summary>
+        /// <param name="item">A player object</param>
+        /// <returns></returns>
+        private bool PlayerNameInGameFilter( object item )
+        {
+            Player player = item as Player;
+            return player.PlayerName.IndexOf(_nameFilter, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        #endregion  
 
         ////public override void Cleanup()
         ////{
