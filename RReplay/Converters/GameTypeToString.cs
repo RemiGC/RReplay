@@ -11,11 +11,11 @@ namespace RReplay.Converters
             switch ((int)value)
             {
                 case 0:
-                    return "Destruction";
+                    return "Confrontation";
                 case 1:
-                    return "Conquest";
+                    return "NATO";
                 case 2:
-                    return "Economy";
+                    return "PACT";
                 default:
                     return "Unkown";
 
@@ -26,11 +26,11 @@ namespace RReplay.Converters
         {
             switch ( (string)value )
             {
-                case "Destruction":
+                case "Confrontation":
                     return 0;
-                case "Conquest":
+                case "NATO":
                     return 1;
-                case "Economy":
+                case "PACT":
                     return 2;
                 default:
                     return -1;

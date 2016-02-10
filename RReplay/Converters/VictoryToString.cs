@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Windows.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RReplay.Converters
 {
-    public class GameModeToString : IValueConverter
+    public class VictoryToString
     {
         public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            switch ((int)value)
+            switch ( (int)value )
             {
                 case 1:
                     return "Destruction";
                 case 2:
-                    return "Unknown2";
+                    return "Siege";
                 case 3:
                     return "Economy";
                 case 4:
@@ -30,7 +33,7 @@ namespace RReplay.Converters
             {
                 case "Destruction":
                     return 1;
-                case "Unknown2":
+                case "Siege":
                     return 2;
                 case "Economy":
                     return 3;

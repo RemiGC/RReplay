@@ -133,7 +133,7 @@ namespace RReplay.Model
         }
 
         [JsonProperty]
-        public byte VictoryCond
+        public int VictoryCond
         {
             get;
             private set;

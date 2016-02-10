@@ -22,6 +22,9 @@
                 <DockPanel>
                     <Label FontSize="14" >Deck :</Label>
                     <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Deck.Era, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 </DockPanel>
 
                 <DockPanel>

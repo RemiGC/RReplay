@@ -5,6 +5,7 @@ namespace RReplay.Model
 {
     public class Player
     {
+        private Deck deck;
         private string gameName;
         [JsonProperty]
         public UInt64 PlayerUserId
@@ -130,6 +131,17 @@ namespace RReplay.Model
                 gameName = value;
             }
         }
+        public Deck Deck
+        {
+            get
+            {
+                if(deck == null)
+                {
+                    deck = new Deck(PlayerDeckContent);
+                }
+                return deck;
+            }
+        }
 
         private Player(string gameName)
         {
@@ -137,7 +149,6 @@ namespace RReplay.Model
         }
         private Player( )
         {
-
         }
     }
 }

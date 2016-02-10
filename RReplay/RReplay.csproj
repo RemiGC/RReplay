@@ -119,7 +119,9 @@
     </ApplicationDefinition>
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
+    <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
+    <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Replay.cs" />
