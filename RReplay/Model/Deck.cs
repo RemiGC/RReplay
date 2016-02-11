@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-
+using System.Windows;
 
 namespace RReplay.Model
 {
@@ -10,12 +11,40 @@ namespace RReplay.Model
         PACT = 0x1
     }
 
+    public struct TwoTransportUnit
+    {
+        public byte Veterancy;
+        public ushort UnitID;
+        public ushort TransportID;
+        public ushort LandingCraftID;
+    };
+
+    public struct OneTransportUnit
+    {
+        public byte Veterancy;
+        public ushort UnitID;
+        public ushort TransportID;
+    };
+
+    public struct Unit
+    {
+        public byte Veterancy;
+        public ushort UnitID;
+    };
+
     public class Deck
     {
         private byte country;
         private byte specialization;
         private byte era;
         private CoalitionEnum coalition;
+        private byte twoTransportsUnits;
+        private byte oneTransportsUnits;
+        private byte units;
+
+        public List<TwoTransportUnit> TwoTransportUnitsList;
+        public List<OneTransportUnit> OneTransportUnitsList;
+        public List<Unit> UnitsList;
 
         public string Country
         {
@@ -76,23 +105,113 @@ namespace RReplay.Model
         {
             var base64EncodedBytes = System.Convert.FromBase64String(deckCode);
 
-            byte firstByte = Buffer.GetByte(base64EncodedBytes, 0);
-            byte secondByte = Buffer.GetByte(base64EncodedBytes, 1);
+            var bitArray = new BitArray(base64EncodedBytes);
+            var bitArrayInversed = new BitArray(bitArray.Length);
 
-            if( firstByte >> 7 == 0)
+            // If it's little endian inverse every 8 bits
+            if ( BitConverter.IsLittleEndian )
             {
-                coalition = CoalitionEnum.NATO;
+                for ( int i = 0; i < bitArray.Length / 8; i++ )
+                {
+                    for ( int j = 0; j < 8; j++ )
+                    {
+                        bitArrayInversed[i * 8 + j] = bitArray[i * 8 + 7 - j];
+                    }
+                }
             }
             else
             {
-                coalition = CoalitionEnum.PACT;
+                bitArrayInversed = bitArray;
             }
 
-            country = (byte)((firstByte & 0x7F) << 1 | secondByte >> 7);
+            int posArray = 0;
 
-            specialization = (byte)((secondByte & 0x70) >> 4);
-            era = (byte)((secondByte & 0xC) >> 2);
+            // First bit is the coalition
+            coalition = (CoalitionEnum)GetBits<byte>(bitArrayInversed, 1, ref posArray);
 
+            // Next 8 bits is the nation
+            country = GetBits<byte>(bitArrayInversed, 8, ref posArray);
+
+            // Next 3 bits is the specialization
+            specialization = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+
+            // next 2 bits is the era
+            era = GetBits<byte>(bitArrayInversed, 2, ref posArray);
+
+            // next 4 bits is the number of two transports units
+            twoTransportsUnits = GetBits<byte>(bitArrayInversed, 4, ref posArray);
+
+            // next 5 bits is the number of two transports units
+            oneTransportsUnits = GetBits<byte>(bitArrayInversed, 5, ref posArray);
+
+            TwoTransportUnitsList = new List<TwoTransportUnit>(twoTransportsUnits);
+
+            for (byte i = 0; i < twoTransportsUnits; i++ )
+            {
+                TwoTransportUnit unit;
+
+                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+
+                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+
+                unit.TransportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+
+                unit.LandingCraftID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+
+                TwoTransportUnitsList.Add(unit);
+            }
+
+            OneTransportUnitsList = new List<OneTransportUnit>(oneTransportsUnits);
+
+            for ( byte i = 0; i < oneTransportsUnits; i++ )
+            {
+                OneTransportUnit unit;
+
+                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+
+                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+
+                unit.TransportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+
+                OneTransportUnitsList.Add(unit);
+            }
+
+            units = (byte)((bitArrayInversed.Length - posArray) / 13);
+
+            UnitsList = new List<Unit>(units);
+
+            for (byte i = 0; i < units; i++ )
+            {
+                Unit unit;
+
+                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+
+                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+                UnitsList.Add(unit);
+            }
+        }
+
+        /// <summary>
+        /// Read numberOfBits of bits from bitArray and increase startingPosArray by numberOfBits
+        /// </summary>
+        /// <typeparam name="T">An unsigned integer lower than 16 bits</typeparam>
+        /// <param name="bitArray">The array where to read the bits</param>
+        /// <param name="numberOfBits">The number of bits to read</param>
+        /// <param name="startingPosArray">The starting position to read</param>
+        /// <returns>An unsigned integer</returns>
+        private T GetBits<T>(BitArray bitArray, byte numberOfBits , ref int startingPosArray)
+        {
+            ushort bits = 0;
+
+            for ( byte j = 0; j < numberOfBits; j++ )
+            {
+                if ( bitArray[startingPosArray++] )
+                {
+                    bits |= (ushort)(1 << (numberOfBits - 1) - j);
+                }
+            }
+
+            return (T)Convert.ChangeType(bits, typeof(T));
         }
 
         public static Dictionary<byte, string> SpecializationDictionary = new Dictionary<byte, string>
