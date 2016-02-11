@@ -33,6 +33,9 @@
                 <DockPanel>
                     <Label FontSize="14" >Code :</Label>
                     <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
+                    <Button Width="32" Height="32" Margin="0,0,15,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Open Deck" Command="{Binding Main.OpenDeckViewCommand , Source={StaticResource Locator}}" CommandParameter="{Binding Deck}" >
+                        <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+                    </Button>
                     <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
                         <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
                     </Button>

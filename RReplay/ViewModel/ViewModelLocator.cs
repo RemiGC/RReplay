@@ -39,6 +39,7 @@ namespace RReplay.ViewModel
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DeckViewModel>();
         }
 
         /// <summary>
@@ -52,6 +53,20 @@ namespace RReplay.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the Deck property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public DeckViewModel Deck
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DeckViewModel>();
             }
         }
 

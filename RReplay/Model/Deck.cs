@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RReplay.Behavior;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
@@ -13,23 +14,23 @@ namespace RReplay.Model
 
     public struct TwoTransportUnit
     {
-        public byte Veterancy;
-        public ushort UnitID;
-        public ushort TransportID;
-        public ushort LandingCraftID;
+        public byte Veterancy { get; set; }
+        public ushort UnitID { get; set; }
+        public ushort TransportID { get; set; }
+        public ushort LandingCraftID { get; set; }
     };
 
     public struct OneTransportUnit
     {
-        public byte Veterancy;
-        public ushort UnitID;
-        public ushort TransportID;
+        public byte Veterancy { get; set; }
+        public ushort UnitID { get; set; }
+        public ushort TransportID { get; set; }
     };
 
     public struct Unit
     {
-        public byte Veterancy;
-        public ushort UnitID;
+        public byte Veterancy { get; set; }
+        public ushort UnitID { get; set; }
     };
 
     public class Deck
@@ -41,6 +42,8 @@ namespace RReplay.Model
         private byte twoTransportsUnits;
         private byte oneTransportsUnits;
         private byte units;
+
+        private string deckCode;
 
         public List<TwoTransportUnit> TwoTransportUnitsList;
         public List<OneTransportUnit> OneTransportUnitsList;
@@ -103,6 +106,7 @@ namespace RReplay.Model
 
         public Deck(string deckCode)
         {
+            this.deckCode = deckCode;
             var base64EncodedBytes = System.Convert.FromBase64String(deckCode);
 
             var bitArray = new BitArray(base64EncodedBytes);
@@ -148,7 +152,7 @@ namespace RReplay.Model
 
             for (byte i = 0; i < twoTransportsUnits; i++ )
             {
-                TwoTransportUnit unit;
+                TwoTransportUnit unit = new TwoTransportUnit();
 
                 unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
@@ -165,7 +169,7 @@ namespace RReplay.Model
 
             for ( byte i = 0; i < oneTransportsUnits; i++ )
             {
-                OneTransportUnit unit;
+                OneTransportUnit unit = new OneTransportUnit();
 
                 unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
@@ -182,12 +186,100 @@ namespace RReplay.Model
 
             for (byte i = 0; i < units; i++ )
             {
-                Unit unit;
+                Unit unit = new Unit();
 
                 unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
                 unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
                 UnitsList.Add(unit);
+            }
+            string test = ExportDeckCode();
+        }
+
+        private string ExportDeckCode()
+        {
+            int size = 24 + twoTransportsUnits * 33 + oneTransportsUnits * 23 + units * 13;
+            BitArray bitArray = new BitArray(size);
+            int curPos = 0;
+
+            SetBits(ref bitArray, (byte)coalition, 1, ref curPos);
+            SetBits(ref bitArray, country, 8, ref curPos);
+            SetBits(ref bitArray, specialization, 3, ref curPos);
+            SetBits(ref bitArray, era, 2, ref curPos);
+            SetBits(ref bitArray, twoTransportsUnits, 4, ref curPos);
+            SetBits(ref bitArray, oneTransportsUnits, 5, ref curPos);
+
+            foreach( var unit in TwoTransportUnitsList )
+            {
+                SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
+                SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
+                SetBits(ref bitArray, unit.TransportID, 10, ref curPos);
+                SetBits(ref bitArray, unit.LandingCraftID, 10, ref curPos);
+            }
+
+            foreach ( var unit in OneTransportUnitsList )
+            {
+                SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
+                SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
+                SetBits(ref bitArray, unit.TransportID, 10, ref curPos);
+            }
+
+            foreach ( var unit in UnitsList )
+            {
+                SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
+                SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
+            }
+
+            BitArray bitArrayInversed = new BitArray(size);
+            if ( BitConverter.IsLittleEndian )
+            {
+                for ( int i = 0; i < bitArray.Length / 8; i++ )
+                {
+                    for ( int j = 0; j < 8; j++ )
+                    {
+                        bitArrayInversed[i * 8 + j] = bitArray[i * 8 + 7 - j];
+                    }
+                }
+            }
+            else
+            {
+                bitArrayInversed = bitArray;
+            }
+
+            byte[] array = BitArrayToByteArray(bitArrayInversed);
+
+            var base64 = System.Convert.ToBase64String(array);
+            return base64;
+        }
+
+        public static byte[] BitArrayToByteArray( BitArray bits )
+        {
+            byte[] ret = new byte[(bits.Length - 1) / 8 + 1];
+            bits.CopyTo(ret, 0);
+            return ret;
+        }
+         
+        private void SetBits(ref BitArray bitArray, ushort value, byte numberOfBits, ref int posArray)
+        {
+            var bytes = BitConverter.GetBytes(value);
+
+            if ( BitConverter.IsLittleEndian )
+            {
+            //    Array.Reverse(bytes);
+            }
+
+            BitArray bit = new BitArray(bytes);
+            for ( byte j = 1; j <= numberOfBits; j++ )
+            {
+                bitArray[posArray++] = bit[numberOfBits - j];
+            }
+        }
+
+        public string DeckCode
+        {
+            get
+            {
+                return deckCode;
             }
         }
 

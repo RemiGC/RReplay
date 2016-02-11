@@ -1,0 +1,53 @@
+﻿<Window x:Class="RReplay.View.DeckView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:b="clr-namespace:RReplay.Behavior"
+        mc:Ignorable="d ignore"
+        DataContext="{Binding Deck, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <DataTemplate x:Key="OneTransportUnitTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label>Veterancy: </Label>
+                <TextBlock Text="{Binding Veterancy}"/>
+                <Label>UnitID:</Label>
+                <TextBlock Text="{Binding UnitID}"/>
+                <Label>TransportID:</Label>
+                <TextBlock Text="{Binding TransportID}"/>                         
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="TwoTransportUnitTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label>Veterancy:</Label>
+                <TextBlock Text="{Binding Veterancy}"/>
+                <Label>UnitID:</Label>
+                <TextBlock Text="{Binding UnitID}"/>
+                <Label>TransportID:</Label>
+                <TextBlock Text="{Binding TransportID}"/>
+                <Label>LandingCraftID:</Label>
+                <TextBlock Text="{Binding LandingCraftID}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="UnitTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label>Veterancy:</Label>
+                <TextBlock Text="{Binding Veterancy}"/>
+                <Label>UnitID:</Label>
+                <TextBlock Text="{Binding UnitID}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,10,10,0" VerticalAlignment="Top" Height="30.67" FontSize="18.667"/>
+        <TextBlock Text="{Binding Deck.Coalition, Mode=OneWay}" Margin="98.949,45.67,630.417,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+        <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" Margin="10,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" Margin="190.902,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15.96" Width="54.103"/>
+        <TextBlock Text="{Binding Deck.Era, Mode=OneWay}" Margin="250.005,45.67,0,0" VerticalAlignment="Top" Height="13.344" HorizontalAlignment="Left" Width="71.108"/>
+        <ListBox x:Name="twoTransportsListBox" ItemTemplate="{DynamicResource TwoTransportUnitTemplate}" ItemsSource="{Binding TwoTransportsUnits}" Margin="10,66.63,10,0" Height="131.811" VerticalAlignment="Top" />
+        <ListBox x:Name="oneTransportsListBox" ItemTemplate="{DynamicResource OneTransportUnitTemplate}" ItemsSource="{Binding OneTransportsUnits}" Margin="10,203.441,10,177.331"/>
+        <ListBox x:Name="unitsListBox" Height="162.331" ItemTemplate="{DynamicResource UnitTemplate}" ItemsSource="{Binding Units}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

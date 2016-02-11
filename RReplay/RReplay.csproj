@@ -117,10 +117,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behavior\Behaviours.cs" />
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
+    <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\Player.cs" />
@@ -128,10 +130,14 @@
     <Compile Include="Model\ReplayRepository.cs" />
     <Compile Include="Model\IReplayRepository.cs" />
     <Compile Include="SettingsHelper.cs" />
+    <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AllPlayersDeck.xaml.cs">
       <DependentUpon>AllPlayersDeck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeckView.xaml.cs">
+      <DependentUpon>DeckView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DetailReplayView.xaml.cs">
       <DependentUpon>DetailReplayView.xaml</DependentUpon>
@@ -163,6 +169,10 @@
     </Page>
     <Page Include="View\AllPlayersDeck.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeckView.xaml">
+      <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DetailReplayView.xaml">
@@ -216,9 +226,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MessageInfrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6">
       <Visible>False</Visible>

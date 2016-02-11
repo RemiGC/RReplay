@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Linq;
+using GalaSoft.MvvmLight.Messaging;
+using RReplay.MessageInfrastructure;
 
 namespace RReplay.ViewModel
 {
@@ -33,6 +35,7 @@ namespace RReplay.ViewModel
 
         private bool _replayViewVisible;
         private bool _allPlayersDeckVisible;
+        private DeckView _deckView;
 
         // All Command
         private RelayCommand<CancelEventArgs> _windowClosingCommand;
@@ -41,6 +44,7 @@ namespace RReplay.ViewModel
         private RelayCommand<ulong> _openSteamCommunityPageCommand;
         private RelayCommand _browseToReplayFileCommand;
         private RelayCommand _openReplayJSONView;
+        private RelayCommand<Deck> _openDeckViewCommand;
 
         // The Data service that collect and return the Replays
         private readonly IReplayRepository _dataService;
@@ -65,6 +69,7 @@ namespace RReplay.ViewModel
             {
                 SelectedReplay = Replays[1];
             }
+
         }
 
         /// <summary>
@@ -291,6 +296,31 @@ namespace RReplay.ViewModel
                 return _windowClosingCommand ?? (_windowClosingCommand = new RelayCommand<CancelEventArgs>(( value ) =>
                 {
                     Settings.Default.Save();
+                }));
+            }
+        }
+
+        public RelayCommand<Deck> OpenDeckViewCommand
+        {
+            get
+            {
+                return _openDeckViewCommand ?? (_openDeckViewCommand = new RelayCommand<Deck>(( value ) =>
+                {
+
+                    /*if(_deckView == null )
+                    {
+                        _deckView = new DeckView();
+                        _deckView.Show();
+                    }*/
+
+                    DeckView dv = new DeckView();
+                    
+                    Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator()
+                    {
+                        deck = value
+                    });
+
+                    dv.Show();
                 }));
             }
         }
