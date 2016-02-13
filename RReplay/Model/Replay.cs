@@ -34,6 +34,7 @@ namespace RReplay.Model
             {
                 Player player = item.First.ToObject<Player>();
                 player.GameName = this.Name;
+                player.Deck = new Deck(player.PlayerDeckContent);
                 Players.Add(player);
             }
         }

@@ -135,11 +135,15 @@ namespace RReplay.Model
         {
             get
             {
-                if(deck == null)
+                /*if(deck == null)
                 {
                     deck = new Deck(PlayerDeckContent);
-                }
+                }*/
                 return deck;
+            }
+            set
+            {
+                deck = value;
             }
         }
 

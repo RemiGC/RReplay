@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:b="clr-namespace:RReplay.Behavior"
+        xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         mc:Ignorable="d ignore"
         DataContext="{Binding Deck, Source={StaticResource Locator}}">
     <Window.Resources>
@@ -46,8 +46,8 @@
         <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" Margin="10,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" Margin="190.902,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15.96" Width="54.103"/>
         <TextBlock Text="{Binding Deck.Era, Mode=OneWay}" Margin="250.005,45.67,0,0" VerticalAlignment="Top" Height="13.344" HorizontalAlignment="Left" Width="71.108"/>
-        <ListBox x:Name="twoTransportsListBox" ItemTemplate="{DynamicResource TwoTransportUnitTemplate}" ItemsSource="{Binding TwoTransportsUnits}" Margin="10,66.63,10,0" Height="131.811" VerticalAlignment="Top" />
-        <ListBox x:Name="oneTransportsListBox" ItemTemplate="{DynamicResource OneTransportUnitTemplate}" ItemsSource="{Binding OneTransportsUnits}" Margin="10,203.441,10,177.331"/>
-        <ListBox x:Name="unitsListBox" Height="162.331" ItemTemplate="{DynamicResource UnitTemplate}" ItemsSource="{Binding Units}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="twoTransportsListBox" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"  ItemTemplate="{DynamicResource TwoTransportUnitTemplate}" ItemsSource="{Binding TwoTransports}" Margin="10,66.63,10,0" Height="131.811" VerticalAlignment="Top" />
+        <ListBox x:Name="oneTransportsListBox" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ItemTemplate="{DynamicResource OneTransportUnitTemplate}" ItemsSource="{Binding OneTransports}" Margin="10,203.441,10,177.331"/>
+        <ListBox x:Name="unitsListBox"  dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Height="162.331" ItemTemplate="{DynamicResource UnitTemplate}" ItemsSource="{Binding UnitsCollection}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

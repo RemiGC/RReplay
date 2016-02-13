@@ -1,4 +1,4 @@
-﻿using RReplay.Behavior;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -104,9 +104,9 @@ namespace RReplay.Model
             }
         }
 
-        public Deck(string deckCode)
+        public Deck(string PlayerDeckContent )
         {
-            this.deckCode = deckCode;
+            this.deckCode = PlayerDeckContent;
             var base64EncodedBytes = System.Convert.FromBase64String(deckCode);
 
             var bitArray = new BitArray(base64EncodedBytes);

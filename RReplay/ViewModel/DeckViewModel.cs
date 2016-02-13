@@ -111,6 +111,10 @@ namespace RReplay.ViewModel
             {
                 return _twoTransportsCollection;
             }
+            set
+            {
+                Set("TwoTransports", ref _twoTransportsCollection, value);
+            }
         }
 
         public ObservableCollection<OneTransportUnit> OneTransports
@@ -118,6 +122,10 @@ namespace RReplay.ViewModel
             get
             {
                 return _oneTransportsCollection;
+            }
+            set
+            {
+                Set("OneTransports", ref _oneTransportsCollection, value);
             }
         }
 
@@ -127,6 +135,10 @@ namespace RReplay.ViewModel
             get
             {
                 return _unitsCollection;
+            }
+            set
+            {
+                Set("UnitsCollection", ref _unitsCollection, value);
             }
         }
 
