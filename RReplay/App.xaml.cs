@@ -1,7 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Threading;
-using RReplay.Model;
 using RReplay.Properties;
-using System.IO;
 using System.Windows;
 
 namespace RReplay

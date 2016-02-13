@@ -4,8 +4,6 @@ using GalaSoft.MvvmLight.Messaging;
 using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 
 namespace RReplay.ViewModel
 {

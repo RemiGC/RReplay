@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
+using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using RReplay.Properties;
 using RReplay.View;
@@ -10,9 +12,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
-using System.Linq;
-using GalaSoft.MvvmLight.Messaging;
-using RReplay.MessageInfrastructure;
 
 namespace RReplay.ViewModel
 {
@@ -38,7 +37,6 @@ namespace RReplay.ViewModel
 
         private bool replayViewVisible;
         private bool allPlayersDeckViewVisible;
-        private DeckView deckView;
 
         // All Command
         private RelayCommand<CancelEventArgs> windowClosingCommand;
