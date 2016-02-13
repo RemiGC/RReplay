@@ -17,17 +17,17 @@ namespace RReplay.ViewModel
     /// </summary>
     public class DeckViewModel : ViewModelBase
     {
-        private Deck _deck;
+        public const string TwoTransportsCollectionPropertyName = "TwoTransportsCollection";
+        public const string OneTransportsCollectionPropertyName = "OneTransportsCollection";
+        public const string UnitsCollectionPropertyName = "UnitsCollection";
 
-        private ICollectionView _twoTransportsUnits;
-        private ICollectionView _oneTransportsUnits;
-        private ICollectionView _units;
+        private Deck deck;
 
-        private ObservableCollection<TwoTransportUnit> _twoTransportsCollection;
-        private ObservableCollection<OneTransportUnit> _oneTransportsCollection;
-        private ObservableCollection<Unit> _unitsCollection;
+        private ObservableCollection<TwoTransportUnit> twoTransportsCollection;
+        private ObservableCollection<OneTransportUnit> oneTransportsCollection;
+        private ObservableCollection<Unit> unitsCollection;
 
-        private RelayCommand _dragAndDropCommand;
+        private RelayCommand dragAndDropCommand;
 
         /// <summary>
         /// Initializes a new instance of the DeckViewModel class.
@@ -47,7 +47,7 @@ namespace RReplay.ViewModel
         {
             get
             {
-                return _dragAndDropCommand ?? (_dragAndDropCommand = new RelayCommand(( ) =>
+                return dragAndDropCommand ?? (dragAndDropCommand = new RelayCommand(( ) =>
                 {
                     // drag and drop
                 }, () =>
@@ -72,60 +72,56 @@ namespace RReplay.ViewModel
         {
             get
             {
-                return _deck;
+                return deck;
             }
             set
             {
-                Set("Deck", ref _deck, value);
+                Set("Deck", ref deck, value);
 
-                TwoTransportsUnits = CollectionViewSource.GetDefaultView(_deck.TwoTransportUnitsList);
-                OneTransportsUnits = CollectionViewSource.GetDefaultView(_deck.OneTransportUnitsList);
-                Units = CollectionViewSource.GetDefaultView(_deck.UnitsList);
+                twoTransportsCollection = new ObservableCollection<TwoTransportUnit>();
 
-                _twoTransportsCollection = new ObservableCollection<TwoTransportUnit>();
-
-                foreach ( var unit in _deck.TwoTransportUnitsList )
+                foreach ( var unit in deck.TwoTransportUnitsList )
                 {
-                    _twoTransportsCollection.Add(unit);
+                    twoTransportsCollection.Add(unit);
                 }
 
-                _oneTransportsCollection = new ObservableCollection<OneTransportUnit>();
+                oneTransportsCollection = new ObservableCollection<OneTransportUnit>();
 
-                foreach ( var unit in _deck.OneTransportUnitsList )
+                foreach ( var unit in deck.OneTransportUnitsList )
                 {
-                    _oneTransportsCollection.Add(unit);
+                    oneTransportsCollection.Add(unit);
                 }
 
-                _unitsCollection = new ObservableCollection<Unit>();
+                unitsCollection = new ObservableCollection<Unit>();
 
-                foreach ( var unit in _deck.UnitsList )
+                foreach ( var unit in deck.UnitsList )
                 {
-                    _unitsCollection.Add(unit);
+                    unitsCollection.Add(unit);
                 }
             }
         }
 
-        public ObservableCollection<TwoTransportUnit> TwoTransports
+        public ObservableCollection<TwoTransportUnit> TwoTransportsCollection
         {
             get
             {
-                return _twoTransportsCollection;
+                return twoTransportsCollection;
             }
             set
             {
-                Set("TwoTransports", ref _twoTransportsCollection, value);
+                Set(TwoTransportsCollectionPropertyName, ref twoTransportsCollection, value);
             }
         }
 
-        public ObservableCollection<OneTransportUnit> OneTransports
+        public ObservableCollection<OneTransportUnit> OneTransportsCollection
         {
             get
             {
-                return _oneTransportsCollection;
+                return oneTransportsCollection;
             }
             set
             {
-                Set("OneTransports", ref _oneTransportsCollection, value);
+                Set(OneTransportsCollectionPropertyName, ref oneTransportsCollection, value);
             }
         }
 
@@ -134,48 +130,11 @@ namespace RReplay.ViewModel
         {
             get
             {
-                return _unitsCollection;
+                return unitsCollection;
             }
             set
             {
-                Set("UnitsCollection", ref _unitsCollection, value);
-            }
-        }
-
-
-        public ICollectionView TwoTransportsUnits
-        {
-            get
-            {
-                return _twoTransportsUnits;
-            }
-            set
-            {
-                Set("TwoTransportsUnits", ref _twoTransportsUnits, value);
-            }
-        }
-
-        public ICollectionView OneTransportsUnits
-        {
-            get
-            {
-                return _oneTransportsUnits;
-            }
-            set
-            {
-                Set("OneTransportUnits", ref _oneTransportsUnits, value);
-            }
-        }
-
-        public ICollectionView Units
-        {
-            get
-            {
-                return _units;
-            }
-            set
-            {
-                Set("Units", ref _units, value);
+                Set(UnitsCollectionPropertyName, ref unitsCollection, value);
             }
         }
     }

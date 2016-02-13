@@ -118,7 +118,7 @@ namespace RReplay.Model
             }
         }
 
-        public static string ExtractJSONFromReplayFile( string replayPath )
+        private static string ExtractJSONFromReplayFile( string replayPath )
         {
             string json;
             using ( FileStream stream = File.OpenRead(replayPath) )

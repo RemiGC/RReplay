@@ -150,6 +150,7 @@ namespace RReplay.Model
 
             TwoTransportUnitsList = new List<TwoTransportUnit>(twoTransportsUnits);
 
+            // 33 bits for each two transport unit
             for (byte i = 0; i < twoTransportsUnits; i++ )
             {
                 TwoTransportUnit unit = new TwoTransportUnit();
@@ -167,6 +168,7 @@ namespace RReplay.Model
 
             OneTransportUnitsList = new List<OneTransportUnit>(oneTransportsUnits);
 
+            // 23 bits for each one tansport unit
             for ( byte i = 0; i < oneTransportsUnits; i++ )
             {
                 OneTransportUnit unit = new OneTransportUnit();
@@ -184,6 +186,7 @@ namespace RReplay.Model
 
             UnitsList = new List<Unit>(units);
 
+            // 13 bits for each unit
             for (byte i = 0; i < units; i++ )
             {
                 Unit unit = new Unit();
@@ -252,7 +255,7 @@ namespace RReplay.Model
             return base64;
         }
 
-        public static byte[] BitArrayToByteArray( BitArray bits )
+        private static byte[] BitArrayToByteArray( BitArray bits )
         {
             byte[] ret = new byte[(bits.Length - 1) / 8 + 1];
             bits.CopyTo(ret, 0);
