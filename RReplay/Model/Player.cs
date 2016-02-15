@@ -7,15 +7,17 @@ namespace RReplay.Model
     {
         private Deck deck;
         private string gameName;
+
         [JsonProperty]
-        public UInt64 PlayerUserId
+        public ulong PlayerUserId
         {
             get;
             private set;
         }
 
         [JsonProperty]
-        public string PlayerIALevel
+        [JsonConverter(typeof(PlayerIALevelConverter))]
+        public ulong PlayerIALevel
         {
             get;
             private set;
@@ -135,15 +137,20 @@ namespace RReplay.Model
         {
             get
             {
-                /*if(deck == null)
-                {
-                    deck = new Deck(PlayerDeckContent);
-                }*/
                 return deck;
             }
             set
             {
                 deck = value;
+            }
+        }
+
+        public bool IsAI
+        {
+            get
+            {
+                return PlayerIALevel < 20;
+               
             }
         }
 
@@ -153,6 +160,35 @@ namespace RReplay.Model
         }
         private Player( )
         {
+        }
+    }
+
+    public class PlayerIALevelConverter : JsonConverter
+    {
+        public override void WriteJson( JsonWriter writer, object value, JsonSerializer serializer )
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object ReadJson( JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer )
+        {
+            string testVal = (string)serializer.Deserialize(reader, typeof(string));
+            object retVal = new object();
+
+            if (testVal == "-1")
+            {
+                retVal = ulong.MaxValue;
+            }
+            else
+            {
+                retVal = serializer.Deserialize(reader, objectType);
+            }
+            return retVal;
+        }
+
+        public override bool CanConvert( Type objectType )
+        {
+            return false;
         }
     }
 }

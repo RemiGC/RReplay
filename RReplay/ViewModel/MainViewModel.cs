@@ -42,7 +42,7 @@ namespace RReplay.ViewModel
         private RelayCommand<CancelEventArgs> windowClosingCommand;
         private RelayCommand refreshReplays;
         private RelayCommand<string> copyDeckCodeCommand;
-        private RelayCommand<ulong> openSteamCommunityPageCommand;
+        private RelayCommand<Player> openSteamCommunityPageCommand;
         private RelayCommand browseToReplayFileCommand;
         private RelayCommand openReplayJSONView;
         private RelayCommand<Deck> openDeckViewCommand;
@@ -336,14 +336,27 @@ namespace RReplay.ViewModel
         /// <summary>
         /// Command to open the default browser to the Steam Community Page for that SteamID
         /// </summary>
-        public RelayCommand<ulong> OpenSteamCommunityPageCommand
+        public RelayCommand<Player> OpenSteamCommunityPageCommand
         {
             get
             {
-                return openSteamCommunityPageCommand ?? (openSteamCommunityPageCommand = new RelayCommand<ulong>(( value ) =>
+                return openSteamCommunityPageCommand ?? (openSteamCommunityPageCommand = new RelayCommand<Player>(( value ) =>
                 {
-                    string uri = @"http://steamcommunity.com/profiles/" + value.ToString();
+                    Player player = value as Player;
+                    string uri = @"http://steamcommunity.com/profiles/" + player.SteamID.ToString();
                     System.Diagnostics.Process.Start(uri);
+                },
+                ( value ) =>
+                {
+                    Player player = value as Player;
+                    if(player.IsAI)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }));
             }
         }
