@@ -1,6 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Converters="clr-namespace:RReplay.Converters">
+
+    <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
+    <Converters:SpecializationCodeToImageSource x:Key="SpecializationCodeToImageSource"/>
+    <Converters:EraCodeToImageSource x:Key="EraCodeToImageSource"/>
+
     <DataTemplate x:Key="PlayerTemplate" >
         <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
             <StackPanel Orientation="Vertical">
@@ -20,23 +25,23 @@
                     </Button>
                 </DockPanel>
                 <DockPanel>
-                    <Image Source="{Binding Deck.CountryFlagPath}" Width="40" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"></Image>
-                    <Image Source="{Binding Deck.SpecializationFlagPath, TargetNullValue={x:Null}}" ToolTip="{Binding Deck.Specialization, Mode=OneWay}" Width="24" Height="24" Margin="2,0">
+                    <Image Source="{Binding Deck.Country, Converter={StaticResource CountryCodeToImageSource}}" Width="40" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"></Image>
+                    <Image Source="{Binding Deck.Specialization, Converter={StaticResource SpecializationCodeToImageSource}}" ToolTip="{Binding Deck.Specialization, Mode=OneWay}" Width="24" Height="24" Margin="2,0">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Deck.SpecializationFlagPath}" Value="{x:Null}">
+                                    <DataTrigger Binding="{Binding Deck.Specialization, Converter={StaticResource SpecializationCodeToImageSource}}" Value="{x:Null}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image Source="{Binding Deck.EraFlagPath, TargetNullValue={x:Null}}" ToolTip="{Binding Deck.Era, Mode=OneWay}" Width="24" Height="24" Margin="2,0" >
+                    <Image Source="{Binding Deck.Era, Converter={StaticResource EraCodeToImageSource}}" ToolTip="{Binding Deck.Era, Mode=OneWay}" Width="24" Height="24" Margin="2,0" >
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Deck.EraFlagPath}" Value="{x:Null}">
+                                    <DataTrigger Binding="{Binding Deck.Era, Converter={StaticResource SpecializationCodeToImageSource}}" Value="{x:Null}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                     </DataTrigger>
                                 </Style.Triggers>

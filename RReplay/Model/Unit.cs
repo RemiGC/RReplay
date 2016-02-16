@@ -19,10 +19,8 @@ namespace RReplay.Model
         private string classNameDebug;
         private string alias;
         private int category;
-        private int instanceID;
+        private uint instanceID;
         private int classNumber;
-        private string imagePath;
-
 
         public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID )
         {
@@ -32,14 +30,15 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitInfo unitInfo = repository.GetUnit(coalition, unitID);
-
-            ClassNameDebug = unitInfo.classNameDebug;
-            Alias = unitInfo.alias;
-            Category = unitInfo.category;
-            InstanceID = unitInfo.instanceID;
-            ClassNumber = unitInfo.classNumber;
-            ImagePath = unitInfo.imagePath;
+            UnitesUnit unitInfo = repository.GetUnit(coalition, unitID);
+            if ( unitInfo != null )
+            {
+                ClassNameDebug = unitInfo.ClassNameForDebug;
+                Alias = unitInfo.AliasName;
+                Category = unitInfo.Category;
+                InstanceID = unitInfo.InstanceID;
+                ClassNumber = unitInfo.Class;
+            }
         }
 
         public string ClassNameDebug
@@ -108,7 +107,7 @@ namespace RReplay.Model
             }
         }
 
-        public int InstanceID
+        public uint InstanceID
         {
             get
             {
@@ -157,19 +156,6 @@ namespace RReplay.Model
             private set
             {
                 unitID = value;
-            }
-        }
-
-        public string ImagePath
-        {
-            get
-            {
-                return imagePath;
-            }
-
-            private set
-            {
-                imagePath = value;
             }
         }
     }

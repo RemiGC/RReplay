@@ -15,7 +15,7 @@ namespace RReplay.Model
         private string secondTransportClassNameDebug;
         private string secondTransportAlias;
         private int secondTransportCategory;
-        private int secondTtransportInstanceID;
+        private uint secondTtransportInstanceID;
         private int secondTransportClassNumber;
         private string secondTransportImagePath;
 
@@ -26,14 +26,16 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitInfo unitInfo = repository.GetUnit(coalition, secondTransportID);
+            UnitesUnit unitInfo = repository.GetUnit(coalition, secondTransportID);
 
-            secondTransportClassNameDebug = unitInfo.classNameDebug;
-            secondTransportAlias = unitInfo.alias;
-            secondTransportCategory = unitInfo.category;
-            secondTtransportInstanceID = unitInfo.instanceID;
-            secondTransportClassNumber = unitInfo.classNumber;
-            SecondTransportImagePath = unitInfo.imagePath;
+            if ( unitInfo != null )
+            {
+                secondTransportClassNameDebug = unitInfo.ClassNameForDebug;
+                secondTransportAlias = unitInfo.AliasName;
+                secondTransportCategory = unitInfo.Category;
+                secondTtransportInstanceID = unitInfo.InstanceID;
+                secondTransportClassNumber = unitInfo.Class;
+            }
         }
 
         public string SecondTransportClassNameDebug
@@ -75,7 +77,7 @@ namespace RReplay.Model
             }
         }
 
-        public int SecondTtransportInstanceID
+        public uint SecondTtransportInstanceID
         {
             get
             {

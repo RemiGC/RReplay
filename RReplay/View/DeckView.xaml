@@ -6,12 +6,19 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:m="clr-namespace:RReplay.Model"
         xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+        xmlns:Converters="clr-namespace:RReplay.Converters"
         mc:Ignorable="d ignore"
         DataContext="{Binding Deck, Source={StaticResource Locator}}" Icon="/RReplay;component/Ressources/ShowAllCode_16x.png">
     <Window.Resources>
+
+        <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
+        <Converters:SpecializationCodeToImageSource x:Key="SpecializationCodeToImageSource"/>
+        <Converters:EraCodeToImageSource x:Key="EraCodeToImageSource"/>
+        <Converters:ClassNameDebugToImageSource x:Key="ClassNameDebugToImageSource" />
+
         <DataTemplate DataType="{x:Type m:OneTransportUnit}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ImagePath}"></Image>
+                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
                 <Label>UnitID:</Label>
@@ -22,12 +29,12 @@
                 <TextBlock Text="{Binding TransportID}"/>
                 <Label>Transport Name:</Label>
                 <TextBlock Text="{Binding TransportClassNameDebug}"/>
-                <Image Source="{Binding TransportImagePath}"></Image>
+                <Image Source="{Binding TransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:TwoTransportUnit}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ImagePath}"></Image>
+                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
                 <Label>UnitID:</Label>
@@ -41,14 +48,14 @@
                 <Label>LandingCraftID:</Label>
                 <TextBlock Text="{Binding LandingCraftID}"/>
                 <Label>Landing Craft Name:</Label>
-                <TextBlock Text="{Binding secondTransportClassNameDebug}"/>
-                <Image Source="{Binding TransportImagePath}"></Image>
-                <Image Source="{Binding SecondTransportImagePath}"></Image>
+                <TextBlock Text="{Binding SecondTransportClassNameDebug}"/>
+                <Image Source="{Binding TransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
+                <Image Source="{Binding SecondTransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:Unit}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ImagePath}"></Image>
+                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
                 <Label>Category:</Label>

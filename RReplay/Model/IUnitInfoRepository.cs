@@ -8,16 +8,6 @@ namespace RReplay.Model
 {
     public interface IUnitInfoRepository
     {
-        UnitInfo GetUnit( CoalitionEnum coalition, ushort unitID );
-    }
-
-    public struct UnitInfo
-    {
-        public string classNameDebug;
-        public string alias;
-        public int category;
-        public int instanceID;
-        public int classNumber;
-        public string imagePath;
+        UnitesUnit GetUnit( CoalitionEnum coalition, ushort unitID );
     }
 }

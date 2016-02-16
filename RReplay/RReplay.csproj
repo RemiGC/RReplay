@@ -121,8 +121,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ClassNameDebugToImageSource.cs" />
+    <Compile Include="Converters\CountryCodeToImageSource.cs" />
+    <Compile Include="Converters\EraCodeToImageSource.cs" />
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
+    <Compile Include="Converters\SpecializationCodeToImageSource.cs" />
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="Model\TwoTransportUnit.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitInfoRepository.cs" />
+    <Compile Include="Model\Units.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

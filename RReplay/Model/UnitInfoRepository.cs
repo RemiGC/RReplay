@@ -6,63 +6,64 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace RReplay.Model
 {
     public class UnitInfoRepository : IUnitInfoRepository
     {
-        XDocument natoDoc;
-        XDocument pactDoc;
+        SortedList<ushort, UnitesUnit> natoList;
+        SortedList<ushort, UnitesUnit> pactList;
 
         public UnitInfoRepository()
         {
-            natoDoc = XDocument.Load("NATO.xml");
-            pactDoc = XDocument.Load("PACT.xml");
+            XmlSerializer ser = new XmlSerializer(typeof(Unites));
+
+            Unites natoUnits = ser.Deserialize(new FileStream("NATO.xml", FileMode.Open)) as Unites;
+
+            natoList = new SortedList<ushort, UnitesUnit>(natoUnits.Unit.Length);
+
+            foreach (var unit in natoUnits.Unit)
+            {
+                natoList.Add(unit.ShowRoomID, unit);
+            }
+
+            Unites pactUnits = ser.Deserialize(new FileStream("PACT.xml", FileMode.Open)) as Unites;
+
+            pactList = new SortedList<ushort, UnitesUnit>(pactUnits.Unit.Length);
+
+            foreach ( var unit in pactUnits.Unit )
+            {
+                pactList.Add(unit.ShowRoomID, unit);
+            }
         }
 
-        public UnitInfo GetUnit( CoalitionEnum coalition, ushort unitID )
+        public UnitesUnit GetUnit( CoalitionEnum coalition, ushort unitID )
         {
-            UnitInfo unit = new UnitInfo();
-            XDocument xdoc;
-
             if ( coalition == CoalitionEnum.NATO )
             {
-                xdoc = natoDoc;
+                UnitesUnit unit;
+                if(natoList.TryGetValue(unitID, out unit))
+                {
+                    return unit;
+                }
+                else
+                {
+                    return null;
+                }                
             }
             else
             {
-                xdoc = pactDoc;
+                UnitesUnit unit;
+                if ( pactList.TryGetValue(unitID, out unit) )
+                {
+                    return unit;
+                }
+                else
+                {
+                    return null;
+                }
             }
-
-            var query = from units in xdoc.Element("Unites").Elements("Unit")
-                        where ushort.Parse(units.Attribute("ShowRoomID").Value) == unitID
-                        select units;
-
-            XElement oneUnit = query.FirstOrDefault();
-            if ( oneUnit != null )
-            {
-                unit.alias = oneUnit.Element("AliasName").Value.ToString();
-                unit.classNameDebug = oneUnit.Element("ClassNameForDebug").Value.ToString();
-
-                int.TryParse(oneUnit.Element("Category").Value, out unit.category);
-                int.TryParse(oneUnit.Element("Class").Value, out unit.classNumber);
-                int.TryParse(oneUnit.Element("InstanceID").Value, out unit.instanceID);
-            }
-
-            string exe = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            if ( !String.IsNullOrEmpty(unit.classNameDebug) )
-            {
-                
-                unit.imagePath = Path.Combine(exe, "Icons", "Units" , unit.classNameDebug + ".jpg");
-            }
-
-            if( !File.Exists(unit.imagePath) )
-            {
-                unit.imagePath = Path.Combine(exe, "Icons", "Units", "NoImage.jpg");
-            }
-
-            return unit;
         }
     }
 }

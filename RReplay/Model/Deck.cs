@@ -181,37 +181,6 @@ namespace RReplay.Model
 
                 UnitsList.Add(new Unit(coalition, veterancy, unitID));
             }
-
-            string exe = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            CountryFlagPath = Path.Combine(exe, "Icons", "Flags", Country + "_flag.png");
-
-            if ( !File.Exists(CountryFlagPath) )
-            {
-                CountryFlagPath = Path.Combine(exe, "Icons", "Flags", "neut_flag.png");
-            }
-
-            if ( Era != "All" )
-            {
-                string path = Path.Combine(exe, "Icons", "Deck", Era + ".png");
-
-                if ( File.Exists(path) )
-                {
-                    EraFlagPath = path;
-                }
-            }
-
-            if ( Specialization != "All" )
-            {
-                string path = Path.Combine(exe, "Icons", "Deck", Specialization + ".png");
-
-                if ( File.Exists(path) )
-                {
-                    SpecializationFlagPath = path;
-                }
-            }
-
-
         }
 
         public void NewList(IEnumerable<Unit> list)

@@ -1,9 +1,4 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RReplay.Model
 {
@@ -15,9 +10,8 @@ namespace RReplay.Model
         private string transportClassNameDebug;
         private string transportAlias;
         private int transportCategory;
-        private int transportInstanceID;
+        private uint transportInstanceID;
         private int transportClassNumber;
-        private string transportImagePath;
 
         public OneTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID )
             :base(coalition, veterancy, unitID)
@@ -26,14 +20,16 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitInfo unitInfo = repository.GetUnit(coalition, transportID);
+            UnitesUnit unitInfo = repository.GetUnit(coalition, transportID);
 
-            transportClassNameDebug = unitInfo.classNameDebug;
-            transportAlias = unitInfo.alias;
-            transportCategory = unitInfo.category;
-            transportInstanceID = unitInfo.instanceID;
-            transportClassNumber = unitInfo.classNumber;
-            transportImagePath = unitInfo.imagePath;
+            if ( unitInfo != null )
+            {
+                transportClassNameDebug = unitInfo.ClassNameForDebug;
+                transportAlias = unitInfo.AliasName;
+                transportCategory = unitInfo.Category;
+                transportInstanceID = unitInfo.InstanceID;
+                transportClassNumber = unitInfo.Class;
+            }
         }
 
         public ushort TransportID
@@ -88,7 +84,7 @@ namespace RReplay.Model
             }
         }
 
-        public int TransportInstanceID
+        public uint TransportInstanceID
         {
             get
             {
@@ -111,19 +107,6 @@ namespace RReplay.Model
             private set
             {
                 transportClassNumber = value;
-            }
-        }
-
-        public string TransportImagePath
-        {
-            get
-            {
-                return transportImagePath;
-            }
-
-            private set
-            {
-                transportImagePath = value;
             }
         }
     }
