@@ -36,6 +36,7 @@ namespace RReplay.ViewModel
             else
             {
                 SimpleIoc.Default.Register<IReplayRepository, ReplayRepository>();
+                SimpleIoc.Default.Register<IUnitInfoRepository, UnitInfoRepository>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

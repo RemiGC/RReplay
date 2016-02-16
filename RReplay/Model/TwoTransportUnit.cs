@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,23 @@ namespace RReplay.Model
         private int secondTransportCategory;
         private int secondTtransportInstanceID;
         private int secondTransportClassNumber;
+        private string secondTransportImagePath;
 
         public TwoTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, ushort secondTransportID )
             : base(coalition, veterancy, unitID, transportID)
         {
             LandingCraftID = secondTransportID;
+
+            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
+
+            UnitInfo unitInfo = repository.GetUnit(coalition, secondTransportID);
+
+            secondTransportClassNameDebug = unitInfo.classNameDebug;
+            secondTransportAlias = unitInfo.alias;
+            secondTransportCategory = unitInfo.category;
+            secondTtransportInstanceID = unitInfo.instanceID;
+            secondTransportClassNumber = unitInfo.classNumber;
+            SecondTransportImagePath = unitInfo.imagePath;
         }
 
         public string SecondTransportClassNameDebug
@@ -98,6 +111,19 @@ namespace RReplay.Model
             private set
             {
                 landingCraftID = value;
+            }
+        }
+
+        public string SecondTransportImagePath
+        {
+            get
+            {
+                return secondTransportImagePath;
+            }
+
+            private set
+            {
+                secondTransportImagePath = value;
             }
         }
     }

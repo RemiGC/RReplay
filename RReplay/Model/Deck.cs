@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace RReplay.Model
@@ -12,8 +14,9 @@ namespace RReplay.Model
         PACT = 0x1
     }
 
-    public class Deck
+    public class Deck: INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private byte country;
         private byte specialization;
         private byte era;
@@ -38,6 +41,14 @@ namespace RReplay.Model
                 {
                     return PACTDictionary[country];
                 }
+            }
+        }
+
+        private void NotifyPropertyChanged( [CallerMemberName] String propertyName = "" )
+        {
+            if ( PropertyChanged != null )
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -167,6 +178,12 @@ namespace RReplay.Model
             }
         }
 
+        public void NewList(IEnumerable<Unit> list)
+        {
+            UnitsList = list.ToList();
+            PropertyChanged(this, new PropertyChangedEventArgs("DeckCode"));
+        }
+
         private string ExportDeckCode()
         {
             int size = 23 + twoTransportsUnits * 33 + oneTransportsUnits * 23 + units * 13;
@@ -246,7 +263,7 @@ namespace RReplay.Model
         {
             get
             {
-                return deckCode;
+                return ExportDeckCode();
             }
         }
 

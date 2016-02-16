@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,23 @@ namespace RReplay.Model
         private int transportCategory;
         private int transportInstanceID;
         private int transportClassNumber;
+        private string transportImagePath;
 
         public OneTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID )
             :base(coalition, veterancy, unitID)
         {
             TransportID = transportID;
+
+            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
+
+            UnitInfo unitInfo = repository.GetUnit(coalition, transportID);
+
+            transportClassNameDebug = unitInfo.classNameDebug;
+            transportAlias = unitInfo.alias;
+            transportCategory = unitInfo.category;
+            transportInstanceID = unitInfo.instanceID;
+            transportClassNumber = unitInfo.classNumber;
+            transportImagePath = unitInfo.imagePath;
         }
 
         public ushort TransportID
@@ -98,6 +111,19 @@ namespace RReplay.Model
             private set
             {
                 transportClassNumber = value;
+            }
+        }
+
+        public string TransportImagePath
+        {
+            get
+            {
+                return transportImagePath;
+            }
+
+            private set
+            {
+                transportImagePath = value;
             }
         }
     }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RReplay.Model
 {
@@ -19,6 +21,7 @@ namespace RReplay.Model
         private int category;
         private int instanceID;
         private int classNumber;
+        private string imagePath;
 
 
         public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID )
@@ -26,11 +29,17 @@ namespace RReplay.Model
             Coalition = coalition;
             Veterancy = veterancy;
             UnitID = unitID;
-            /*ClassNameDebug = className;
-            Alias = alias;
-            Category = category;
-            InstanceID = instanceID;
-            ClassNumber = classNumber;*/
+
+            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
+
+            UnitInfo unitInfo = repository.GetUnit(coalition, unitID);
+
+            ClassNameDebug = unitInfo.classNameDebug;
+            Alias = unitInfo.alias;
+            Category = unitInfo.category;
+            InstanceID = unitInfo.instanceID;
+            ClassNumber = unitInfo.classNumber;
+            ImagePath = unitInfo.imagePath;
         }
 
         public string ClassNameDebug
@@ -148,6 +157,19 @@ namespace RReplay.Model
             private set
             {
                 unitID = value;
+            }
+        }
+
+        public string ImagePath
+        {
+            get
+            {
+                return imagePath;
+            }
+
+            private set
+            {
+                imagePath = value;
             }
         }
     }

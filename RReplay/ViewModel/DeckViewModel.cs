@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using RReplay.MessageInfrastructure;
 using RReplay.Model;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace RReplay.ViewModel
@@ -22,19 +23,19 @@ namespace RReplay.ViewModel
         private ObservableCollection<Unit> unitsCollection;
 
         private RelayCommand dragAndDropCommand;
+        private RelayCommand refreshCode;
 
         /// <summary>
         /// Initializes a new instance of the DeckViewModel class.
         /// </summary>
         public DeckViewModel()
         {
+            //unitInfoRepository = repository;
             ReceiveDeckInfo();
             if (IsInDesignMode)
             {
                 Deck = new Deck("WfgQSknJN2XKKV+HmurrM22ZVau2zMtlPsg0QziTKRTIijQak9GKY+FYyQ5H6f2WodaUAqf0XBgRLyLbOwGzxbp1MA==");
             }
-
-
         }
 
         public RelayCommand DragAndDropCommand
@@ -44,6 +45,22 @@ namespace RReplay.ViewModel
                 return dragAndDropCommand ?? (dragAndDropCommand = new RelayCommand(( ) =>
                 {
                     // drag and drop
+                    Deck.NewList(UnitsCollection);
+                }, () =>
+                {
+                    return true;
+                }));
+            }
+        }
+
+        public RelayCommand RefreshCode
+        {
+            get
+            {
+                return refreshCode ?? (refreshCode = new RelayCommand(() =>
+                {
+                    // drag and drop
+                    Deck.NewList(UnitsCollection);
                 }, () =>
                 {
                     return true;
@@ -70,11 +87,11 @@ namespace RReplay.ViewModel
             }
             set
             {
-                unitsCollection = new ObservableCollection<Unit>(value.UnitsList);
-
+                UnitsCollection = new ObservableCollection<Unit>(value.UnitsList);
                 Set("Deck", ref deck, value);
             }
         }
+
 
         public ObservableCollection<Unit> UnitsCollection
         {
@@ -85,7 +102,7 @@ namespace RReplay.ViewModel
 
             set
             {
-                unitsCollection = value;
+                Set("UnitsCollection", ref unitsCollection, value);
             }
         }
     }

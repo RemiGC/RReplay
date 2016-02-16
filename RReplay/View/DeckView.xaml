@@ -7,46 +7,71 @@
         xmlns:m="clr-namespace:RReplay.Model"
         xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         mc:Ignorable="d ignore"
-        DataContext="{Binding Deck, Source={StaticResource Locator}}">
+        DataContext="{Binding Deck, Source={StaticResource Locator}}" Icon="/RReplay;component/Ressources/ShowAllCode_16x.png">
     <Window.Resources>
         <DataTemplate DataType="{x:Type m:OneTransportUnit}">
             <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ImagePath}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
                 <Label>UnitID:</Label>
                 <TextBlock Text="{Binding UnitID}"/>
+                <Label>Name:</Label>
+                <TextBlock Text="{Binding ClassNameDebug}"/>
                 <Label>TransportID:</Label>
                 <TextBlock Text="{Binding TransportID}"/>
+                <Label>Transport Name:</Label>
+                <TextBlock Text="{Binding TransportClassNameDebug}"/>
+                <Image Source="{Binding TransportImagePath}"></Image>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:TwoTransportUnit}">
             <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ImagePath}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
                 <Label>UnitID:</Label>
                 <TextBlock Text="{Binding UnitID}"/>
+                <Label>Name:</Label>
+                <TextBlock Text="{Binding ClassNameDebug}"/>
                 <Label>TransportID:</Label>
                 <TextBlock Text="{Binding TransportID}"/>
+                <Label>Transport Name:</Label>
+                <TextBlock Text="{Binding TransportClassNameDebug}"/>
                 <Label>LandingCraftID:</Label>
                 <TextBlock Text="{Binding LandingCraftID}"/>
+                <Label>Landing Craft Name:</Label>
+                <TextBlock Text="{Binding secondTransportClassNameDebug}"/>
+                <Image Source="{Binding TransportImagePath}"></Image>
+                <Image Source="{Binding SecondTransportImagePath}"></Image>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:Unit}">
             <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ImagePath}"></Image>
                 <Label>Veterancy:</Label>
                 <TextBlock Text="{Binding Veterancy}"/>
+                <Label>Category:</Label>
+                <TextBlock Text="{Binding Category}"/>
                 <Label>UnitID:</Label>
                 <TextBlock Text="{Binding UnitID}"/>
+                <Label>Name:</Label>
+                <TextBlock Text="{Binding ClassNameDebug}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
     <Grid>
-        <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,10,10,0" VerticalAlignment="Top" Height="30.67" FontSize="18.667"/>
-        <TextBlock Text="{Binding Deck.Coalition, Mode=OneWay}" Margin="98.949,45.67,630.417,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+        <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,10,47,0" VerticalAlignment="Top" Height="31" FontSize="18.667"/>
+        <TextBlock Text="{Binding Deck.Coalition, Mode=OneWay}" Margin="99,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" Margin="10,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" Margin="190.902,45.67,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15.96" Width="54.103"/>
         <TextBlock Text="{Binding Deck.Era, Mode=OneWay}" Margin="250.005,45.67,0,0" VerticalAlignment="Top" Height="13.344" HorizontalAlignment="Left" Width="71.108"/>
-        <ListBox x:Name="unitsListBox" ItemsSource="{Binding UnitsCollection}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Margin="10,67,10,10"/>
+
+        <ListBox x:Name="unitsListBox" ItemsSource="{Binding UnitsCollection}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Margin="10,67,10,10"/>
+        <Button x:Name="refresh" Content="Refresh" Command="{Binding RefreshCode}" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="copy" Margin="0,0,10,0" VerticalAlignment="Top" Height="32" HorizontalAlignment="Right" Width="32" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding  Deck.DeckCode}" >
+            <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+        </Button>
     </Grid>
 </Window>

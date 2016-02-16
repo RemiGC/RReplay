@@ -128,6 +128,7 @@
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\IUnitInfoRepository.cs" />
     <Compile Include="Model\OneTransportUnit.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Replay.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Model\IReplayRepository.cs" />
     <Compile Include="Model\TwoTransportUnit.cs" />
     <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\UnitInfoRepository.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -272,6 +274,9 @@
     <Resource Include="Data\PACT.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\ShowAllCode_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
