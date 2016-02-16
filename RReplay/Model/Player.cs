@@ -170,6 +170,7 @@ namespace RReplay.Model
             throw new NotImplementedException();
         }
 
+        // Some version have ulong.MaxValue as false for the ai, other have -1
         public override object ReadJson( JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer )
         {
             string testVal = (string)serializer.Deserialize(reader, typeof(string));

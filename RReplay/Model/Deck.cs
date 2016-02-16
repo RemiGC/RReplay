@@ -15,6 +15,9 @@ namespace RReplay.Model
         PACT = 0x1
     }
 
+    /// <summary>
+    /// A class that represent a Complete Deck build from a deck code
+    /// </summary>
     public class Deck: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,10 +32,6 @@ namespace RReplay.Model
         private string deckCode;
 
         public List<Unit> UnitsList;
-
-        private string countryFlagPath;
-        private string eraFlagPath;
-        private string specializationFlagPath;
 
         public string Country
         {
@@ -189,6 +188,10 @@ namespace RReplay.Model
             PropertyChanged(this, new PropertyChangedEventArgs("DeckCode"));
         }
 
+        /// <summary>
+        /// Export the deck code to a usable form for the game
+        /// </summary>
+        /// <returns></returns>
         private string ExportDeckCode()
         {
             int size = 23 + twoTransportsUnits * 33 + oneTransportsUnits * 23 + units * 13;
@@ -272,45 +275,6 @@ namespace RReplay.Model
             }
         }
 
-        public string CountryFlagPath
-        {
-            get
-            {
-                return countryFlagPath;
-            }
-
-            private set
-            {
-                countryFlagPath = value;
-            }
-        }
-
-        public string EraFlagPath
-        {
-            get
-            {
-                return eraFlagPath;
-            }
-
-            set
-            {
-                eraFlagPath = value;
-            }
-        }
-
-        public string SpecializationFlagPath
-        {
-            get
-            {
-                return specializationFlagPath;
-            }
-
-            set
-            {
-                specializationFlagPath = value;
-            }
-        }
-
         /// <summary>
         /// Read numberOfBits of bits from bitArray and increase startingPosArray by numberOfBits
         /// </summary>
@@ -334,6 +298,7 @@ namespace RReplay.Model
             return (T)Convert.ChangeType(bits, typeof(T));
         }
 
+        // TODO move those somewhere, maybe build them from xml or json instead
         public static Dictionary<byte, string> SpecializationDictionary = new Dictionary<byte, string>
         {
             { 0x0, "Motorized" },

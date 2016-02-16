@@ -44,7 +44,7 @@ namespace RReplay.ViewModel
             {
                 return dragAndDropCommand ?? (dragAndDropCommand = new RelayCommand(( ) =>
                 {
-                    // drag and drop
+                    // TODO find how to refresh on drag & drop
                     Deck.NewList(UnitsCollection);
                 }, () =>
                 {
@@ -59,7 +59,6 @@ namespace RReplay.ViewModel
             {
                 return refreshCode ?? (refreshCode = new RelayCommand(() =>
                 {
-                    // drag and drop
                     Deck.NewList(UnitsCollection);
                 }, () =>
                 {
