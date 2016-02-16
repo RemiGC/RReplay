@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -28,6 +29,10 @@ namespace RReplay.Model
         private string deckCode;
 
         public List<Unit> UnitsList;
+
+        private string countryFlagPath;
+        private string eraFlagPath;
+        private string specializationFlagPath;
 
         public string Country
         {
@@ -176,6 +181,37 @@ namespace RReplay.Model
 
                 UnitsList.Add(new Unit(coalition, veterancy, unitID));
             }
+
+            string exe = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            CountryFlagPath = Path.Combine(exe, "Icons", "Flags", Country + "_flag.png");
+
+            if ( !File.Exists(CountryFlagPath) )
+            {
+                CountryFlagPath = Path.Combine(exe, "Icons", "Flags", "neut_flag.png");
+            }
+
+            if ( Era != "All" )
+            {
+                string path = Path.Combine(exe, "Icons", "Deck", Era + ".png");
+
+                if ( File.Exists(path) )
+                {
+                    EraFlagPath = path;
+                }
+            }
+
+            if ( Specialization != "All" )
+            {
+                string path = Path.Combine(exe, "Icons", "Deck", Specialization + ".png");
+
+                if ( File.Exists(path) )
+                {
+                    SpecializationFlagPath = path;
+                }
+            }
+
+
         }
 
         public void NewList(IEnumerable<Unit> list)
@@ -267,6 +303,45 @@ namespace RReplay.Model
             }
         }
 
+        public string CountryFlagPath
+        {
+            get
+            {
+                return countryFlagPath;
+            }
+
+            private set
+            {
+                countryFlagPath = value;
+            }
+        }
+
+        public string EraFlagPath
+        {
+            get
+            {
+                return eraFlagPath;
+            }
+
+            set
+            {
+                eraFlagPath = value;
+            }
+        }
+
+        public string SpecializationFlagPath
+        {
+            get
+            {
+                return specializationFlagPath;
+            }
+
+            set
+            {
+                specializationFlagPath = value;
+            }
+        }
+
         /// <summary>
         /// Read numberOfBits of bits from bitArray and increase startingPosArray by numberOfBits
         /// </summary>
@@ -304,8 +379,8 @@ namespace RReplay.Model
 
         public static Dictionary<byte, string> EraDictionary = new Dictionary<byte, string>
         {
-            { 0x0, "Before 80" },
-            { 0x1, "Before 85" },
+            { 0x0, "Before80" },
+            { 0x1, "Before85" },
             { 0x2, "All" },
         };
 

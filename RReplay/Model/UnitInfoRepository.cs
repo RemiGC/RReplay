@@ -49,16 +49,17 @@ namespace RReplay.Model
                 int.TryParse(oneUnit.Element("InstanceID").Value, out unit.instanceID);
             }
 
-            string exe = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string exePath = System.IO.Path.GetDirectoryName(exe);
+            string exe = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             if ( !String.IsNullOrEmpty(unit.classNameDebug) )
             {
-                unit.imagePath = Path.Combine(exePath, "UnitsIcons", unit.classNameDebug + ".jpg");
+                
+                unit.imagePath = Path.Combine(exe, "Icons", "Units" , unit.classNameDebug + ".jpg");
             }
-            else
+
+            if( !File.Exists(unit.imagePath) )
             {
-                unit.imagePath = Path.Combine(exePath, "UnitsIcons", "NoImage.jpg");
+                unit.imagePath = Path.Combine(exe, "Icons", "Units", "NoImage.jpg");
             }
 
             return unit;

@@ -20,14 +20,31 @@
                     </Button>
                 </DockPanel>
                 <DockPanel>
+                    <Image Source="{Binding Deck.CountryFlagPath}" Width="40" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"></Image>
+                    <Image Source="{Binding Deck.SpecializationFlagPath, TargetNullValue={x:Null}}" ToolTip="{Binding Deck.Specialization, Mode=OneWay}" Width="24" Height="24" Margin="2,0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Deck.SpecializationFlagPath}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Source="{Binding Deck.EraFlagPath, TargetNullValue={x:Null}}" ToolTip="{Binding Deck.Era, Mode=OneWay}" Width="24" Height="24" Margin="2,0" >
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Deck.EraFlagPath}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                     <Label FontSize="14" >Deck :</Label>
                     <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Label FontSize="14" >Nation:</Label>
-                    <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Label FontSize="14" >Era:</Label>
-                    <TextBlock Text="{Binding Deck.Era, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Label FontSize="14" >Type:</Label>
-                    <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Open Deck" Command="{Binding Main.OpenDeckViewCommand , Source={StaticResource Locator}}" CommandParameter="{Binding Deck}" >
                         <Image Source="/RReplay;component/Ressources/ShowAllCode_16x.png"  Stretch="UniformToFill"  />
                     </Button>
