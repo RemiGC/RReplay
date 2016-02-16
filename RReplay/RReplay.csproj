@@ -128,10 +128,13 @@
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\OneTransportUnit.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Replay.cs" />
     <Compile Include="Model\ReplayRepository.cs" />
     <Compile Include="Model\IReplayRepository.cs" />
+    <Compile Include="Model\TwoTransportUnit.cs" />
+    <Compile Include="Model\Unit.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -261,6 +264,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\ItemUpdatedAssociation_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\NATO.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\PACT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

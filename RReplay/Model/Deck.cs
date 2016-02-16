@@ -1,35 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace RReplay.Model
 {
-    enum CoalitionEnum
+    public enum CoalitionEnum
     {
         NATO = 0x0,
         PACT = 0x1
     }
-
-    public struct TwoTransportUnit
-    {
-        public byte Veterancy { get; set; }
-        public ushort UnitID { get; set; }
-        public ushort TransportID { get; set; }
-        public ushort LandingCraftID { get; set; }
-    };
-
-    public struct OneTransportUnit
-    {
-        public byte Veterancy { get; set; }
-        public ushort UnitID { get; set; }
-        public ushort TransportID { get; set; }
-    };
-
-    public struct Unit
-    {
-        public byte Veterancy { get; set; }
-        public ushort UnitID { get; set; }
-    };
 
     public class Deck
     {
@@ -43,8 +24,6 @@ namespace RReplay.Model
 
         private string deckCode;
 
-        public List<TwoTransportUnit> TwoTransportUnitsList;
-        public List<OneTransportUnit> OneTransportUnitsList;
         public List<Unit> UnitsList;
 
         public string Country
@@ -146,60 +125,52 @@ namespace RReplay.Model
             // next 5 bits is the number of two transports units
             oneTransportsUnits = GetBits<byte>(bitArrayInversed, 5, ref posArray);
 
-            TwoTransportUnitsList = new List<TwoTransportUnit>(twoTransportsUnits);
+
+            UnitsList = new List<Unit>();
 
             // 33 bits for each two transport unit
             for (byte i = 0; i < twoTransportsUnits; i++ )
             {
-                TwoTransportUnit unit = new TwoTransportUnit();
+                byte veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
-                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+                ushort unitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+                ushort transportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.TransportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+                ushort landingCraftID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.LandingCraftID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
-
-                TwoTransportUnitsList.Add(unit);
+                UnitsList.Add(new TwoTransportUnit(coalition,veterancy,unitID,transportID,landingCraftID));
             }
-
-            OneTransportUnitsList = new List<OneTransportUnit>(oneTransportsUnits);
 
             // 23 bits for each one tansport unit
             for ( byte i = 0; i < oneTransportsUnits; i++ )
             {
-                OneTransportUnit unit = new OneTransportUnit();
+                byte veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
-                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+                ushort unitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
+                ushort transportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.TransportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
-
-                OneTransportUnitsList.Add(unit);
+                UnitsList.Add(new OneTransportUnit(coalition, veterancy, unitID, transportID));
             }
 
             units = (byte)((bitArrayInversed.Length - posArray) / 13);
 
-            UnitsList = new List<Unit>(units);
-
             // 13 bits for each unit
             for (byte i = 0; i < units; i++ )
             {
-                Unit unit = new Unit();
+                byte veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
 
-                unit.Veterancy = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+                ushort unitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                unit.UnitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
-                UnitsList.Add(unit);
+                UnitsList.Add(new Unit(coalition, veterancy, unitID));
             }
-            string test = ExportDeckCode();
         }
 
         private string ExportDeckCode()
         {
-            int size = 24 + twoTransportsUnits * 33 + oneTransportsUnits * 23 + units * 13;
+            int size = 23 + twoTransportsUnits * 33 + oneTransportsUnits * 23 + units * 13;
+            size = ((size - 1) / 8 + 1) * 8; //round up to an exact number of bytes
             BitArray bitArray = new BitArray(size);
             int curPos = 0;
 
@@ -210,7 +181,7 @@ namespace RReplay.Model
             SetBits(ref bitArray, twoTransportsUnits, 4, ref curPos);
             SetBits(ref bitArray, oneTransportsUnits, 5, ref curPos);
 
-            foreach( var unit in TwoTransportUnitsList )
+            foreach( var unit in UnitsList.OfType<TwoTransportUnit>())
             {
                 SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
                 SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
@@ -218,14 +189,14 @@ namespace RReplay.Model
                 SetBits(ref bitArray, unit.LandingCraftID, 10, ref curPos);
             }
 
-            foreach ( var unit in OneTransportUnitsList )
+            foreach ( var unit in UnitsList.OfType<OneTransportUnit>().Where(i => i.GetType() == typeof(OneTransportUnit)) )
             {
                 SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
                 SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
                 SetBits(ref bitArray, unit.TransportID, 10, ref curPos);
             }
 
-            foreach ( var unit in UnitsList )
+            foreach ( var unit in UnitsList.OfType<Unit>().Where(i => i.GetType() == typeof(Unit)) )
             {
                 SetBits(ref bitArray, unit.Veterancy, 3, ref curPos);
                 SetBits(ref bitArray, unit.UnitID, 10, ref curPos);
@@ -263,11 +234,6 @@ namespace RReplay.Model
         private void SetBits(ref BitArray bitArray, ushort value, byte numberOfBits, ref int posArray)
         {
             var bytes = BitConverter.GetBytes(value);
-
-            if ( BitConverter.IsLittleEndian )
-            {
-            //    Array.Reverse(bytes);
-            }
 
             BitArray bit = new BitArray(bytes);
             for ( byte j = 1; j <= numberOfBits; j++ )

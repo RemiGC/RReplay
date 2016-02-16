@@ -15,14 +15,10 @@ namespace RReplay.ViewModel
     /// </summary>
     public class DeckViewModel : ViewModelBase
     {
-        public const string TwoTransportsCollectionPropertyName = "TwoTransportsCollection";
-        public const string OneTransportsCollectionPropertyName = "OneTransportsCollection";
         public const string UnitsCollectionPropertyName = "UnitsCollection";
 
         private Deck deck;
 
-        private ObservableCollection<TwoTransportUnit> twoTransportsCollection;
-        private ObservableCollection<OneTransportUnit> oneTransportsCollection;
         private ObservableCollection<Unit> unitsCollection;
 
         private RelayCommand dragAndDropCommand;
@@ -74,55 +70,11 @@ namespace RReplay.ViewModel
             }
             set
             {
+                unitsCollection = new ObservableCollection<Unit>(value.UnitsList);
+
                 Set("Deck", ref deck, value);
-
-                twoTransportsCollection = new ObservableCollection<TwoTransportUnit>();
-
-                foreach ( var unit in deck.TwoTransportUnitsList )
-                {
-                    twoTransportsCollection.Add(unit);
-                }
-
-                oneTransportsCollection = new ObservableCollection<OneTransportUnit>();
-
-                foreach ( var unit in deck.OneTransportUnitsList )
-                {
-                    oneTransportsCollection.Add(unit);
-                }
-
-                unitsCollection = new ObservableCollection<Unit>();
-
-                foreach ( var unit in deck.UnitsList )
-                {
-                    unitsCollection.Add(unit);
-                }
             }
         }
-
-        public ObservableCollection<TwoTransportUnit> TwoTransportsCollection
-        {
-            get
-            {
-                return twoTransportsCollection;
-            }
-            set
-            {
-                Set(TwoTransportsCollectionPropertyName, ref twoTransportsCollection, value);
-            }
-        }
-
-        public ObservableCollection<OneTransportUnit> OneTransportsCollection
-        {
-            get
-            {
-                return oneTransportsCollection;
-            }
-            set
-            {
-                Set(OneTransportsCollectionPropertyName, ref oneTransportsCollection, value);
-            }
-        }
-
 
         public ObservableCollection<Unit> UnitsCollection
         {
@@ -130,9 +82,10 @@ namespace RReplay.ViewModel
             {
                 return unitsCollection;
             }
+
             set
             {
-                Set(UnitsCollectionPropertyName, ref unitsCollection, value);
+                unitsCollection = value;
             }
         }
     }
