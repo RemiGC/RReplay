@@ -32,6 +32,7 @@ namespace RReplay.ViewModel
             if ( ViewModelBase.IsInDesignModeStatic )
             {
                 SimpleIoc.Default.Register<IReplayRepository, Design.DesignReplayRepository>();
+                SimpleIoc.Default.Register<IUnitInfoRepository, UnitInfoRepository>();
             }
             else
             {

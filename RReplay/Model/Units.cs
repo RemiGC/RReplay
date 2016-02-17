@@ -8,126 +8,171 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RReplay.Model
+using System.Runtime.Serialization;
+
+[assembly: System.Runtime.Serialization.ContractNamespaceAttribute("", ClrNamespace = "")]
+
+
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+[System.Runtime.Serialization.CollectionDataContractAttribute(Name = "UnitesInfo", Namespace = "", ItemName = "UnitInfo")]
+public class UnitesInfo : System.Collections.Generic.List<UnitInfo>
 {
-    using System.Runtime.Serialization;
+}
 
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+[System.Runtime.Serialization.DataContractAttribute(Name = "UnitInfo", Namespace = "")]
+public partial class UnitInfo : object, System.Runtime.Serialization.IExtensibleDataObject
+{
 
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name = "UnitesInfo", Namespace = "", ItemName = "UnitInfo")]
-    public class UnitesInfo : System.Collections.Generic.List<RReplay.Model.UnitInfo>
+    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+    private ushort ShowRoomIDField;
+
+    private ushort ClassField;
+
+    private uint InstanceIDField;
+
+    private string ClassNameForDebugField;
+
+    private string AliasNameField;
+
+    private ushort CategoryField;
+
+    private string MotherCountryField;
+
+    private uint ProductionYearField;
+
+    private string LocalizedNameField;
+
+    public System.Runtime.Serialization.ExtensionDataObject ExtensionData
     {
+        get
+        {
+            return this.extensionDataField;
+        }
+        set
+        {
+            this.extensionDataField = value;
+        }
     }
 
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "UnitInfo", Namespace = "")]
-    public partial class UnitInfo : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true)]
+    public ushort ShowRoomID
     {
-
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-
-        private ushort ShowRoomIDField;
-
-        private ushort ClassField;
-
-        private uint InstanceIDField;
-
-        private string ClassNameForDebugField;
-
-        private string AliasNameField;
-
-        private ushort CategoryField;
-
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        get
         {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
+            return this.ShowRoomIDField;
         }
-
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true)]
-        public ushort ShowRoomID
+        set
         {
-            get
-            {
-                return this.ShowRoomIDField;
-            }
-            set
-            {
-                this.ShowRoomIDField = value;
-            }
+            this.ShowRoomIDField = value;
         }
+    }
 
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 1)]
-        public ushort Class
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 1)]
+    public ushort Class
+    {
+        get
         {
-            get
-            {
-                return this.ClassField;
-            }
-            set
-            {
-                this.ClassField = value;
-            }
+            return this.ClassField;
         }
-
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 2)]
-        public uint InstanceID
+        set
         {
-            get
-            {
-                return this.InstanceIDField;
-            }
-            set
-            {
-                this.InstanceIDField = value;
-            }
+            this.ClassField = value;
         }
+    }
 
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 3)]
-        public string ClassNameForDebug
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 2)]
+    public uint InstanceID
+    {
+        get
         {
-            get
-            {
-                return this.ClassNameForDebugField;
-            }
-            set
-            {
-                this.ClassNameForDebugField = value;
-            }
+            return this.InstanceIDField;
         }
-
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 4)]
-        public string AliasName
+        set
         {
-            get
-            {
-                return this.AliasNameField;
-            }
-            set
-            {
-                this.AliasNameField = value;
-            }
+            this.InstanceIDField = value;
         }
+    }
 
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 5)]
-        public ushort Category
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 3)]
+    public string ClassNameForDebug
+    {
+        get
         {
-            get
-            {
-                return this.CategoryField;
-            }
-            set
-            {
-                this.CategoryField = value;
-            }
+            return this.ClassNameForDebugField;
+        }
+        set
+        {
+            this.ClassNameForDebugField = value;
+        }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 4)]
+    public string AliasName
+    {
+        get
+        {
+            return this.AliasNameField;
+        }
+        set
+        {
+            this.AliasNameField = value;
+        }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 5)]
+    public ushort Category
+    {
+        get
+        {
+            return this.CategoryField;
+        }
+        set
+        {
+            this.CategoryField = value;
+        }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 6)]
+    public string MotherCountry
+    {
+        get
+        {
+            return this.MotherCountryField;
+        }
+        set
+        {
+            this.MotherCountryField = value;
+        }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 7)]
+    public uint ProductionYear
+    {
+        get
+        {
+            return this.ProductionYearField;
+        }
+        set
+        {
+            this.ProductionYearField = value;
+        }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 8)]
+    public string LocalizedName
+    {
+        get
+        {
+            return this.LocalizedNameField;
+        }
+        set
+        {
+            this.LocalizedNameField = value;
         }
     }
 }

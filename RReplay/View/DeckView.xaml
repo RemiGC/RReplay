@@ -1,4 +1,4 @@
-﻿<Window x:Class="RReplay.View.DeckView"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,77 +7,71 @@
         xmlns:m="clr-namespace:RReplay.Model"
         xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         xmlns:Converters="clr-namespace:RReplay.Converters"
+        xmlns:local="clr-namespace:RReplay.View" x:Class="RReplay.View.DeckView"
         mc:Ignorable="d ignore"
-        DataContext="{Binding Deck, Source={StaticResource Locator}}" Icon="/RReplay;component/Ressources/ShowAllCode_16x.png">
+        Icon="/RReplay;component/Ressources/ShowAllCode_16x.png">
     <Window.Resources>
 
         <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
         <Converters:SpecializationCodeToImageSource x:Key="SpecializationCodeToImageSource"/>
         <Converters:EraCodeToImageSource x:Key="EraCodeToImageSource"/>
         <Converters:ClassNameDebugToImageSource x:Key="ClassNameDebugToImageSource" />
+        <Converters:VeterancyToImageSource x:Key="VeterancyToImageSource" />
 
         <DataTemplate DataType="{x:Type m:OneTransportUnit}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-                <Label>Name:</Label>
-                <TextBlock Text="{Binding ClassNameDebug}"/>
-                <Label>Veterancy:</Label>
-                <TextBlock Text="{Binding Veterancy}"/>
-                <Label>Category:</Label>
-                <TextBlock Text="{Binding Category}"/>
-                <Label>UnitID:</Label>
-                <TextBlock Text="{Binding UnitID}"/>
-                <Label>TransportID:</Label>
-                <TextBlock Text="{Binding TransportID}"/>
-                <Label>Transport Name:</Label>
-                <TextBlock Text="{Binding TransportClassNameDebug}"/>
-                <Image Source="{Binding TransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-            </StackPanel>
+            <WrapPanel Orientation="Horizontal" Width="500">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
+                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
+                </StackPanel>
+                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+                <Label Content="Name:"/>
+                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <Label Content="Category:"/>
+                <TextBlock Text="{Binding UnitInfo.Category}"/>
+                <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+            </WrapPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:TwoTransportUnit}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-                <Label>Name:</Label>
-                <TextBlock Text="{Binding ClassNameDebug}"/>
-                <Label>Veterancy:</Label>
-                <TextBlock Text="{Binding Veterancy}"/>
-                <Label>Category:</Label>
-                <TextBlock Text="{Binding Category}"/>
-                <Label>UnitID:</Label>
-                <TextBlock Text="{Binding UnitID}"/>
-                <Label>TransportID:</Label>
-                <TextBlock Text="{Binding TransportID}"/>
-                <Label>Transport Name:</Label>
-                <TextBlock Text="{Binding TransportClassNameDebug}"/>
-                <Label>LandingCraftID:</Label>
-                <TextBlock Text="{Binding LandingCraftID}"/>
-                <Label>Landing Craft Name:</Label>
-                <TextBlock Text="{Binding SecondTransportClassNameDebug}"/>
-                <Image Source="{Binding TransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-                <Image Source="{Binding SecondTransportClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-            </StackPanel>
+            <WrapPanel Orientation="Horizontal" Width="500">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
+                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
+                </StackPanel>
+                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+                <Label Content="Name:"/>
+                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <Label Content="Category:"/>
+                <TextBlock Text="{Binding UnitInfo.Category}"/>
+                <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+                <Image Source="{Binding LandingCraftUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+            </WrapPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type m:Unit}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding ClassNameDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"></Image>
-                <Label>Name:</Label>
-                <TextBlock Text="{Binding ClassNameDebug}"/>
-                <Label>Veterancy:</Label>
-                <TextBlock Text="{Binding Veterancy}"/>
-                <Label>Category:</Label>
-                <TextBlock Text="{Binding Category}"/>
-                <Label>UnitID:</Label>
-                <TextBlock Text="{Binding UnitID}"/>
-            </StackPanel>
+            <WrapPanel Orientation="Horizontal" Width="500">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
+                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
+                </StackPanel>
+                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
+                <Label Content="Name:"/>
+                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <Label Content="Category:"/>
+                <TextBlock Text="{Binding UnitInfo.Category}"/>
+            </WrapPanel>
         </DataTemplate>
     </Window.Resources>
+
+    <Window.DataContext>
+        <Binding Path="Deck" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
 
     <Grid>
         <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,10,47,0" VerticalAlignment="Top" Height="31" FontSize="18.667"/>
         <StackPanel Orientation="Horizontal"  Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="660">
             <TextBlock Text="{Binding Deck.Coalition, Mode=OneWay}" Width="90"/>
             <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" Width="66"/>
-            <Image Source="{Binding Deck.Country, Converter={StaticResource CountryCodeToImageSource}}" Width="67" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"></Image>
+            <Image Source="{Binding Deck.Country, Converter={StaticResource CountryCodeToImageSource}}" Width="67" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"/>
             <TextBlock Text="{Binding Deck.Specialization, Mode=OneWay}" Height="15.96" Width="54.103"/>
             <Image Source="{Binding Deck.Specialization, Converter={StaticResource SpecializationCodeToImageSource}}" Width="24" Height="24" Margin="2,0">
                 <Image.Style>
@@ -104,9 +98,15 @@
             </Image>
         </StackPanel>
 
-        <ListBox x:Name="unitsListBox" ItemsSource="{Binding UnitsCollection}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Margin="10,82,10,10"/>
+        <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsCollection}"  MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Margin="10,82,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
         <Button x:Name="refresh" Content="Refresh" Command="{Binding RefreshCode}" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="copy" Margin="0,0,10,0" VerticalAlignment="Top" Height="32" HorizontalAlignment="Right" Width="32" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding  Deck.DeckCode}" >
+        <Button x:Name="copy" Margin="0,0,10,0" VerticalAlignment="Top" Height="32" HorizontalAlignment="Right" Width="32" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding Deck.DeckCode}" >
             <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
         </Button>
     </Grid>

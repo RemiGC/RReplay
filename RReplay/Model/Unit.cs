@@ -10,11 +10,7 @@ namespace RReplay.Model
         private ushort unitID;
 
         // Extented property from the XML
-        private string classNameDebug;
-        private string alias;
-        private int category;
-        private uint instanceID;
-        private int classNumber;
+        UnitInfo unitInfo;
 
         public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID )
         {
@@ -24,28 +20,7 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            var unitInfo = repository.GetUnit(coalition, unitID);
-
-            if ( unitInfo != null )
-            {
-                ClassNameDebug = unitInfo.ClassNameForDebug;
-                Alias = unitInfo.AliasName;
-                Category = unitInfo.Category;
-                InstanceID = unitInfo.InstanceID;
-                ClassNumber = unitInfo.Class;
-            }
-        }
-
-        public string ClassNameDebug
-        {
-            get
-            {
-                return classNameDebug;
-            }
-            private set
-            {
-                classNameDebug = value;
-            }
+            UnitInfo = repository.GetUnit(coalition, unitID);
         }
 
         public CoalitionEnum Coalition
@@ -76,59 +51,7 @@ namespace RReplay.Model
             }
         }
 
-        public string Alias
-        {
-            get
-            {
-                return alias;
-            }
-
-            private set
-            {
-                alias = value;
-            }
-        }
-
-        public int Category
-        {
-            get
-            {
-                return category;
-            }
-
-            private set
-            {
-                category = value;
-            }
-        }
-
-        public uint InstanceID
-        {
-            get
-            {
-                return instanceID;
-            }
-
-            private set
-            {
-                instanceID = value;
-            }
-        }
-
-        public int ClassNumber
-        {
-            get
-            {
-                return classNumber;
-            }
-
-            private set
-            {
-                classNumber = value;
-            }
-        }
-
-        public byte Veterancy
+         public byte Veterancy
         {
             get
             {
@@ -151,6 +74,19 @@ namespace RReplay.Model
             private set
             {
                 unitID = value;
+            }
+        }
+
+        public UnitInfo UnitInfo
+        {
+            get
+            {
+                return unitInfo;
+            }
+
+            private set
+            {
+                unitInfo = value;
             }
         }
     }

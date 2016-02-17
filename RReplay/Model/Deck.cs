@@ -16,7 +16,7 @@ namespace RReplay.Model
     /// <summary>
     /// A class that represent a Complete Deck build from a deck code
     /// </summary>
-    public class Deck: INotifyPropertyChanged
+    public class Deck: INotifyPropertyChanged, IEquatable<Deck>
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private byte country;
@@ -294,6 +294,11 @@ namespace RReplay.Model
             }
 
             return (T)Convert.ChangeType(bits, typeof(T));
+        }
+
+        public bool Equals( Deck other )
+        {
+            return deckCode == other.deckCode;
         }
 
         // TODO move those somewhere, maybe build them from xml or json instead

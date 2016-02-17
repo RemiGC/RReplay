@@ -130,6 +130,7 @@
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
     <Compile Include="Converters\SpecializationCodeToImageSource.cs" />
+    <Compile Include="Converters\VeterancyToImageSource.cs" />
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
