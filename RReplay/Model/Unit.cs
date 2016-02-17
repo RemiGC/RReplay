@@ -1,10 +1,4 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace RReplay.Model
 {
@@ -30,7 +24,8 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitesUnit unitInfo = repository.GetUnit(coalition, unitID);
+            var unitInfo = repository.GetUnit(coalition, unitID);
+
             if ( unitInfo != null )
             {
                 ClassNameDebug = unitInfo.ClassNameForDebug;

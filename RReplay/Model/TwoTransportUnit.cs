@@ -1,9 +1,4 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RReplay.Model
 {
@@ -26,7 +21,7 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitesUnit unitInfo = repository.GetUnit(coalition, secondTransportID);
+            var unitInfo = repository.GetUnit(coalition, secondTransportID);
 
             if ( unitInfo != null )
             {

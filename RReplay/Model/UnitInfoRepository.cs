@@ -1,48 +1,49 @@
-﻿using System;
+﻿using RReplay.Properties;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace RReplay.Model
 {
     public class UnitInfoRepository : IUnitInfoRepository
     {
-        SortedList<ushort, UnitesUnit> natoList;
-        SortedList<ushort, UnitesUnit> pactList;
+        SortedList<ushort, UnitInfo> natoList;
+        SortedList<ushort, UnitInfo> pactList;
 
         public UnitInfoRepository()
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Unites));
+            var ser = new DataContractSerializer(typeof(UnitesInfo));
 
-            Unites natoUnits = ser.Deserialize(new FileStream("NATO.xml", FileMode.Open)) as Unites;
+            natoList = new SortedList<ushort, UnitInfo>();
 
-            natoList = new SortedList<ushort, UnitesUnit>(natoUnits.Unit.Length);
-
-            foreach (var unit in natoUnits.Unit)
+            using ( var reader = new FileStream(Path.Combine(Settings.Default.exeFolder, "NATO.xml"), FileMode.Open) )
             {
-                natoList.Add(unit.ShowRoomID, unit);
+                UnitesInfo natoUnits = ser.ReadObject(reader) as UnitesInfo;
+
+                foreach ( var unit in natoUnits )
+                {
+                    natoList.Add(unit.ShowRoomID, unit);
+                }
             }
 
-            Unites pactUnits = ser.Deserialize(new FileStream("PACT.xml", FileMode.Open)) as Unites;
+            pactList = new SortedList<ushort, UnitInfo>();
 
-            pactList = new SortedList<ushort, UnitesUnit>(pactUnits.Unit.Length);
-
-            foreach ( var unit in pactUnits.Unit )
+            using ( var reader = new FileStream(Path.Combine(Settings.Default.exeFolder, "PACT.xml"), FileMode.Open) )
             {
-                pactList.Add(unit.ShowRoomID, unit);
+                UnitesInfo pactUnits = ser.ReadObject(reader) as UnitesInfo;
+
+                foreach ( var unit in pactUnits)
+                {
+                    pactList.Add(unit.ShowRoomID, unit);
+                }
             }
         }
 
-        public UnitesUnit GetUnit( CoalitionEnum coalition, ushort unitID )
+        public UnitInfo GetUnit( CoalitionEnum coalition, ushort unitID )
         {
             if ( coalition == CoalitionEnum.NATO )
             {
-                UnitesUnit unit;
+                UnitInfo unit;
                 if(natoList.TryGetValue(unitID, out unit))
                 {
                     return unit;
@@ -54,7 +55,7 @@ namespace RReplay.Model
             }
             else
             {
-                UnitesUnit unit;
+                UnitInfo unit;
                 if ( pactList.TryGetValue(unitID, out unit) )
                 {
                     return unit;

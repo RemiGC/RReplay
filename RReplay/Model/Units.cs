@@ -8,114 +8,126 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Xml.Serialization;
-
-// 
-// Ce code source a été automatiquement généré par xsd, Version=4.6.1055.0.
-// 
+namespace RReplay.Model
+{
+    using System.Runtime.Serialization;
 
 
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class Unites {
-    
-    private UnitesUnit[] unitField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("Unit")]
-    public UnitesUnit[] Unit {
-        get {
-            return this.unitField;
-        }
-        set {
-            this.unitField = value;
-        }
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name = "UnitesInfo", Namespace = "", ItemName = "UnitInfo")]
+    public class UnitesInfo : System.Collections.Generic.List<RReplay.Model.UnitInfo>
+    {
     }
-}
 
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class UnitesUnit {
-    
-    private ushort classField;
-    
-    private uint instanceIDField;
-    
-    private string classNameForDebugField;
-    
-    private string aliasNameField;
-    
-    private ushort categoryField;
-    
-    private ushort showRoomIDField;
-    
-    /// <remarks/>
-    public ushort Class {
-        get {
-            return this.classField;
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "UnitInfo", Namespace = "")]
+    public partial class UnitInfo : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+        private ushort ShowRoomIDField;
+
+        private ushort ClassField;
+
+        private uint InstanceIDField;
+
+        private string ClassNameForDebugField;
+
+        private string AliasNameField;
+
+        private ushort CategoryField;
+
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
         }
-        set {
-            this.classField = value;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true)]
+        public ushort ShowRoomID
+        {
+            get
+            {
+                return this.ShowRoomIDField;
+            }
+            set
+            {
+                this.ShowRoomIDField = value;
+            }
         }
-    }
-    
-    /// <remarks/>
-    public uint InstanceID {
-        get {
-            return this.instanceIDField;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 1)]
+        public ushort Class
+        {
+            get
+            {
+                return this.ClassField;
+            }
+            set
+            {
+                this.ClassField = value;
+            }
         }
-        set {
-            this.instanceIDField = value;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 2)]
+        public uint InstanceID
+        {
+            get
+            {
+                return this.InstanceIDField;
+            }
+            set
+            {
+                this.InstanceIDField = value;
+            }
         }
-    }
-    
-    /// <remarks/>
-    public string ClassNameForDebug {
-        get {
-            return this.classNameForDebugField;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 3)]
+        public string ClassNameForDebug
+        {
+            get
+            {
+                return this.ClassNameForDebugField;
+            }
+            set
+            {
+                this.ClassNameForDebugField = value;
+            }
         }
-        set {
-            this.classNameForDebugField = value;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, EmitDefaultValue = false, Order = 4)]
+        public string AliasName
+        {
+            get
+            {
+                return this.AliasNameField;
+            }
+            set
+            {
+                this.AliasNameField = value;
+            }
         }
-    }
-    
-    /// <remarks/>
-    public string AliasName {
-        get {
-            return this.aliasNameField;
-        }
-        set {
-            this.aliasNameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public ushort Category {
-        get {
-            return this.categoryField;
-        }
-        set {
-            this.categoryField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort ShowRoomID {
-        get {
-            return this.showRoomIDField;
-        }
-        set {
-            this.showRoomIDField = value;
+
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 5)]
+        public ushort Category
+        {
+            get
+            {
+                return this.CategoryField;
+            }
+            set
+            {
+                this.CategoryField = value;
+            }
         }
     }
 }

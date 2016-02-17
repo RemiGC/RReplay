@@ -20,7 +20,7 @@ namespace RReplay.Model
 
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
-            UnitesUnit unitInfo = repository.GetUnit(coalition, transportID);
+            var unitInfo = repository.GetUnit(coalition, transportID);
 
             if ( unitInfo != null )
             {

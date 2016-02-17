@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using RReplay.MessageInfrastructure;
 using RReplay.Model;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace RReplay.ViewModel

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Threading;
 using RReplay.Properties;
+using System.IO;
 using System.Windows;
 
 namespace RReplay
@@ -29,18 +30,28 @@ namespace RReplay
 
         private bool Setup()
         {
+            // Upgrade settings from past config
             if ( Settings.Default.UpgradeRequired )
             {
                 Settings.Default.Upgrade();
                 Settings.Default.UpgradeRequired = false;
+
+                //Introduced in V.0.5
+                if ( string.IsNullOrEmpty(Settings.Default.exeFolder) )
+                {
+                    Settings.Default.exeFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                }
             }
 
+            // First setup
             if ( Settings.Default.firstRun )
             {
                 Settings.Default.firstRun = false;
                 Settings.Default.replaysFolder = ReplayFolderPicker.GetDefaultReplayGamesFolder();
+                Settings.Default.exeFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             }
 
+            // Check if the replays folder we have is good, if not ask for a new one
             if ( !ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
                 string newPath;
@@ -52,6 +63,33 @@ namespace RReplay
                 {
                     Settings.Default.replaysFolder = newPath;
                 }
+            }
+
+            bool filePresent = false;
+
+            // check if we have all the base icons we need
+            if ( !ExeFolder.IsBaseFilesPresent(Settings.Default.exeFolder))
+            {
+                // Maybe they moved the .exe folder from the last execution
+                if(Settings.Default.exeFolder != Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) )
+                {
+                    string newPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    if( ExeFolder.IsBaseFilesPresent(newPath) )
+                    {
+                        Settings.Default.exeFolder = newPath; // yup
+                        filePresent = true;
+                    }
+                }
+            }
+            else
+            {
+                filePresent = true;
+            }
+
+            if(!filePresent)
+            {
+                // TODO ask for a new icons folder maybe.
+                return false;
             }
 
             return true;
