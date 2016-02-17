@@ -4,18 +4,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RReplay.View"
+             xmlns:converters="clr-namespace:RReplay.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding Main, Source={StaticResource Locator}}">
     
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/RReplay;component/Skins/MainSkin.xaml"  />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
+        <converters:SpecializationCodeToImageSource x:Key="SpecializationCodeToImageSource"/>
+        <converters:EraCodeToImageSource x:Key="EraCodeToImageSource"/>
+
+        <DataTemplate x:Key="PlayerTemplate" >
+            <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Width="600" Margin="5,0,0,0" Padding="5">
+                <WrapPanel Orientation="Vertical">
+                    <DockPanel >
+                        <Label FontSize="14" >Name :</Label>
+                        <TextBlock FontWeight="Bold" x:Name="PlayerNameText" Text="{Binding PlayerName, Mode=OneWay}" ToolTip="{Binding PlayerName, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+                        <Label FontSize      ="14">ID :</Label>
+                        <TextBlock Text="{Binding PlayerUserId, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">LVL:</Label>
+                        <TextBlock Text="{Binding PlayerLevel, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">Rank:</Label>
+                        <TextBlock Text="{Binding PlayerRank, Mode=OneWay}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Label FontSize      ="14">ELO:</Label>
+                        <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,5,0" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">
+                            <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
+                        </Button>
+                    </DockPanel>
+                    <DockPanel>
+                        <Image Source="{Binding Deck.Country, Converter={StaticResource CountryCodeToImageSource}}" Width="40" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"></Image>
+                        <Image Source="{Binding Deck.Specialization, Converter={StaticResource SpecializationCodeToImageSource}}" ToolTip="{Binding Deck.Specialization, Mode=OneWay}" Width="24" Height="24" Margin="2,0">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Deck.Specialization, Converter={StaticResource SpecializationCodeToImageSource}}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image Source="{Binding Deck.Era, Converter={StaticResource EraCodeToImageSource}}" ToolTip="{Binding Deck.Era, Mode=OneWay}" Width="24" Height="24" Margin="2,0" >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Deck.Era, Converter={StaticResource SpecializationCodeToImageSource}}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Label FontSize="14" >Deck :</Label>
+                        <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Open Deck" Command="{Binding Main.OpenDeckViewCommand , Source={StaticResource Locator}}" CommandParameter="{Binding Deck}" >
+                            <Image Source="/RReplay;component/Ressources/ShowAllCode_16x.png"  Stretch="UniformToFill"  />
+                        </Button>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label FontSize="14" >Code :</Label>
+                        <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
+                        <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
+                            <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+                        </Button>
+                    </DockPanel>
+               
+                </WrapPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsAI}" Value="True">
+                    <DataTrigger.Setters>
+                        <Setter Property="Text" Value="{Binding PlayerIALevel, Mode=OneWay}" TargetName="PlayerNameText" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsAI}" Value="False">
+                    <DataTrigger.Setters>
+                        <Setter Property="Text" Value="{Binding PlayerName, Mode=OneWay}" TargetName="PlayerNameText" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid>
-        <ListBox x:Name="listBox" ItemTemplate="{DynamicResource PlayerTemplate}" ItemsSource="{Binding PlayersView}" Margin="10"/>
+        <ListView x:Name="listBox" ItemTemplate="{DynamicResource PlayerTemplate}"   ItemsSource="{Binding PlayersView}" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!-- -->
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                    <!-- </Border> -->
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
     </Grid>
 </UserControl>
