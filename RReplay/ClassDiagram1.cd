@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="RReplay.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.MessageInfrastructure.MessageCommunicator">
+    <Position X="22" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageInfrastructure\MessageCommunicator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RReplay.Model.Deck" BaseTypeListCollapsed="true">
+    <Position X="25.75" Y="8.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQAAwAQAAIABkrAAgAAQAAACiBIQACgCAQQAAARAAEA=</HashCode>
+      <FileName>Model\Deck.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="UnitsList" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.338" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.Model.Game" Collapsed="true">
+    <Position X="23.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAABAGQICBgEgAAAEgEABABAgQEgCAkCABIBQ=</HashCode>
+      <FileName>Model\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RReplay.Model.OneTransportUnit" Collapsed="true">
+    <Position X="29.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAACAAAAAgAAAAIAAAAAAA=</HashCode>
+      <FileName>Model\OneTransportUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RReplay.Model.Player">
+    <Position X="23.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMACI0AAAAAAAgBBCAAAAIAwAAAAGAAAAhgAAAACAA=</HashCode>
+      <FileName>Model\Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Deck" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RReplay.Model.Replay">
+    <Position X="20.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAIAABAAAACBABgAAAUAAAggAAABAgAAAAAEAAA=</HashCode>
+      <FileName>Model\Replay.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Players" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RReplay.Model.TwoTransportUnit" Collapsed="true">
+    <Position X="29.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Model\TwoTransportUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RReplay.Model.Unit">
+    <Position X="29.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgACIAIAggAAAAAAAAAAAAAAAQAAAQEAAAAAAA=</HashCode>
+      <FileName>Model\Unit.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="unitInfo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="UnitInfo" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACQQAAAQgCAAIAIAAAAAIAAAAEEQAIACIAiBA=</HashCode>
+      <FileName>Model\Units.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.AllPlayersDeck" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AllPlayersDeck.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.DeckView" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\DeckView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.DetailReplayView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\DetailReplayView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.ReplayJSONView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\ReplayJSONView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.ReplaysListView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\ReplaysListView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.View.ReplayView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\ReplayView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RReplay.ViewModel.DeckViewModel">
+    <Position X="25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgQAAAIIAAAAAAAAAAAAAAAAAAEAAAAFABAAAAAE=</HashCode>
+      <FileName>ViewModel\DeckViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Deck" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RReplay.ViewModel.MainViewModel">
+    <Position X="18" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>BgEIDAAAAEoACBDASEAAZAoAKCIgAhAAgAAJAFQBCDA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="playersList" />
+      <Field Name="replaysCollection" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RReplay.ViewModel.ViewModelLocator">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABEAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Deck" />
+      <Property Name="Main" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
