@@ -1,0 +1,1 @@
+svcutil /dconly Units.xsd /out:Units.cs /ser:DataContractSerializer

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="UnitesInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="UnitInfo">
+          <xs:complexType>
+            <xs:sequence>
+			  <xs:element name="ShowRoomID" type="xs:unsignedShort" />
+			  <xs:element name="Class" type="xs:unsignedShort" />
+			  <xs:element name="InstanceID" type="xs:unsignedInt" />
+			  <xs:element name="ClassNameForDebug" type="xs:string" />
+			  <xs:element name="AliasName" type="xs:string" />
+			  <xs:element name="Category" type="xs:unsignedShort" />
+			  <xs:element name="MotherCountry" type="xs:string" />
+			  <xs:element name="ProductionYear" xs:nillable="true" type="xs:unsignedInt" />
+			  <xs:element name="LocalizedName" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="ShowRoomIDUnique">
+      <xs:selector xpath="UnitInfo" />
+      <xs:field xpath="@ShowRoomID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
