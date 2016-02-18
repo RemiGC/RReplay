@@ -18,6 +18,10 @@ build/
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 
+#Settings and Visual studio folder
+.settings/
+.vs/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -145,6 +149,7 @@ ModelManifest.xml
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+*.lnk
 
 # Folder config file
 Desktop.ini
