@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:RReplay.Converters"
         mc:Ignorable="d ignore"
         MinHeight="340"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" >
+        DataContext="{Binding Main, Source={StaticResource Locator}}" d:DesignWidth="660" >
     
     <UserControl.Resources>
         <converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>

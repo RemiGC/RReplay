@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        DataContext="{Binding Main.SelectedReplay, Source={StaticResource Locator}}" >
+        DataContext="{Binding Main.SelectedReplay, Source={StaticResource Locator}}" d:DesignWidth="262" d:DesignHeight="230" >
 
     <StackPanel>
         <Label>Name: </Label>

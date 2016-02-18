@@ -64,6 +64,15 @@
   <PropertyGroup>
     <ApplicationIcon>Ressources\comodo_dragon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>RedReplay.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -133,6 +142,7 @@
     <Compile Include="Converters\VeterancyToImageSource.cs" />
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
+    <Compile Include="Design\DesignUnitInfoRepository.cs" />
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
@@ -146,6 +156,7 @@
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitInfoRepository.cs" />
     <Compile Include="Model\Units.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Settings\exeFolder.cs" />
     <Compile Include="Settings\ReplayFolderPicker.cs" />
     <Compile Include="ViewModel\DeckViewModel.cs" />
@@ -240,6 +251,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="RedReplay.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

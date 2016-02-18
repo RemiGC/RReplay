@@ -61,8 +61,6 @@ namespace RReplay.ViewModel
 
         public MainViewModel( IReplayRepository dataService )
         {
-            ReplayViewVisible = true;
-
             this.dataService = dataService;
             this.dataService.GetData(this.ReceiveData);
 
@@ -70,6 +68,8 @@ namespace RReplay.ViewModel
             {
                 SelectedReplay = Replays[1];
             }
+            ReplayViewVisible = true;
+            nameFilter = "";
 
         }
 
@@ -348,14 +348,21 @@ namespace RReplay.ViewModel
                 },
                 ( value ) =>
                 {
-                    Player player = value as Player;
-                    if(player.IsAI)
+                    if ( value is Player )
                     {
-                        return false;
+                        Player player = value as Player;
+                        if ( player.IsAI )
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
                     }
                     else
                     {
-                        return true;
+                        return false;
                     }
                 }));
             }
