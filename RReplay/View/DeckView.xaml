@@ -9,7 +9,7 @@
         xmlns:Converters="clr-namespace:RReplay.Converters"
         xmlns:local="clr-namespace:RReplay.View" x:Class="RReplay.View.DeckView"
         mc:Ignorable="d ignore"
-        Icon="/RReplay;component/Ressources/ShowAllCode_16x.png" d:DesignWidth="834.186" d:DesignHeight="566.254">
+        Icon="{StaticResource ComodoIcon}" d:DesignWidth="834.186" d:DesignHeight="566.254">
     <Window.Resources>
 
         <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>

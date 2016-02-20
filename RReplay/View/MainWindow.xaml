@@ -14,14 +14,11 @@
         Width="796.915"
         Title="RReplay"
         DataContext="{Binding Main, Source={StaticResource Locator}}" 
-        Icon="Ressources/comodo_dragon.ico">
+        Icon="{StaticResource ComodoIcon}">
 
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Skins/MainSkin.xaml" />
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 

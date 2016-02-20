@@ -24,17 +24,17 @@
                 <ContextMenu>
                     <MenuItem Header="View JSON" Command="{Binding OpenReplayJSONView}">
                         <MenuItem.Icon>
-                            <Image Source="/RReplay;component/Ressources/JSONDocumentOutline_16x.png"></Image>
+                            <Image Source="{StaticResource ViewJsonIcon}"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Browse To" Command="{Binding BrowseToReplayFileCommand}">
                         <MenuItem.Icon>
-                           <Image Source="/RReplay;component/Ressources/FolderOpen.ico"></Image>
+                           <Image Source="{StaticResource FolderOpenIcon}"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Refresh" Command="{Binding RefreshReplay}" >
                         <MenuItem.Icon>
-                            <Image Source="/RReplay;component/Ressources/ItemUpdatedAssociation_16x.png"></Image>
+                            <Image Source="{StaticResource RefreshIcon}"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Save JSON..." IsEnabled="False" />

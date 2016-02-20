@@ -29,7 +29,7 @@
                         <Label FontSize      ="14">ELO:</Label>
                         <TextBlock Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" FontSize="14.667" HorizontalAlignment="Left" VerticalAlignment="Center" />
                         <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,5,0" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding}" ToolTip="Open the Steam Community Page" HorizontalAlignment="Right">
-                            <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
+                            <Image Source="{StaticResource SteamIcon}" Stretch="UniformToFill"  />
                         </Button>
                     </DockPanel>
                     <DockPanel>
@@ -59,7 +59,7 @@
                         <Label FontSize="14" >Deck :</Label>
                         <TextBlock FontWeight="Bold" FontSize="14.667" ToolTip="{Binding PlayerDeckName, Mode=OneWay}" Text="{Binding PlayerDeckName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                         <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Open Deck" Command="{Binding Main.OpenDeckViewCommand , Source={StaticResource Locator}}" CommandParameter="{Binding Deck}" >
-                            <Image Source="/RReplay;component/Ressources/ShowAllCode_16x.png"  Stretch="UniformToFill"  />
+                            <Image Source="{StaticResource ShowDeckDetailsIcon}"  Stretch="UniformToFill"  />
                         </Button>
                     </DockPanel>
 
@@ -67,7 +67,7 @@
                         <Label FontSize="14" >Code :</Label>
                         <TextBlock Width="494"  ToolTip="{Binding PlayerDeckContent, Mode=OneWay}" Text="{Binding PlayerDeckContent, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="False"/>
                         <Button Width="32" Height="32" Margin="0,0,5,0" Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Copy Deck" Command="{Binding Main.CopyDeckCodeCommand , Source={StaticResource Locator}}" CommandParameter="{Binding PlayerDeckContent}" >
-                            <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
+                            <Image Source="{StaticResource CopyToClipboardIcon}" Stretch="UniformToFill"  />
                         </Button>
                     </DockPanel>
                

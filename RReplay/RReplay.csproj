@@ -162,62 +162,65 @@
     <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\AllPlayersDeck.xaml.cs">
-      <DependentUpon>AllPlayersDeck.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\DeckView.xaml.cs">
       <DependentUpon>DeckView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DetailReplayView.xaml.cs">
-      <DependentUpon>DetailReplayView.xaml</DependentUpon>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReplayJSONView.xaml.cs">
       <DependentUpon>ReplayJSONView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ReplaysListView.xaml.cs">
-      <DependentUpon>ReplaysListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ReplayView.xaml.cs">
-      <DependentUpon>ReplayView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="View\UserControl\AllPlayersDeck.xaml.cs">
+      <DependentUpon>AllPlayersDeck.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControl\DetailReplayView.xaml.cs">
+      <DependentUpon>DetailReplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControl\ReplaysListView.xaml.cs">
+      <DependentUpon>ReplaysListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControl\ReplayView.xaml.cs">
+      <DependentUpon>ReplayView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Ressources\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\AllPlayersDeck.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DeckView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DetailReplayView.xaml">
-      <SubType>Form</SubType>
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ReplayJSONView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ReplaysListView.xaml">
+    <Page Include="View\UserControl\AllPlayersDeck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ReplayView.xaml">
-      <SubType>Form</SubType>
+    <Page Include="View\UserControl\DetailReplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControl\ReplaysListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControl\ReplayView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -74,7 +74,6 @@ namespace RReplay
 
         private static void AnotherReplayFolderCMDLink_Click( object s, EventArgs e )
         {
-            _buttonPressed = "anotherFolder";
             var openFolderDialog = new CommonOpenFileDialog();
 
             openFolderDialog.Title = "Select the wargame3 replay folders";
