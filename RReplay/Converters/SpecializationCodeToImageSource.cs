@@ -12,7 +12,7 @@ namespace RReplay.Converters
         {
             string specializationFlagPath = null;
 
-            if ( (string)value != "All" )
+            if ( !((string)value).Equals("All",StringComparison.OrdinalIgnoreCase) )
             {
                 string path = Path.Combine(Settings.Default.exeFolder, "Icons", "Deck", (string)value + ".png");
 
