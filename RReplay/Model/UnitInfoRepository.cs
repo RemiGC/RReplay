@@ -1,70 +1,69 @@
-﻿using RReplay.Properties;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
+using System.Linq;
+using System.Windows;
 
 namespace RReplay.Model
 {
     public class UnitInfoRepository : IUnitInfoRepository
     {
-        SortedList<ushort, UnitInfo> natoList;
-        SortedList<ushort, UnitInfo> pactList;
+        Dictionary<int, TUniteAuSol> otanUnits;
+        Dictionary<int, TUniteAuSol> pactUnits;
+        Dictionary<Tuple<CoalitionEnum, byte>, Nations> nations;
+        Dictionary<byte, Era> eras;
+        Dictionary<byte, Specialization> specializations;
 
         public UnitInfoRepository()
         {
-            var ser = new DataContractSerializer(typeof(UnitesInfo));
-
-            natoList = new SortedList<ushort, UnitInfo>();
-
-            using ( var reader = new FileStream(Path.Combine(Settings.Default.exeFolder, "NATO.xml"), FileMode.Open) )
+            using ( var unitsContext = new UnitsContext() )
             {
-                UnitesInfo natoUnits = ser.ReadObject(reader) as UnitesInfo;
+                otanUnits = unitsContext.OtanUnits
+                  .Include("TUniteAuSol")
+                  .Include("TUniteAuSol.Units_Translation_US")
+                  .ToDictionary(u => u.DeckId, u => u.TUniteAuSol);
 
-                foreach ( var unit in natoUnits )
-                {
-                    natoList.Add(unit.ShowRoomID, unit);
-                }
-            }
+                pactUnits = unitsContext.PactUnits
+                  .Include("TUniteAuSol")
+                  .Include("TUniteAuSol.Units_Translation_US")
+                  .ToDictionary(u => u.DeckId, u => u.TUniteAuSol);
 
-            pactList = new SortedList<ushort, UnitInfo>();
+                nations = unitsContext.Nations
+                  .ToDictionary(u => new Tuple<CoalitionEnum, byte>((CoalitionEnum)u.Coalition,u.NationID), u => u);
 
-            using ( var reader = new FileStream(Path.Combine(Settings.Default.exeFolder, "PACT.xml"), FileMode.Open) )
-            {
-                UnitesInfo pactUnits = ser.ReadObject(reader) as UnitesInfo;
+                eras = unitsContext.Era
+                    .ToDictionary(u => u.EraId, u => u);
 
-                foreach ( var unit in pactUnits)
-                {
-                    pactList.Add(unit.ShowRoomID, unit);
-                }
+                specializations = unitsContext.Specialization
+                    .ToDictionary(u => u.SpecializationID, u => u);
             }
         }
 
-        public UnitInfo GetUnit( CoalitionEnum coalition, ushort unitID )
+        public TUniteAuSol GetUnit( CoalitionEnum coalition, ushort unitID )
         {
-            if ( coalition == CoalitionEnum.NATO )
+            if (coalition == CoalitionEnum.NATO)
             {
-                UnitInfo unit;
-                if(natoList.TryGetValue(unitID, out unit))
-                {
-                    return unit;
-                }
-                else
-                {
-                    return null;
-                }                
+                return otanUnits[unitID];
             }
             else
             {
-                UnitInfo unit;
-                if ( pactList.TryGetValue(unitID, out unit) )
-                {
-                    return unit;
-                }
-                else
-                {
-                    return null;
-                }
+                return pactUnits[unitID];
             }
+        }
+
+        public Nations GetNation( CoalitionEnum coalition, byte nationId )
+        {
+            var nat = nations[new Tuple<CoalitionEnum, byte>(coalition, nationId)];
+            return nat;
+        }
+
+        public Era GetEra( byte eraId )
+        {
+            return eras[eraId];
+        }
+
+        public Specialization GetSpecialization( byte specializationId )
+        {
+            return specializations[specializationId];
         }
     }
 }

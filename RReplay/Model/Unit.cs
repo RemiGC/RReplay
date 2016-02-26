@@ -10,7 +10,7 @@ namespace RReplay.Model
         private ushort unitID;
 
         // Extented property from the XML
-        UnitInfo unitInfo;
+        TUniteAuSol unitInfo;
 
         public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID )
         {
@@ -77,7 +77,7 @@ namespace RReplay.Model
             }
         }
 
-        public UnitInfo UnitInfo
+        public TUniteAuSol UnitInfo
         {
             get
             {

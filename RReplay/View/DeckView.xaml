@@ -26,7 +26,7 @@
                 </StackPanel>
                 <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
                 <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
                 <Label Content="Category:"/>
                 <TextBlock Text="{Binding UnitInfo.Category}"/>
                 <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
@@ -40,7 +40,7 @@
                 </StackPanel>
                 <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
                 <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
                 <Label Content="Category:"/>
                 <TextBlock Text="{Binding UnitInfo.Category}"/>
                 <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
@@ -55,7 +55,7 @@
                 </StackPanel>
                 <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
                 <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.LocalizedName}"/>
+                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
                 <Label Content="Category:"/>
                 <TextBlock Text="{Binding UnitInfo.Category}"/>
             </WrapPanel>

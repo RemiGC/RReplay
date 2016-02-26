@@ -20,8 +20,6 @@ namespace RReplay
             baseFiles.Add(Path.Combine("Icons", "Deck", "motorized.png"));
             baseFiles.Add(Path.Combine("Icons", "Deck", "navy.png"));
             baseFiles.Add(Path.Combine("Icons", "Deck", "support.png"));
-            baseFiles.Add("NATO.xml");
-            baseFiles.Add("PACT.xml");
 
             foreach (var file in baseFiles)
             {

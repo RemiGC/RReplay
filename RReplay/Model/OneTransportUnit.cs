@@ -7,7 +7,7 @@ namespace RReplay.Model
         private ushort transportID;
 
         // Extented transport property from the XML
-        UnitInfo transportUnitInfo;
+        TUniteAuSol transportUnitInfo;
 
 
         public OneTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID )
@@ -33,7 +33,7 @@ namespace RReplay.Model
             }
         }
 
-        public UnitInfo TransportUnitInfo
+        public TUniteAuSol TransportUnitInfo
         {
             get
             {

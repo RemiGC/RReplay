@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Units.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Era">
+          <Key>
+            <PropertyRef Name="EraId" />
+          </Key>
+          <Property Name="EraId" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Hash" Type="varbinary" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="Flags">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="DestinationClassId" Type="tinyint" />
+          <Property Name="DestinationInstanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaxDeployableAmount">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="DeployableAmount1" Type="int" />
+          <Property Name="DeployableAmount2" Type="int" />
+          <Property Name="DeployableAmount3" Type="int" />
+          <Property Name="DeployableAmount4" Type="int" />
+          <Property Name="DeployableAmount5" Type="int" />
+        </EntityType>
+        <EntityType Name="Nations">
+          <Key>
+            <PropertyRef Name="Coalition" />
+            <PropertyRef Name="NationID" />
+          </Key>
+          <Property Name="Coalition" Type="tinyint" Nullable="false" />
+          <Property Name="NationID" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Hash" Type="binary" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtanUnits">
+          <Key>
+            <PropertyRef Name="DeckId" />
+          </Key>
+          <Property Name="DeckId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="smallint" Nullable="false" />
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="RefClassId" Type="tinyint" Nullable="false" />
+          <Property Name="RefInstanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PactUnits">
+          <Key>
+            <PropertyRef Name="DeckId" />
+          </Key>
+          <Property Name="DeckId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="smallint" Nullable="false" />
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="RefClassId" Type="tinyint" Nullable="false" />
+          <Property Name="RefInstanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductionPrice">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="Price1" Type="int" />
+          <Property Name="Price2" Type="int" />
+          <Property Name="Price3" Type="int" />
+          <Property Name="Price4" Type="int" />
+          <Property Name="Price5" Type="int" />
+        </EntityType>
+        <EntityType Name="ShowInMenu">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="ShowMenu1" Type="bit" />
+          <Property Name="ShowMenu2" Type="bit" />
+          <Property Name="ShowMenu3" Type="bit" />
+          <Property Name="ShowMenu4" Type="bit" />
+          <Property Name="ShowMenu5" Type="bit" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="SpecializationID" />
+          </Key>
+          <Property Name="SpecializationID" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Hash" Type="varbinary" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TUniteAuSol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="tinyint" />
+          <Property Name="DescriptorId" Type="nvarchar" MaxLength="1000" />
+          <Property Name="_ShortDatabaseName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ClassNameForDebug" Type="nvarchar" MaxLength="1000" />
+          <Property Name="StickToGround" Type="bit" />
+          <Property Name="ManageUnitOrientation" Type="nvarchar" MaxLength="1000" />
+          <Property Name="HitRollSizeModifier" Type="real" />
+          <Property Name="IconeType" Type="int" />
+          <Property Name="PositionInMenu" Type="int" />
+          <Property Name="NameInMenuToken" Type="varbinary" MaxLength="8" />
+          <Property Name="AliasName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Category" Type="int" />
+          <Property Name="AcknowUnitType" Type="int" />
+          <Property Name="TypeForAcknow" Type="int" />
+          <Property Name="Nationalite" Type="int" />
+          <Property Name="MotherCountry" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProductionYear" Type="int" />
+          <Property Name="MaxPacks" Type="int" />
+          <Property Name="Factory" Type="int" />
+          <Property Name="ProductionTime" Type="int" />
+          <Property Name="CoutEtoile" Type="int" />
+          <Property Name="TextureMotherCountryForInterface" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UnitMovingType" Type="int" />
+          <Property Name="VitesseCombat" Type="real" />
+          <Property Name="IsPrototype" Type="bit" />
+        </EntityType>
+        <EntityType Name="TypeUnit">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="DestinationClassId" Type="tinyint" />
+          <Property Name="DestinationInstanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Units_Translation_US">
+          <Key>
+            <PropertyRef Name="Hash" />
+          </Key>
+          <Property Name="Hash" Type="varbinary" MaxLength="8" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="UnitTypeTokens">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="UnitTokenLocalisation1" Type="varbinary" MaxLength="8" />
+          <Property Name="UnitTokenLocalisation2" Type="varbinary" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="WeaponManager">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="int" Nullable="false" />
+          <Property Name="SourceClassId" Type="tinyint" />
+          <Property Name="DestinationClassId" Type="tinyint" />
+          <Property Name="DestinationInstanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OtanUnits_TUniteAuSol">
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="1" />
+          <End Role="OtanUnits" Type="Self.OtanUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUniteAuSol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtanUnits">
+              <PropertyRef Name="RefInstanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PactUnits_TUniteAuSol">
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="1" />
+          <End Role="PactUnits" Type="Self.PactUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUniteAuSol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PactUnits">
+              <PropertyRef Name="RefInstanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TUniteAuSol_Units_Translation_US">
+          <End Role="Units_Translation_US" Type="Self.Units_Translation_US" Multiplicity="0..1" />
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units_Translation_US">
+              <PropertyRef Name="Hash" />
+            </Principal>
+            <Dependent Role="TUniteAuSol">
+              <PropertyRef Name="NameInMenuToken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Units_Translation_US_Units_Translation_US">
+          <End Role="Units_Translation_US" Type="Self.Units_Translation_US" Multiplicity="1" />
+          <End Role="Units_Translation_US1" Type="Self.Units_Translation_US" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Units_Translation_US">
+              <PropertyRef Name="Hash" />
+            </Principal>
+            <Dependent Role="Units_Translation_US1">
+              <PropertyRef Name="Hash" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnitsdbModelStoreContainer">
+          <EntitySet Name="Era" EntityType="Self.Era" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flags" EntityType="Self.Flags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaxDeployableAmount" EntityType="Self.MaxDeployableAmount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nations" EntityType="Self.Nations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtanUnits" EntityType="Self.OtanUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PactUnits" EntityType="Self.PactUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductionPrice" EntityType="Self.ProductionPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShowInMenu" EntityType="Self.ShowInMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TUniteAuSol" EntityType="Self.TUniteAuSol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeUnit" EntityType="Self.TypeUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units_Translation_US" EntityType="Self.Units_Translation_US" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitTypeTokens" EntityType="Self.UnitTypeTokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeaponManager" EntityType="Self.WeaponManager" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OtanUnits_TUniteAuSol" Association="Self.FK_OtanUnits_TUniteAuSol">
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+            <End Role="OtanUnits" EntitySet="OtanUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PactUnits_TUniteAuSol" Association="Self.FK_PactUnits_TUniteAuSol">
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+            <End Role="PactUnits" EntitySet="PactUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TUniteAuSol_Units_Translation_US" Association="Self.FK_TUniteAuSol_Units_Translation_US">
+            <End Role="Units_Translation_US" EntitySet="Units_Translation_US" />
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Units_Translation_US_Units_Translation_US" Association="Self.FK_Units_Translation_US_Units_Translation_US">
+            <End Role="Units_Translation_US" EntitySet="Units_Translation_US" />
+            <End Role="Units_Translation_US1" EntitySet="Units_Translation_US" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Units.dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Era">
+          <Key>
+            <PropertyRef Name="EraId" />
+          </Key>
+          <Property Name="EraId" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Flags">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="DestinationClassId" Type="Byte" />
+          <Property Name="DestinationInstanceID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaxDeployableAmount">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="DeployableAmount1" Type="Int32" />
+          <Property Name="DeployableAmount2" Type="Int32" />
+          <Property Name="DeployableAmount3" Type="Int32" />
+          <Property Name="DeployableAmount4" Type="Int32" />
+          <Property Name="DeployableAmount5" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Nations">
+          <Key>
+            <PropertyRef Name="Coalition" />
+            <PropertyRef Name="NationID" />
+          </Key>
+          <Property Name="Coalition" Type="Byte" Nullable="false" />
+          <Property Name="NationID" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtanUnits">
+          <Key>
+            <PropertyRef Name="DeckId" />
+          </Key>
+          <Property Name="DeckId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Int16" Nullable="false" />
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="RefClassId" Type="Byte" Nullable="false" />
+          <Property Name="RefInstanceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TUniteAuSol" Relationship="Self.FK_OtanUnits_TUniteAuSol" FromRole="OtanUnits" ToRole="TUniteAuSol" />
+        </EntityType>
+        <EntityType Name="PactUnits">
+          <Key>
+            <PropertyRef Name="DeckId" />
+          </Key>
+          <Property Name="DeckId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Int16" Nullable="false" />
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="RefClassId" Type="Byte" Nullable="false" />
+          <Property Name="RefInstanceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TUniteAuSol" Relationship="Self.FK_PactUnits_TUniteAuSol" FromRole="PactUnits" ToRole="TUniteAuSol" />
+        </EntityType>
+        <EntityType Name="ProductionPrice">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="Price1" Type="Int32" />
+          <Property Name="Price2" Type="Int32" />
+          <Property Name="Price3" Type="Int32" />
+          <Property Name="Price4" Type="Int32" />
+          <Property Name="Price5" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ShowInMenu">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="ShowMenu1" Type="Boolean" />
+          <Property Name="ShowMenu2" Type="Boolean" />
+          <Property Name="ShowMenu3" Type="Boolean" />
+          <Property Name="ShowMenu4" Type="Boolean" />
+          <Property Name="ShowMenu5" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="SpecializationID" />
+          </Key>
+          <Property Name="SpecializationID" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TUniteAuSol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Byte" />
+          <Property Name="DescriptorId" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="C_ShortDatabaseName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ClassNameForDebug" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="StickToGround" Type="Boolean" />
+          <Property Name="ManageUnitOrientation" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="HitRollSizeModifier" Type="Single" />
+          <Property Name="IconeType" Type="Int32" />
+          <Property Name="PositionInMenu" Type="Int32" />
+          <Property Name="NameInMenuToken" Type="Binary" MaxLength="8" FixedLength="false" />
+          <Property Name="AliasName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="Int32" />
+          <Property Name="AcknowUnitType" Type="Int32" />
+          <Property Name="TypeForAcknow" Type="Int32" />
+          <Property Name="Nationalite" Type="Int32" />
+          <Property Name="MotherCountry" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionYear" Type="Int32" />
+          <Property Name="MaxPacks" Type="Int32" />
+          <Property Name="Factory" Type="Int32" />
+          <Property Name="ProductionTime" Type="Int32" />
+          <Property Name="CoutEtoile" Type="Int32" />
+          <Property Name="TextureMotherCountryForInterface" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UnitMovingType" Type="Int32" />
+          <Property Name="VitesseCombat" Type="Single" />
+          <Property Name="IsPrototype" Type="Boolean" />
+          <NavigationProperty Name="OtanUnits" Relationship="Self.FK_OtanUnits_TUniteAuSol" FromRole="TUniteAuSol" ToRole="OtanUnits" />
+          <NavigationProperty Name="PactUnits" Relationship="Self.FK_PactUnits_TUniteAuSol" FromRole="TUniteAuSol" ToRole="PactUnits" />
+          <NavigationProperty Name="Units_Translation_US" Relationship="Self.FK_TUniteAuSol_Units_Translation_US" FromRole="TUniteAuSol" ToRole="Units_Translation_US" />
+        </EntityType>
+        <EntityType Name="TypeUnit">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="DestinationClassId" Type="Byte" />
+          <Property Name="DestinationInstanceID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Units_Translation_US">
+          <Key>
+            <PropertyRef Name="Hash" />
+          </Key>
+          <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TUniteAuSol" Relationship="Self.FK_TUniteAuSol_Units_Translation_US" FromRole="Units_Translation_US" ToRole="TUniteAuSol" />
+          </EntityType>
+        <EntityType Name="UnitTypeTokens">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="UnitTokenLocalisation1" Type="Binary" MaxLength="8" FixedLength="false" />
+          <Property Name="UnitTokenLocalisation2" Type="Binary" MaxLength="8" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WeaponManager">
+          <Key>
+            <PropertyRef Name="SourceInstanceId" />
+          </Key>
+          <Property Name="SourceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="SourceClassId" Type="Byte" />
+          <Property Name="DestinationClassId" Type="Byte" />
+          <Property Name="DestinationInstanceID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OtanUnits_TUniteAuSol">
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="1" />
+          <End Role="OtanUnits" Type="Self.OtanUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUniteAuSol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtanUnits">
+              <PropertyRef Name="RefInstanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PactUnits_TUniteAuSol">
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="1" />
+          <End Role="PactUnits" Type="Self.PactUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUniteAuSol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PactUnits">
+              <PropertyRef Name="RefInstanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TUniteAuSol_Units_Translation_US">
+          <End Role="Units_Translation_US" Type="Self.Units_Translation_US" Multiplicity="0..1" />
+          <End Role="TUniteAuSol" Type="Self.TUniteAuSol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units_Translation_US">
+              <PropertyRef Name="Hash" />
+            </Principal>
+            <Dependent Role="TUniteAuSol">
+              <PropertyRef Name="NameInMenuToken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnitsContext" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Era" EntityType="Self.Era" />
+          <EntitySet Name="Flags" EntityType="Self.Flags" />
+          <EntitySet Name="MaxDeployableAmount" EntityType="Self.MaxDeployableAmount" />
+          <EntitySet Name="Nations" EntityType="Self.Nations" />
+          <EntitySet Name="OtanUnits" EntityType="Self.OtanUnits" />
+          <EntitySet Name="PactUnits" EntityType="Self.PactUnits" />
+          <EntitySet Name="ProductionPrice" EntityType="Self.ProductionPrice" />
+          <EntitySet Name="ShowInMenu" EntityType="Self.ShowInMenu" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TUniteAuSol" EntityType="Self.TUniteAuSol" />
+          <EntitySet Name="TypeUnit" EntityType="Self.TypeUnit" />
+          <EntitySet Name="Units_Translation_US" EntityType="Self.Units_Translation_US" />
+          <EntitySet Name="UnitTypeTokens" EntityType="Self.UnitTypeTokens" />
+          <EntitySet Name="WeaponManager" EntityType="Self.WeaponManager" />
+          <AssociationSet Name="FK_OtanUnits_TUniteAuSol" Association="Self.FK_OtanUnits_TUniteAuSol">
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+            <End Role="OtanUnits" EntitySet="OtanUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PactUnits_TUniteAuSol" Association="Self.FK_PactUnits_TUniteAuSol">
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+            <End Role="PactUnits" EntitySet="PactUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TUniteAuSol_Units_Translation_US" Association="Self.FK_TUniteAuSol_Units_Translation_US">
+            <End Role="Units_Translation_US" EntitySet="Units_Translation_US" />
+            <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnitsdbModelStoreContainer" CdmEntityContainer="UnitsContext">
+          <EntitySetMapping Name="Era">
+            <EntityTypeMapping TypeName="Units.dbModel.Era">
+              <MappingFragment StoreEntitySet="Era">
+                <ScalarProperty Name="EraId" ColumnName="EraId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flags">
+            <EntityTypeMapping TypeName="Units.dbModel.Flags">
+              <MappingFragment StoreEntitySet="Flags">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="DestinationClassId" ColumnName="DestinationClassId" />
+                <ScalarProperty Name="DestinationInstanceID" ColumnName="DestinationInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaxDeployableAmount">
+            <EntityTypeMapping TypeName="Units.dbModel.MaxDeployableAmount">
+              <MappingFragment StoreEntitySet="MaxDeployableAmount">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="DeployableAmount1" ColumnName="DeployableAmount1" />
+                <ScalarProperty Name="DeployableAmount2" ColumnName="DeployableAmount2" />
+                <ScalarProperty Name="DeployableAmount3" ColumnName="DeployableAmount3" />
+                <ScalarProperty Name="DeployableAmount4" ColumnName="DeployableAmount4" />
+                <ScalarProperty Name="DeployableAmount5" ColumnName="DeployableAmount5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nations">
+            <EntityTypeMapping TypeName="Units.dbModel.Nations">
+              <MappingFragment StoreEntitySet="Nations">
+                <ScalarProperty Name="Coalition" ColumnName="Coalition" />
+                <ScalarProperty Name="NationID" ColumnName="NationID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtanUnits">
+            <EntityTypeMapping TypeName="Units.dbModel.OtanUnits">
+              <MappingFragment StoreEntitySet="OtanUnits">
+                <ScalarProperty Name="DeckId" ColumnName="DeckId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="RefClassId" ColumnName="RefClassId" />
+                <ScalarProperty Name="RefInstanceID" ColumnName="RefInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PactUnits">
+            <EntityTypeMapping TypeName="Units.dbModel.PactUnits">
+              <MappingFragment StoreEntitySet="PactUnits">
+                <ScalarProperty Name="DeckId" ColumnName="DeckId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="RefClassId" ColumnName="RefClassId" />
+                <ScalarProperty Name="RefInstanceID" ColumnName="RefInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionPrice">
+            <EntityTypeMapping TypeName="Units.dbModel.ProductionPrice">
+              <MappingFragment StoreEntitySet="ProductionPrice">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="Price1" ColumnName="Price1" />
+                <ScalarProperty Name="Price2" ColumnName="Price2" />
+                <ScalarProperty Name="Price3" ColumnName="Price3" />
+                <ScalarProperty Name="Price4" ColumnName="Price4" />
+                <ScalarProperty Name="Price5" ColumnName="Price5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShowInMenu">
+            <EntityTypeMapping TypeName="Units.dbModel.ShowInMenu">
+              <MappingFragment StoreEntitySet="ShowInMenu">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="ShowMenu1" ColumnName="ShowMenu1" />
+                <ScalarProperty Name="ShowMenu2" ColumnName="ShowMenu2" />
+                <ScalarProperty Name="ShowMenu3" ColumnName="ShowMenu3" />
+                <ScalarProperty Name="ShowMenu4" ColumnName="ShowMenu4" />
+                <ScalarProperty Name="ShowMenu5" ColumnName="ShowMenu5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialization">
+            <EntityTypeMapping TypeName="Units.dbModel.Specialization">
+              <MappingFragment StoreEntitySet="Specialization">
+                <ScalarProperty Name="SpecializationID" ColumnName="SpecializationID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Units.dbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TUniteAuSol">
+            <EntityTypeMapping TypeName="Units.dbModel.TUniteAuSol">
+              <MappingFragment StoreEntitySet="TUniteAuSol">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="DescriptorId" ColumnName="DescriptorId" />
+                <ScalarProperty Name="C_ShortDatabaseName" ColumnName="_ShortDatabaseName" />
+                <ScalarProperty Name="ClassNameForDebug" ColumnName="ClassNameForDebug" />
+                <ScalarProperty Name="StickToGround" ColumnName="StickToGround" />
+                <ScalarProperty Name="ManageUnitOrientation" ColumnName="ManageUnitOrientation" />
+                <ScalarProperty Name="HitRollSizeModifier" ColumnName="HitRollSizeModifier" />
+                <ScalarProperty Name="IconeType" ColumnName="IconeType" />
+                <ScalarProperty Name="PositionInMenu" ColumnName="PositionInMenu" />
+                <ScalarProperty Name="NameInMenuToken" ColumnName="NameInMenuToken" />
+                <ScalarProperty Name="AliasName" ColumnName="AliasName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="AcknowUnitType" ColumnName="AcknowUnitType" />
+                <ScalarProperty Name="TypeForAcknow" ColumnName="TypeForAcknow" />
+                <ScalarProperty Name="Nationalite" ColumnName="Nationalite" />
+                <ScalarProperty Name="MotherCountry" ColumnName="MotherCountry" />
+                <ScalarProperty Name="ProductionYear" ColumnName="ProductionYear" />
+                <ScalarProperty Name="MaxPacks" ColumnName="MaxPacks" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="ProductionTime" ColumnName="ProductionTime" />
+                <ScalarProperty Name="CoutEtoile" ColumnName="CoutEtoile" />
+                <ScalarProperty Name="TextureMotherCountryForInterface" ColumnName="TextureMotherCountryForInterface" />
+                <ScalarProperty Name="UnitMovingType" ColumnName="UnitMovingType" />
+                <ScalarProperty Name="VitesseCombat" ColumnName="VitesseCombat" />
+                <ScalarProperty Name="IsPrototype" ColumnName="IsPrototype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeUnit">
+            <EntityTypeMapping TypeName="Units.dbModel.TypeUnit">
+              <MappingFragment StoreEntitySet="TypeUnit">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="DestinationClassId" ColumnName="DestinationClassId" />
+                <ScalarProperty Name="DestinationInstanceID" ColumnName="DestinationInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units_Translation_US">
+            <EntityTypeMapping TypeName="Units.dbModel.Units_Translation_US">
+              <MappingFragment StoreEntitySet="Units_Translation_US">
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitTypeTokens">
+            <EntityTypeMapping TypeName="Units.dbModel.UnitTypeTokens">
+              <MappingFragment StoreEntitySet="UnitTypeTokens">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="UnitTokenLocalisation1" ColumnName="UnitTokenLocalisation1" />
+                <ScalarProperty Name="UnitTokenLocalisation2" ColumnName="UnitTokenLocalisation2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeaponManager">
+            <EntityTypeMapping TypeName="Units.dbModel.WeaponManager">
+              <MappingFragment StoreEntitySet="WeaponManager">
+                <ScalarProperty Name="SourceInstanceId" ColumnName="SourceInstanceId" />
+                <ScalarProperty Name="SourceClassId" ColumnName="SourceClassId" />
+                <ScalarProperty Name="DestinationClassId" ColumnName="DestinationClassId" />
+                <ScalarProperty Name="DestinationInstanceID" ColumnName="DestinationInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

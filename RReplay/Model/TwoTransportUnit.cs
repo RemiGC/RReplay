@@ -7,7 +7,7 @@ namespace RReplay.Model
         private ushort landingCraftID;
 
         // Extented transport property from the XML
-        private UnitInfo landingCraftUnitInfo;
+        private TUniteAuSol landingCraftUnitInfo;
 
         public TwoTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, ushort secondTransportID )
             : base(coalition, veterancy, unitID, transportID)
@@ -32,7 +32,7 @@ namespace RReplay.Model
             }
         }
 
-        public UnitInfo LandingCraftUnitInfo
+        public TUniteAuSol LandingCraftUnitInfo
         {
             get
             {

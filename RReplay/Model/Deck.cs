@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,21 +8,15 @@ using System.Runtime.CompilerServices;
 
 namespace RReplay.Model
 {
-    public enum CoalitionEnum
-    {
-        NATO = 0x0,
-        PACT = 0x1
-    }
-
     /// <summary>
     /// A class that represent a Complete Deck build from a deck code
     /// </summary>
     public class Deck: INotifyPropertyChanged, IEquatable<Deck>
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private byte country;
-        private byte specialization;
-        private byte era;
+        private Nations nation;
+        private Specialization specialization;
+        private Era era;
         private CoalitionEnum coalition;
         private byte twoTransportsUnits;
         private byte oneTransportsUnits;
@@ -31,18 +26,13 @@ namespace RReplay.Model
 
         public List<Unit> UnitsList;
 
+        //private Era era;
+
         public string Country
         {
             get
             {
-                if(IsNATO)
-                {
-                    return NATODictionary[country];
-                }
-                else
-                {
-                    return PACTDictionary[country];
-                }
+                return nation.Description;
             }
         }
 
@@ -58,7 +48,7 @@ namespace RReplay.Model
         {
             get
             {
-                return EraDictionary[era];
+                return era.Description;
             }
         }
 
@@ -66,7 +56,7 @@ namespace RReplay.Model
         {
             get
             {
-                return SpecializationDictionary[specialization];
+                return specialization.Description;
             }
         }
 
@@ -120,17 +110,19 @@ namespace RReplay.Model
 
             int posArray = 0;
 
+            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
+
             // First bit is the coalition
             coalition = (CoalitionEnum)GetBits<byte>(bitArrayInversed, 1, ref posArray);
 
             // Next 8 bits is the nation
-            country = GetBits<byte>(bitArrayInversed, 8, ref posArray);
+            nation = repository.GetNation(coalition, GetBits<byte>(bitArrayInversed, 8, ref posArray));
 
             // Next 3 bits is the specialization
-            specialization = GetBits<byte>(bitArrayInversed, 3, ref posArray);
+            specialization = repository.GetSpecialization(GetBits<byte>(bitArrayInversed, 3, ref posArray));
 
             // next 2 bits is the era
-            era = GetBits<byte>(bitArrayInversed, 2, ref posArray);
+            era = repository.GetEra(GetBits<byte>(bitArrayInversed, 2, ref posArray));
 
             // next 4 bits is the number of two transports units
             twoTransportsUnits = GetBits<byte>(bitArrayInversed, 4, ref posArray);
@@ -198,9 +190,9 @@ namespace RReplay.Model
             int curPos = 0;
 
             SetBits(ref bitArray, (byte)coalition, 1, ref curPos);
-            SetBits(ref bitArray, country, 8, ref curPos);
-            SetBits(ref bitArray, specialization, 3, ref curPos);
-            SetBits(ref bitArray, era, 2, ref curPos);
+            SetBits(ref bitArray, nation.NationID, 8, ref curPos);
+            SetBits(ref bitArray, specialization.SpecializationID, 3, ref curPos);
+            SetBits(ref bitArray, era.EraId, 2, ref curPos);
             SetBits(ref bitArray, twoTransportsUnits, 4, ref curPos);
             SetBits(ref bitArray, oneTransportsUnits, 5, ref curPos);
 
@@ -298,75 +290,7 @@ namespace RReplay.Model
 
         public bool Equals( Deck other )
         {
-            return deckCode == other.deckCode;
+            return DeckCode == other.DeckCode;
         }
-
-        // TODO move those somewhere, maybe build them from xml or json instead
-        public static Dictionary<byte, string> SpecializationDictionary = new Dictionary<byte, string>
-        {
-            { 0x0, "Motorized" },
-            { 0x1, "Armored" },
-            { 0x2, "Support" },
-            { 0x3, "Marines" },
-            { 0x4, "Mechanized" },
-            { 0x5, "AirBorne" },
-            { 0x6, "Navy" },
-            { 0x7, "All" }
-        };
-
-        public static Dictionary<byte, string> EraDictionary = new Dictionary<byte, string>
-        {
-            { 0x0, "Before80" },
-            { 0x1, "Before85" },
-            { 0x2, "All" },
-        };
-
-
-        public static Dictionary<byte, string> NATODictionary = new Dictionary<byte, string>
-        {
-            // NATO Countries
-            { 0x09, "US" },
-            { 0x19, "UK" },
-            { 0x29, "FR" },
-            { 0x39 , "RFA" },
-            { 0x49 , "CAN" },
-            { 0x59 , "DAN" },
-            { 0x69 , "SWE" },
-            { 0x79 , "NOR" },
-            { 0x89 , "ANZ" },
-            { 0x99 , "JAP" },
-            { 0xA9 , "ROK" },
-
-            // NATO Coalitions
-            { 0xB0 , "EURO" },
-            { 0xB1 , "SCAND" },
-            { 0xB2 , "CMW" },
-            { 0xB3 , "BLUEDRAG" },
-
-            { 0xB6 , "LANDJUT" },
-            { 0xB8 , "NORAD" },
-
-             // BLUFOR General
-            { 0xB9, "BLUFOR" }
-        };
-
-        public static Dictionary<byte, string> PACTDictionary = new Dictionary<byte, string>
-        {
-            // PACT Countries
-            { 0x09 , "RDA" },
-            { 0x19 , "URSS" },
-            { 0x29 , "POL" },
-            { 0x39 , "TCH" },
-            { 0x49 , "CHI" },
-            { 0x59 , "NK" },
-
-            // PACT Coalitions
-            { 0x64 , "REDDRAG" },
-            { 0x65 , "NSWP" },
-            { 0x67 , "SNK" },
-
-            // REDFOR General
-            { 0x69, "REDFOR" }
-        };
     }
 }

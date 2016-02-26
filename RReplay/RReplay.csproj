@@ -74,6 +74,14 @@
     <AssemblyOriginatorKeyFile>RedReplay.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -109,9 +117,11 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -143,6 +153,15 @@
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
     <Compile Include="Design\DesignUnitInfoRepository.cs" />
+    <Compile Include="Era.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Flags.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaxDeployableAmount.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
@@ -155,10 +174,57 @@
     <Compile Include="Model\TwoTransportUnit.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitInfoRepository.cs" />
-    <Compile Include="Model\Units.cs" />
+    <Compile Include="Nations.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtanUnits.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PactUnits.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductionPrice.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Settings\exeFolder.cs" />
     <Compile Include="Settings\ReplayFolderPicker.cs" />
+    <Compile Include="ShowInMenu.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Specialization.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TUniteAuSol.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeUnit.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Units_Translation_US.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTypeTokens.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\DeckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -186,6 +252,9 @@
     </Compile>
     <Compile Include="View\UserControl\ReplayView.xaml.cs">
       <DependentUpon>ReplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WeaponManager.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
     <Page Include="Ressources\Icons.xaml">
       <SubType>Designer</SubType>
@@ -256,6 +325,13 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="RedReplay.pfx" />
+    <EntityDeploy Include="UnitsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UnitsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="UnitsModel.edmx.diagram">
+      <DependentUpon>UnitsModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -303,6 +379,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\ShowAllCode_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Units.db.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Units.db_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Units.db.mdf</DependentUpon>
+    </Content>
+    <Content Include="UnitsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UnitsModel.edmx</DependentUpon>
+      <LastGenOutput>UnitsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UnitsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UnitsModel.edmx</DependentUpon>
+      <LastGenOutput>UnitsModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
