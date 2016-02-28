@@ -33,7 +33,7 @@ namespace RReplay.ViewModel
             ReceiveDeckInfo();
             if (IsInDesignMode)
             {
-                Deck = new Deck("WfgQSknJN2XKKV+HmurrM22ZVau2zMtlPsg0QziTKRTIijQak9GKY+FYyQ5H6f2WodaUAqf0XBgRLyLbOwGzxbp1MA==");
+                Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw=");
             }
         }
 

@@ -66,7 +66,7 @@ namespace RReplay.ViewModel
 
             if ( IsInDesignMode )
             {
-                SelectedReplay = Replays[1];
+                SelectedReplay = Replays[0];
             }
             ReplayViewVisible = true;
             nameFilter = "";
