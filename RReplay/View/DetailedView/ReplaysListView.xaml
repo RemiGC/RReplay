@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:Converters="clr-namespace:RReplay.Converters" x:Class="RReplay.View.ReplaysListView"
+        xmlns:Converters="clr-namespace:RReplay.Converters"
+        x:Class="RReplay.View.ReplaysListView"
         mc:Ignorable="d ignore" Height="105" Width="879"
     MinHeight="200"
     MinWidth="600">
