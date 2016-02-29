@@ -40,7 +40,7 @@ namespace RReplay
         public string MotherCountry { get; set; }
         public Nullable<int> ProductionYear { get; set; }
         public Nullable<int> MaxPacks { get; set; }
-        public Nullable<int> Factory { get; set; }
+        public int Factory { get; set; }
         public Nullable<int> ProductionTime { get; set; }
         public Nullable<int> CoutEtoile { get; set; }
         public string TextureMotherCountryForInterface { get; set; }

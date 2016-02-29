@@ -9,7 +9,8 @@
         xmlns:Converters="clr-namespace:RReplay.Converters"
         xmlns:local="clr-namespace:RReplay.View" x:Class="RReplay.View.DeckView"
         mc:Ignorable="d ignore"
-        Icon="{StaticResource ComodoIcon}" d:DesignWidth="834.186" d:DesignHeight="566.254">
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Icon="{StaticResource ComodoIcon}" d:DesignWidth="1330.686" d:DesignHeight="868.279">
     <Window.Resources>
 
         <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
@@ -17,49 +18,12 @@
         <Converters:EraCodeToImageSource x:Key="EraCodeToImageSource"/>
         <Converters:ClassNameDebugToImageSource x:Key="ClassNameDebugToImageSource" />
         <Converters:VeterancyToImageSource x:Key="VeterancyToImageSource" />
+        <Converters:FactoryNumberToName x:Key="FactoryNumberToName" />
 
-        <DataTemplate DataType="{x:Type m:OneTransportUnit}">
-            <WrapPanel Orientation="Horizontal" Width="500">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
-                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
-                </StackPanel>
-                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-                <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
-                <Label Content="Category:"/>
-                <TextBlock Text="{Binding UnitInfo.Category}"/>
-                <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-            </WrapPanel>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type m:TwoTransportUnit}">
-            <WrapPanel Orientation="Horizontal" Width="500">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
-                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
-                </StackPanel>
-                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-                <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
-                <Label Content="Category:"/>
-                <TextBlock Text="{Binding UnitInfo.Category}"/>
-                <Image Source="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-                <Image Source="{Binding LandingCraftUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-            </WrapPanel>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type m:Unit}">
-            <WrapPanel Orientation="Horizontal" Width="500">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" Width="24" Height="Auto"/>
-                    <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy}" Width="24" Height="Auto"/>
-                </StackPanel>
-                <Image Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="110" Height="Auto"/>
-                <Label Content="Name:"/>
-                <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}"/>
-                <Label Content="Category:"/>
-                <TextBlock Text="{Binding UnitInfo.Category}"/>
-            </WrapPanel>
+            <local:SmallUnitControl />
         </DataTemplate>
+
     </Window.Resources>
 
     <Window.DataContext>
@@ -98,7 +62,29 @@
             </Image>
         </StackPanel>
 
-        <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsCollection}"  MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Margin="10,82,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsGroupedView}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" Margin="10,82,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True" >
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name, Converter={StaticResource FactoryNumberToName}}" FontWeight="Bold" Foreground="Gray" FontSize="16" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"/>

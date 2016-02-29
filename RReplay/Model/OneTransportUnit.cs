@@ -33,6 +33,14 @@ namespace RReplay.Model
             }
         }
 
+        public new bool HaveTransport
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public TUniteAuSol TransportUnitInfo
         {
             get

@@ -10,7 +10,7 @@
             <PropertyRef Name="EraId" />
           </Key>
           <Property Name="EraId" Type="tinyint" Nullable="false" />
-          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Hash" Type="varbinary" MaxLength="8" />
         </EntityType>
         <EntityType Name="Flags">
@@ -41,7 +41,7 @@
           </Key>
           <Property Name="Coalition" Type="tinyint" Nullable="false" />
           <Property Name="NationID" Type="tinyint" Nullable="false" />
-          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Hash" Type="binary" MaxLength="8" Nullable="false" />
         </EntityType>
         <EntityType Name="OtanUnits">
@@ -93,7 +93,7 @@
             <PropertyRef Name="SpecializationID" />
           </Key>
           <Property Name="SpecializationID" Type="tinyint" Nullable="false" />
-          <Property Name="Description" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="Hash" Type="varbinary" MaxLength="8" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -129,7 +129,7 @@
           <Property Name="MotherCountry" Type="nvarchar" MaxLength="1000" />
           <Property Name="ProductionYear" Type="int" />
           <Property Name="MaxPacks" Type="int" />
-          <Property Name="Factory" Type="int" />
+          <Property Name="Factory" Type="int" Nullable="false" />
           <Property Name="ProductionTime" Type="int" />
           <Property Name="CoutEtoile" Type="int" />
           <Property Name="TextureMotherCountryForInterface" Type="nvarchar" MaxLength="1000" />
@@ -261,7 +261,7 @@
             <PropertyRef Name="EraId" />
           </Key>
           <Property Name="EraId" Type="Byte" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" />
         </EntityType>
         <EntityType Name="Flags">
@@ -292,7 +292,7 @@
           </Key>
           <Property Name="Coalition" Type="Byte" Nullable="false" />
           <Property Name="NationID" Type="Byte" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" />
         </EntityType>
         <EntityType Name="OtanUnits">
@@ -346,7 +346,7 @@
             <PropertyRef Name="SpecializationID" />
           </Key>
           <Property Name="SpecializationID" Type="Byte" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -382,7 +382,7 @@
           <Property Name="MotherCountry" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ProductionYear" Type="Int32" />
           <Property Name="MaxPacks" Type="Int32" />
-          <Property Name="Factory" Type="Int32" />
+          <Property Name="Factory" Type="Int32" Nullable="false" />
           <Property Name="ProductionTime" Type="Int32" />
           <Property Name="CoutEtoile" Type="Int32" />
           <Property Name="TextureMotherCountryForInterface" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -409,6 +409,8 @@
           <Property Name="Hash" Type="Binary" MaxLength="8" FixedLength="false" Nullable="false" />
           <Property Name="Translation" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TUniteAuSol" Relationship="Self.FK_TUniteAuSol_Units_Translation_US" FromRole="Units_Translation_US" ToRole="TUniteAuSol" />
+          <NavigationProperty Name="Units_Translation_US1" Relationship="Units.dbModel.FK_Units_Translation_US_Units_Translation_US" FromRole="Units_Translation_US" ToRole="Units_Translation_US1" />
+          <NavigationProperty Name="Units_Translation_US2" Relationship="Units.dbModel.FK_Units_Translation_US_Units_Translation_US" FromRole="Units_Translation_US1" ToRole="Units_Translation_US" />
           </EntityType>
         <EntityType Name="UnitTypeTokens">
           <Key>
@@ -492,7 +494,23 @@
             <End Role="Units_Translation_US" EntitySet="Units_Translation_US" />
             <End Role="TUniteAuSol" EntitySet="TUniteAuSol" />
           </AssociationSet>
+          <AssociationSet Name="FK_Units_Translation_US_Units_Translation_US" Association="Units.dbModel.FK_Units_Translation_US_Units_Translation_US">
+            <End Role="Units_Translation_US" EntitySet="Units_Translation_US" />
+            <End Role="Units_Translation_US1" EntitySet="Units_Translation_US" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Units_Translation_US_Units_Translation_US">
+          <End Type="Units.dbModel.Units_Translation_US" Role="Units_Translation_US" Multiplicity="1" />
+          <End Type="Units.dbModel.Units_Translation_US" Role="Units_Translation_US1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Units_Translation_US">
+              <PropertyRef Name="Hash" />
+            </Principal>
+            <Dependent Role="Units_Translation_US1">
+              <PropertyRef Name="Hash" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

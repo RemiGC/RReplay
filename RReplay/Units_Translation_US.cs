@@ -25,5 +25,7 @@ namespace RReplay
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TUniteAuSol> TUniteAuSol { get; set; }
+        public virtual Units_Translation_US Units_Translation_US1 { get; set; }
+        public virtual Units_Translation_US Units_Translation_US2 { get; set; }
     }
 }

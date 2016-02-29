@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.Messaging;
 using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace RReplay.ViewModel
 {
@@ -16,10 +18,13 @@ namespace RReplay.ViewModel
     public class DeckViewModel : ViewModelBase
     {
         public const string UnitsCollectionPropertyName = "UnitsCollection";
+        public const string UnitsGroupedViewPropertyName = "UnitsGroupedView";
 
         private Deck deck;
 
         private ObservableCollection<Unit> unitsCollection;
+
+        private ICollectionView unitsView;
 
         private RelayCommand dragAndDropCommand;
         private RelayCommand refreshCode;
@@ -49,6 +54,19 @@ namespace RReplay.ViewModel
                 {
                     return true;
                 }));
+            }
+        }
+
+        public ICollectionView UnitsGroupedView
+        {
+            get
+            {
+                return unitsView;
+            }
+            set
+            {
+                unitsView = value;
+                RaisePropertyChanged(UnitsGroupedViewPropertyName);
             }
         }
 
@@ -101,6 +119,19 @@ namespace RReplay.ViewModel
             set
             {
                 Set("UnitsCollection", ref unitsCollection, value);
+                ICollectionView cv = CollectionViewSource.GetDefaultView(value);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Factory");
+                groupDescription.GroupNames.Add(3);
+                groupDescription.GroupNames.Add(6);
+                groupDescription.GroupNames.Add(13);
+                groupDescription.GroupNames.Add(9);
+                groupDescription.GroupNames.Add(10);
+                groupDescription.GroupNames.Add(8);
+                groupDescription.GroupNames.Add(11);
+                groupDescription.GroupNames.Add(7);
+                groupDescription.GroupNames.Add(12);
+                cv.GroupDescriptions.Add(groupDescription);
+                UnitsGroupedView = cv;
             }
         }
     }

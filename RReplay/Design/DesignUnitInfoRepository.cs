@@ -74,32 +74,41 @@ namespace RReplay.Design
 
             Units_Translation_US translation = new Units_Translation_US()
             {
-                Translation = "Infantry"
+                Translation = "Super long Infantry"
             };
 
-            TUniteAuSol unit = new TUniteAuSol()
-            {
-                Id = 0,
-                ClassNameForDebug = "Unit_2eme_rep",
-                Units_Translation_US = translation
-            };
             otanUnits = new Dictionary<int, TUniteAuSol>();
-            otanUnits.Add(0, unit);
-
             pactUnits = new Dictionary<int, TUniteAuSol>();
-            pactUnits.Add(0, unit);
 
+            var possibleFactory = new List<int> { 3,6,7,8,9,10,11,12,13 };
+
+            var r = new Random();
+
+            for (int i = 0 ; i < 20; ++i)
+            {
+                TUniteAuSol unit = new TUniteAuSol()
+                {
+                    Id = i,
+                    ClassNameForDebug = "Unit_2eme_rep",
+                    Units_Translation_US = translation,
+                    Factory = possibleFactory[r.Next(0,possibleFactory.Count)]
+                };
+
+                otanUnits.Add(i, unit);
+                pactUnits.Add(i, unit);
+            }
         }
 
         public TUniteAuSol GetUnit( CoalitionEnum coalition, ushort unitID )
         {
+            var r = new Random();
             if ( coalition == CoalitionEnum.NATO )
             {
-                return otanUnits[0];
+                return otanUnits[r.Next(otanUnits.Count)];
             }
             else
             {
-                return pactUnits[0];
+                return pactUnits[r.Next(pactUnits.Count)];
             }
         }
 

@@ -23,6 +23,7 @@
         <AssociationConnector Association="Units.dbModel.FK_OtanUnits_TUniteAuSol" ManuallyRouted="false" />
         <AssociationConnector Association="Units.dbModel.FK_PactUnits_TUniteAuSol" ManuallyRouted="false" />
         <AssociationConnector Association="Units.dbModel.FK_TUniteAuSol_Units_Translation_US" ManuallyRouted="false" />
+        <AssociationConnector Association="Units.dbModel.FK_Units_Translation_US_Units_Translation_US" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

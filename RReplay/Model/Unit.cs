@@ -35,11 +35,27 @@ namespace RReplay.Model
             }
         }
 
+        public int Factory
+        {
+            get
+            {
+                return unitInfo.Factory;
+            }
+        }
+
         public bool IsNATO
         {
             get
             {
                 return coalition == CoalitionEnum.NATO;
+            }
+        }
+
+        public bool HaveTransport
+        {
+            get
+            {
+                return false;
             }
         }
 

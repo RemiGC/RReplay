@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TrustSoft.Xaml.ShaderEffects</name>
+    </assembly>
+    <members>
+        <member name="T:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect">
+            <summary>
+                An effect that turns the input into shades of a single color.
+            </summary>
+        </member>
+        <member name="M:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect"/> class.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.InputProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.Input"/>.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.FactorProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.Factor"/>.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.FilterColorProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.FilterColor"/>.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.Input">
+            <summary>
+                Implicit input.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.Factor">
+            <summary>
+                The factor that defines effect fullness.
+                Zero value means no effect.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.ColorShadesEffect.FilterColor">
+            <summary>
+                The color used to tint the input.
+            </summary>
+        </member>
+        <member name="T:TrustSoft.Xaml.ShaderEffects.Global">
+            <summary>
+                Global (assembly-wide) utilities.
+            </summary>
+        </member>
+        <member name="M:TrustSoft.Xaml.ShaderEffects.Global.MakePackUri(System.String)">
+            <summary>
+                Helper method for generating a "pack://" URI for a given relative file based on the assembly that this class is in.
+            </summary>
+        </member>
+        <member name="T:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect">
+            <summary>
+                An effect that turns the input into shades of a single color.
+            </summary>
+        </member>
+        <member name="M:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect"/> class.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.InputProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.Input"/>.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.DesaturationFactorProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.DesaturationFactor"/>.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.Input">
+            <summary>
+                Implicit input.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.GrayscaleEffect.DesaturationFactor">
+            <summary>
+                The desaturation factor.
+                Zero value means minimum desaturation.
+            </summary>
+        </member>
+        <member name="T:TrustSoft.Xaml.ShaderEffects.InvertColorEffect">
+            <summary>
+                An effect that turns the input into inverted colors.
+            </summary>
+        </member>
+        <member name="F:TrustSoft.Xaml.ShaderEffects.InvertColorEffect.InputProperty">
+            <summary>
+                Dependency property for <see cref="P:TrustSoft.Xaml.ShaderEffects.InvertColorEffect.Input"/>.
+            </summary>
+        </member>
+        <member name="M:TrustSoft.Xaml.ShaderEffects.InvertColorEffect.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TrustSoft.Xaml.ShaderEffects.InvertColorEffect"/> class.
+            </summary>
+        </member>
+        <member name="P:TrustSoft.Xaml.ShaderEffects.InvertColorEffect.Input">
+            <summary>
+                Implicit input.
+            </summary>
+        </member>
+    </members>
+</doc>

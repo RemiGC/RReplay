@@ -135,6 +135,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TrustSoft.Xaml.ShaderEffects, Version=0.1.1.0, Culture=neutral, PublicKeyToken=324032335e959b35, processorArchitecture=MSIL">
+      <HintPath>..\packages\TrustSoft.Xaml.ShaderEffects.0.1.1.0\lib\NET45\TrustSoft.Xaml.ShaderEffects.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
   </ItemGroup>
@@ -146,10 +150,12 @@
     <Compile Include="Converters\ClassNameDebugToImageSource.cs" />
     <Compile Include="Converters\CountryCodeToImageSource.cs" />
     <Compile Include="Converters\EraCodeToImageSource.cs" />
+    <Compile Include="Converters\FactoryNumberToName.cs" />
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
     <Compile Include="Converters\SpecializationCodeToImageSource.cs" />
     <Compile Include="Converters\VeterancyToImageSource.cs" />
+    <Compile Include="Converters\VeterancyToString.cs" />
     <Compile Include="Converters\VictoryToString.cs" />
     <Compile Include="Design\DesignReplayRepository.cs" />
     <Compile Include="Design\DesignUnitInfoRepository.cs" />
@@ -241,17 +247,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\UserControl\AllPlayersDeck.xaml.cs">
+    <Compile Include="View\DetailedView\AllPlayersDeck.xaml.cs">
       <DependentUpon>AllPlayersDeck.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\DetailReplayView.xaml.cs">
+    <Compile Include="View\DetailedView\DetailReplayView.xaml.cs">
       <DependentUpon>DetailReplayView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\ReplaysListView.xaml.cs">
+    <Compile Include="View\DetailedView\ReplaysListView.xaml.cs">
       <DependentUpon>ReplaysListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\ReplayView.xaml.cs">
+    <Compile Include="View\DetailedView\ReplayView.xaml.cs">
       <DependentUpon>ReplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailedView\SmallUnitControl.xaml.cs">
+      <DependentUpon>SmallUnitControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="WeaponManager.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
@@ -261,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Skins\MainSkin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -276,19 +289,23 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl\AllPlayersDeck.xaml">
+    <Page Include="View\DetailedView\AllPlayersDeck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl\DetailReplayView.xaml">
+    <Page Include="View\DetailedView\DetailReplayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl\ReplaysListView.xaml">
+    <Page Include="View\DetailedView\ReplaysListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl\ReplayView.xaml">
+    <Page Include="View\DetailedView\ReplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailedView\SmallUnitControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
