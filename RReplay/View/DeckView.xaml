@@ -31,8 +31,8 @@
     </Window.DataContext>
 
     <Grid>
-        <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,10,47,0" VerticalAlignment="Top" Height="31" FontSize="18.667"/>
-        <StackPanel Orientation="Horizontal"  Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="660">
+        <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,5,47,0" VerticalAlignment="Top" Height="31" FontSize="18.667"/>
+        <StackPanel Orientation="Horizontal"  Margin="10,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="660">
             <TextBlock Text="{Binding Deck.Coalition, Mode=OneWay}" Width="90"/>
             <TextBlock Text="{Binding Deck.Country, Mode=OneWay}" Width="66"/>
             <Image Source="{Binding Deck.Country, Converter={StaticResource CountryCodeToImageSource}}" Width="67" Height="24" ToolTip="{Binding Deck.Country, Mode=OneWay}"/>
@@ -62,7 +62,12 @@
             </Image>
         </StackPanel>
 
-        <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsGroupedView}" dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" Margin="10,82,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsGroupedView}" 
+                  dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" 
+                  MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" 
+                  Margin="10,66,10,10" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  ItemContainerStyle="{DynamicResource ListViewItemStyleDeckView}" Style="{DynamicResource ListViewStyleDeckView}">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
@@ -70,10 +75,10 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="True" >
+                                        <Expander IsExpanded="True" Margin="0,0,0,-3" >
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name, Converter={StaticResource FactoryNumberToName}}" FontWeight="Bold" Foreground="Gray" FontSize="16" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding Name, Converter={StaticResource FactoryNumberToName}}" VerticalAlignment="Bottom" />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />

@@ -21,6 +21,8 @@
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         </ResourceDictionary>
+        
+
     </Window.Resources>
 
     <i:Interaction.Triggers>
@@ -29,29 +31,30 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition MinHeight="150"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition MinHeight="350"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="660"  MaxWidth="1350"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <Label>Player name :</Label>
-            <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" Width="125" ></TextBox>
-        </StackPanel>
-        <Rectangle Name="sizingElement" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="Transparent" Margin="0"/>
-        <views:ReplaysListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="{Binding ElementName=sizingElement, Path=ActualHeight, FallbackValue=1}" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-        <GridSplitter Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Height="5" ShowsPreview="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-        <views:ReplayView Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=ReplayViewVisible, Converter={StaticResource BoolToVisConverter} }" />
-        <views:AllPlayersDeck Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=AllPlayersDeckVisible, Converter={StaticResource BoolToVisConverter} }"/>
-        <GridSplitter Grid.Column="1" Grid.Row="3" Width="5" ShowsPreview="True" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-        <views:DetailReplayView Grid.Column="2" Grid.Row="3" Width="Auto" Margin="0,0,0,0" />
-        
-    </Grid>
+        <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition MinHeight="150"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition MinHeight="350"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="660"  MaxWidth="1350"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <Label>Player name :</Label>
+                <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" Width="125" ></TextBox>
+            </StackPanel>
+            <Rectangle Name="sizingElement" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="Transparent" Margin="0"/>
+            <views:ReplaysListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="{Binding ElementName=sizingElement, Path=ActualHeight, FallbackValue=1}" Width="Auto" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            <GridSplitter Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Height="5" ShowsPreview="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <views:ReplayView Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=ReplayViewVisible, Converter={StaticResource BoolToVisConverter} }" />
+            <views:AllPlayersDeck Grid.Column="0" Grid.Row="3" Width="Auto" Margin="0,0,0,0" Visibility="{Binding Path=AllPlayersDeckVisible, Converter={StaticResource BoolToVisConverter} }"/>
+            <GridSplitter Grid.Column="1" Grid.Row="3" Width="5" ShowsPreview="True" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+            <views:DetailReplayView Grid.Column="2" Grid.Row="3" Width="Auto" Margin="0,0,0,0" />
+
+        </Grid>
+ 
 </Window>

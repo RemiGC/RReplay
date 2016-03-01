@@ -265,6 +265,10 @@
     <Compile Include="WeaponManager.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Skins\CustomThemes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ressources\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

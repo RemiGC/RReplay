@@ -21,7 +21,8 @@
         
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Ressources/Icons.xaml" />
-                <ResourceDictionary Source="Skins\Theme.xaml" />
+                <ResourceDictionary Source="Skins/Theme.xaml" />
+                <ResourceDictionary Source="Skins/CustomThemes.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
