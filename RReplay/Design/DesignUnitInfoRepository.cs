@@ -7,11 +7,11 @@ namespace RReplay.Design
 {
     public class DesignUnitInfoRepository : IUnitInfoRepository
     {
-        Dictionary<int, TUniteAuSol> otanUnits;
-        Dictionary<int, TUniteAuSol> pactUnits;
         Dictionary<Tuple<CoalitionEnum, byte>, Nations> nations;
         Dictionary<byte, Era> eras;
         Dictionary<byte, Specialization> specializations;
+
+        List<int> possibleFactory;
 
         public DesignUnitInfoRepository()
         {
@@ -77,39 +77,26 @@ namespace RReplay.Design
                 Translation = "Super long Infantry"
             };
 
-            otanUnits = new Dictionary<int, TUniteAuSol>();
-            pactUnits = new Dictionary<int, TUniteAuSol>();
+            possibleFactory = new List<int> { 3,6,7,8,9,10,11,12,13 };
 
-            var possibleFactory = new List<int> { 3,6,7,8,9,10,11,12,13 };
-
-            var r = new Random();
-
-            for (int i = 0 ; i < 20; ++i)
-            {
-                TUniteAuSol unit = new TUniteAuSol()
-                {
-                    Id = i,
-                    ClassNameForDebug = "Unit_2eme_rep",
-                    Units_Translation_US = translation,
-                    Factory = possibleFactory[r.Next(0,possibleFactory.Count)]
-                };
-
-                otanUnits.Add(i, unit);
-                pactUnits.Add(i, unit);
-            }
         }
-
-        public TUniteAuSol GetUnit( CoalitionEnum coalition, ushort unitID )
+        public SimpleUnit GetUnit( CoalitionEnum coalition, ushort unitID )
         {
             var r = new Random();
-            if ( coalition == CoalitionEnum.NATO )
+            var unit = new SimpleUnit()
             {
-                return otanUnits[r.Next(otanUnits.Count)];
-            }
-            else
-            {
-                return pactUnits[r.Next(pactUnits.Count)];
-            }
+                Coalition = (byte)coalition,
+                DeckId = unitID,
+                ClassNameForDebug = "Unit_2eme_rep",
+                UnitName = "A Super long unit name",
+                Category = possibleFactory[r.Next(0,possibleFactory.Count)],
+                MotherCountry = "FR",
+                UnitTypeName = "Main Battle Tank",
+                TypeUnitValue = 3
+
+            };
+
+            return unit;
         }
 
         public Nations GetNation( CoalitionEnum coalition, byte nationId )

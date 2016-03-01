@@ -18,5 +18,7 @@ namespace RReplay
         public Nullable<byte> SourceClassId { get; set; }
         public byte[] UnitTokenLocalisation1 { get; set; }
         public byte[] UnitTokenLocalisation2 { get; set; }
+    
+        public virtual TUniteAuSol TUniteAuSol { get; set; }
     }
 }

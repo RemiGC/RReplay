@@ -12,11 +12,9 @@ namespace RReplay
     using System;
     using System.Collections.Generic;
     
-    public partial class Flags
+    public partial class Interface_Translation_US
     {
-        public int SourceInstanceId { get; set; }
-        public Nullable<byte> SourceClassId { get; set; }
-        public Nullable<byte> DestinationClassId { get; set; }
-        public int DestinationInstanceID { get; set; }
+        public byte[] Hash { get; set; }
+        public string Translation { get; set; }
     }
 }

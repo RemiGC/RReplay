@@ -15,11 +15,13 @@ namespace RReplay
     public partial class ShowInMenu
     {
         public int SourceInstanceId { get; set; }
-        public Nullable<byte> SourceClassId { get; set; }
-        public Nullable<bool> ShowMenu1 { get; set; }
-        public Nullable<bool> ShowMenu2 { get; set; }
-        public Nullable<bool> ShowMenu3 { get; set; }
-        public Nullable<bool> ShowMenu4 { get; set; }
-        public Nullable<bool> ShowMenu5 { get; set; }
+        public byte SourceClassId { get; set; }
+        public bool ShowMenu1 { get; set; }
+        public bool ShowMenu2 { get; set; }
+        public bool ShowMenu3 { get; set; }
+        public bool ShowMenu4 { get; set; }
+        public bool ShowMenu5 { get; set; }
+    
+        public virtual TUniteAuSol TUniteAuSol { get; set; }
     }
 }

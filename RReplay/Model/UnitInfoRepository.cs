@@ -7,8 +7,7 @@ namespace RReplay.Model
 {
     public class UnitInfoRepository : IUnitInfoRepository
     {
-        Dictionary<int, TUniteAuSol> otanUnits;
-        Dictionary<int, TUniteAuSol> pactUnits;
+        Dictionary<Tuple<CoalitionEnum, int>, SimpleUnit> simpleUnits;
         Dictionary<Tuple<CoalitionEnum, byte>, Nations> nations;
         Dictionary<byte, Era> eras;
         Dictionary<byte, Specialization> specializations;
@@ -17,15 +16,8 @@ namespace RReplay.Model
         {
             using ( var unitsContext = new UnitsContext() )
             {
-                otanUnits = unitsContext.OtanUnits
-                  .Include("TUniteAuSol")
-                  .Include("TUniteAuSol.Units_Translation_US")
-                  .ToDictionary(u => u.DeckId, u => u.TUniteAuSol);
-
-                pactUnits = unitsContext.PactUnits
-                  .Include("TUniteAuSol")
-                  .Include("TUniteAuSol.Units_Translation_US")
-                  .ToDictionary(u => u.DeckId, u => u.TUniteAuSol);
+                simpleUnits = unitsContext.MainUnitsView
+                  .ToDictionary(u => new Tuple<CoalitionEnum, int>((CoalitionEnum)u.Coalition,u.DeckId), u => u);
 
                 nations = unitsContext.Nations
                   .ToDictionary(u => new Tuple<CoalitionEnum, byte>((CoalitionEnum)u.Coalition,u.NationID), u => u);
@@ -38,16 +30,9 @@ namespace RReplay.Model
             }
         }
 
-        public TUniteAuSol GetUnit( CoalitionEnum coalition, ushort unitID )
+        public SimpleUnit GetUnit( CoalitionEnum coalition, ushort unitID )
         {
-            if (coalition == CoalitionEnum.NATO)
-            {
-                return otanUnits[unitID];
-            }
-            else
-            {
-                return pactUnits[unitID];
-            }
+            return simpleUnits[new Tuple<CoalitionEnum, int>(coalition, unitID)];
         }
 
         public Nations GetNation( CoalitionEnum coalition, byte nationId )

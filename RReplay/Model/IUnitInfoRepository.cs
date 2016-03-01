@@ -2,7 +2,7 @@
 {
     public interface IUnitInfoRepository
     {
-        TUniteAuSol GetUnit( CoalitionEnum coalition, ushort unitID );
+        SimpleUnit GetUnit( CoalitionEnum coalition, ushort unitID );
         Era GetEra( byte eraId );
         Specialization GetSpecialization( byte specializationId );
         Nations GetNation( CoalitionEnum coalition, byte nationId );

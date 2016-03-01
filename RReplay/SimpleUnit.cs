@@ -12,11 +12,17 @@ namespace RReplay
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeUnit
+    public partial class SimpleUnit
     {
-        public int SourceInstanceId { get; set; }
-        public Nullable<byte> SourceClassId { get; set; }
-        public Nullable<byte> DestinationClassId { get; set; }
-        public int DestinationInstanceID { get; set; }
+        public int Id { get; set; }
+        public string ClassNameForDebug { get; set; }
+        public string UnitName { get; set; }
+        public string MotherCountry { get; set; }
+        public int Category { get; set; }
+        public int Factory { get; set; }
+        public string UnitTypeName { get; set; }
+        public Nullable<int> TypeUnitValue { get; set; }
+        public int DeckId { get; set; }
+        public byte Coalition { get; set; }
     }
 }

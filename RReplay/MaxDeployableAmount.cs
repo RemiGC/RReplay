@@ -15,11 +15,13 @@ namespace RReplay
     public partial class MaxDeployableAmount
     {
         public int SourceInstanceId { get; set; }
-        public Nullable<byte> SourceClassId { get; set; }
-        public Nullable<int> DeployableAmount1 { get; set; }
-        public Nullable<int> DeployableAmount2 { get; set; }
-        public Nullable<int> DeployableAmount3 { get; set; }
-        public Nullable<int> DeployableAmount4 { get; set; }
-        public Nullable<int> DeployableAmount5 { get; set; }
+        public byte SourceClassId { get; set; }
+        public int DeployableAmount1 { get; set; }
+        public int DeployableAmount2 { get; set; }
+        public int DeployableAmount3 { get; set; }
+        public int DeployableAmount4 { get; set; }
+        public int DeployableAmount5 { get; set; }
+    
+        public virtual TUniteAuSol TUniteAuSol { get; set; }
     }
 }

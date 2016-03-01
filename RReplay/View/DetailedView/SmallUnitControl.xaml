@@ -26,7 +26,7 @@
                 <DataTrigger Binding="{Binding HaveTransport}" Value="True">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Setter Property="Source" Value="{Binding TransportUnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" />
-                    <Setter Property="ToolTip" Value="{Binding TransportUnitInfo.Units_Translation_US.Translation}" />
+                    <Setter Property="ToolTip" Value="{Binding TransportUnitInfo.UnitName}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -57,7 +57,8 @@
                 </Image.Effect>
             </Image>
             <Image Style="{StaticResource UnitMouseOver}" Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="120" Margin="-21,2,0,0"  HorizontalAlignment="Left" DockPanel.Dock="Top"/>
-            <TextBlock Text="{Binding UnitInfo.Units_Translation_US.Translation}" ToolTip="{Binding UnitInfo.Units_Translation_US.Translation}" Panel.ZIndex="1" Margin="-20,0,-36,0" DockPanel.Dock="Bottom" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Width="131" IsHitTestVisible="True" UseLayoutRounding="False"  />
+            <TextBlock Text="{Binding UnitInfo.UnitName}" ToolTip="{Binding UnitInfo.UnitName}" Panel.ZIndex="1" Margin="-20,0,-36,0" DockPanel.Dock="Bottom" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Width="131" IsHitTestVisible="True" UseLayoutRounding="False"  />
+            <TextBlock Text="{Binding UnitInfo.TypeUnitValue,TargetNullValue='??'}" ToolTip="{Binding UnitInfo.UnitTypeName}" Panel.ZIndex="1" Margin="-15,-110,0,0" DockPanel.Dock="Right" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Width="15" Height="20"  IsHitTestVisible="True" UseLayoutRounding="False" VerticalAlignment="Center"  />
             <Image x:Name="TransportImage" Style="{StaticResource ImageTransportVisibility}" Width="80" Height="40" Margin="0,-40,-35,0" Panel.ZIndex="1" DockPanel.Dock="Right" >
             </Image>
             

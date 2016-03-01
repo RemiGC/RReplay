@@ -46,7 +46,38 @@ namespace RReplay.Converters
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            throw new NotSupportedException();
+            int factory = 0;
+            switch ( (string)value )
+            {
+                case "Logistic":
+                    factory = 3;
+                    break;
+                case "Infantry":
+                    factory = 6;
+                    break;
+                case "Plane":
+                    factory = 7;
+                    break;
+                case "Vehicle":
+                    factory = 8;
+                    break;
+                case "Tank":
+                    factory = 9;
+                    break;
+                case "Recon":
+                    factory = 10;
+                    break;
+                case "Helo":
+                    factory = 11;
+                    break;
+                case "Naval":
+                    factory = 12;
+                    break;
+                case "Support":
+                    factory = 13;
+                    break;
+            }
+            return factory;
         }
     }
 }

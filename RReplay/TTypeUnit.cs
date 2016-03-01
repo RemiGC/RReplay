@@ -12,21 +12,26 @@ namespace RReplay
     using System;
     using System.Collections.Generic;
     
-    public partial class Units_Translation_US
+    public partial class TTypeUnit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Units_Translation_US()
+        public TTypeUnit()
         {
             this.TUniteAuSol = new HashSet<TUniteAuSol>();
-            this.TTypeUnit = new HashSet<TTypeUnit>();
         }
     
-        public byte[] Hash { get; set; }
-        public string Translation { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> TypeUnitValue { get; set; }
+        public byte[] TypeUnitHintToken { get; set; }
+        public byte[] NameInMenuToken { get; set; }
+        public string MotherCountry { get; set; }
+        public Nullable<int> UnitInfoJaugeType { get; set; }
+        public byte[] Training { get; set; }
+        public byte[] CIWS { get; set; }
+        public byte[] Sailing { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TUniteAuSol> TUniteAuSol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TTypeUnit> TTypeUnit { get; set; }
+        public virtual Units_Translation_US Units_Translation_US { get; set; }
     }
 }

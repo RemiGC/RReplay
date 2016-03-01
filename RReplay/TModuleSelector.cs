@@ -12,11 +12,12 @@ namespace RReplay
     using System;
     using System.Collections.Generic;
     
-    public partial class WeaponManager
+    public partial class TModuleSelector
     {
-        public int SourceInstanceId { get; set; }
-        public Nullable<byte> SourceClassId { get; set; }
-        public Nullable<byte> DestinationClassId { get; set; }
-        public int DestinationInstanceID { get; set; }
+        public int Id { get; set; }
+        public byte ClassId { get; set; }
+        public string ControllerName { get; set; }
+        public Nullable<byte> RefClassId { get; set; }
+        public Nullable<int> RefInstanceID { get; set; }
     }
 }

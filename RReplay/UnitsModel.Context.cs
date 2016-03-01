@@ -27,7 +27,6 @@ namespace RReplay
         }
     
         public virtual DbSet<Era> Era { get; set; }
-        public virtual DbSet<Flags> Flags { get; set; }
         public virtual DbSet<MaxDeployableAmount> MaxDeployableAmount { get; set; }
         public virtual DbSet<Nations> Nations { get; set; }
         public virtual DbSet<OtanUnits> OtanUnits { get; set; }
@@ -37,9 +36,11 @@ namespace RReplay
         public virtual DbSet<Specialization> Specialization { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TUniteAuSol> TUniteAuSol { get; set; }
-        public virtual DbSet<TypeUnit> TypeUnit { get; set; }
         public virtual DbSet<Units_Translation_US> Units_Translation_US { get; set; }
         public virtual DbSet<UnitTypeTokens> UnitTypeTokens { get; set; }
-        public virtual DbSet<WeaponManager> WeaponManager { get; set; }
+        public virtual DbSet<Interface_Translation_US> Interface_Translation_US { get; set; }
+        public virtual DbSet<TModuleSelector> TModuleSelector { get; set; }
+        public virtual DbSet<TTypeUnit> TTypeUnit { get; set; }
+        public virtual DbSet<SimpleUnit> MainUnitsView { get; set; }
     }
 }

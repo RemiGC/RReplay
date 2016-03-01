@@ -21,5 +21,7 @@ namespace RReplay
         public Nullable<int> Price3 { get; set; }
         public Nullable<int> Price4 { get; set; }
         public Nullable<int> Price5 { get; set; }
+    
+        public virtual TUniteAuSol TUniteAuSol { get; set; }
     }
 }

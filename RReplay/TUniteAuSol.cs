@@ -22,7 +22,7 @@ namespace RReplay
         }
     
         public int Id { get; set; }
-        public Nullable<byte> ClassId { get; set; }
+        public byte ClassId { get; set; }
         public string DescriptorId { get; set; }
         public string C_ShortDatabaseName { get; set; }
         public string ClassNameForDebug { get; set; }
@@ -33,9 +33,9 @@ namespace RReplay
         public Nullable<int> PositionInMenu { get; set; }
         public byte[] NameInMenuToken { get; set; }
         public string AliasName { get; set; }
-        public Nullable<int> Category { get; set; }
+        public int Category { get; set; }
         public Nullable<int> AcknowUnitType { get; set; }
-        public Nullable<int> TypeForAcknow { get; set; }
+        public int TypeForAcknow { get; set; }
         public Nullable<int> Nationalite { get; set; }
         public string MotherCountry { get; set; }
         public Nullable<int> ProductionYear { get; set; }
@@ -47,11 +47,19 @@ namespace RReplay
         public Nullable<int> UnitMovingType { get; set; }
         public Nullable<float> VitesseCombat { get; set; }
         public Nullable<bool> IsPrototype { get; set; }
+        public Nullable<int> TypeUnitId { get; set; }
+        public Nullable<int> FlagsId { get; set; }
+        public Nullable<int> WeaponManagerId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtanUnits> OtanUnits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PactUnits> PactUnits { get; set; }
         public virtual Units_Translation_US Units_Translation_US { get; set; }
+        public virtual MaxDeployableAmount MaxDeployableAmount { get; set; }
+        public virtual ShowInMenu ShowInMenu { get; set; }
+        public virtual UnitTypeTokens UnitTypeTokens { get; set; }
+        public virtual ProductionPrice ProductionPrice { get; set; }
+        public virtual TTypeUnit TTypeUnit { get; set; }
     }
 }

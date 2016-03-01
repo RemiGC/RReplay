@@ -162,7 +162,7 @@
     <Compile Include="Era.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Flags.cs">
+    <Compile Include="Interface_Translation_US.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MaxDeployableAmount.cs">
@@ -198,16 +198,22 @@
     <Compile Include="ShowInMenu.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SimpleUnit.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Specialization.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TUniteAuSol.cs">
+    <Compile Include="TModuleSelector.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TypeUnit.cs">
+    <Compile Include="TTypeUnit.cs">
+      <DependentUpon>UnitsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TUniteAuSol.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitsModel.Context.cs">
@@ -261,9 +267,6 @@
     </Compile>
     <Compile Include="View\DetailedView\SmallUnitControl.xaml.cs">
       <DependentUpon>SmallUnitControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WeaponManager.cs">
-      <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
     <Page Include="Skins\CustomThemes.xaml">
       <SubType>Designer</SubType>

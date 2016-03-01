@@ -19,6 +19,7 @@ namespace RReplay
         public int SourceInstanceId { get; set; }
         public byte RefClassId { get; set; }
         public int RefInstanceID { get; set; }
+        public byte Coalition { get; set; }
     
         public virtual TUniteAuSol TUniteAuSol { get; set; }
     }

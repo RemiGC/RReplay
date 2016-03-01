@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.ServiceLocation;
+using RReplay.Converters;
+using System.Windows.Data;
 
 namespace RReplay.Model
 {
@@ -7,7 +9,7 @@ namespace RReplay.Model
         private ushort landingCraftID;
 
         // Extented transport property from the XML
-        private TUniteAuSol landingCraftUnitInfo;
+        private SimpleUnit landingCraftUnitInfo;
 
         public TwoTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, ushort secondTransportID )
             : base(coalition, veterancy, unitID, transportID)
@@ -17,6 +19,22 @@ namespace RReplay.Model
             IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
             LandingCraftUnitInfo = repository.GetUnit(coalition, secondTransportID);
+        }
+
+        public new int Factory
+        {
+            get
+            {
+                IValueConverter fact = new FactoryNumberToName();
+                if ( landingCraftUnitInfo.Factory == (int)fact.ConvertBack("Naval", typeof(int), null, null) )
+                {
+                    return landingCraftUnitInfo.Factory;
+                }
+                else
+                {
+                    return UnitInfo.Factory;
+                }
+            }
         }
 
         public ushort LandingCraftID
@@ -40,7 +58,7 @@ namespace RReplay.Model
             }
         }
 
-        public TUniteAuSol LandingCraftUnitInfo
+        public SimpleUnit LandingCraftUnitInfo
         {
             get
             {

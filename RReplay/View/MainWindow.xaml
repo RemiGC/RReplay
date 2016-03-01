@@ -41,7 +41,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="660"  MaxWidth="1350"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition MaxWidth="225"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
                 <Label>Player name :</Label>
