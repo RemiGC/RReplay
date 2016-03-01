@@ -11,8 +11,9 @@
     MinWidth="600">
 
     <UserControl.Resources>
-        <Converters:GameModeToString x:Key="VictoryToString"/>
+        <Converters:VictoryToString x:Key="VictoryToString"/>
         <Converters:GameTypeToString x:Key="GameTypeToString"/>
+        <Converters:GameModeToString x:Key="GameModeToString" />
     </UserControl.Resources>
 
     <UserControl.DataContext>
@@ -48,7 +49,7 @@
                 <DataGridTextColumn Binding="{Binding PlayerCount, Mode=OneWay}"  Header="Nb Players"/>
                 <DataGridTextColumn Binding="{Binding ServerName, Mode=OneWay}"  Header="Server"/>
                 <DataGridTextColumn Binding="{Binding GameType, Converter={StaticResource ResourceKey=GameTypeToString}}" Header="Game Type"/>
-                <DataGridTextColumn Binding="{Binding GameMode}" Header="Game Mode"/>
+                <DataGridTextColumn Binding="{Binding GameMode, Converter={StaticResource ResourceKey=GameModeToString}}" Header="Game Mode"/>
                 <DataGridTextColumn Binding="{Binding Game.VictoryCond, Mode=OneWay, Converter={StaticResource ResourceKey=VictoryToString}}" Header="Victory"/>
                 <DataGridTextColumn Binding="{Binding Game.Version, Mode=OneWay}" Header="Version"/>
             </DataGrid.Columns>

@@ -10,14 +10,14 @@ namespace RReplay.Converters
         {
             switch ((int)value)
             {
+                case 0:
+                    return "Skirmish";
                 case 1:
-                    return "Destruction";
+                    return "Multi";
                 case 2:
                     return "Unknown2";
                 case 3:
-                    return "Economy";
-                case 4:
-                    return "Conquest";
+                    return "Ranked";
                 default:
                     return "Unkown";
 
@@ -26,20 +26,7 @@ namespace RReplay.Converters
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            switch ( (string)value )
-            {
-                case "Destruction":
-                    return 1;
-                case "Unknown2":
-                    return 2;
-                case "Economy":
-                    return 3;
-                case "Conquest":
-                    return 4;
-                default:
-                    return 0;
-
-            }
+            throw new NotImplementedException();
         }
     }
 }
