@@ -57,7 +57,7 @@ namespace RReplay.ViewModel
             set
             {
                 Set(PlayerPropertyName, ref player, value);
-                Deck = value.Deck;
+                Deck = new Deck(value.Deck.DeckCode);
             }
         }
 
