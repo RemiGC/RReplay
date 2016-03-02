@@ -69,7 +69,7 @@ namespace RReplay.Model
         public string PlayerName
         {
             get;
-            private set;
+            set;
         }
 
         [JsonProperty]
@@ -98,7 +98,7 @@ namespace RReplay.Model
         public string PlayerDeckName
         {
             get;
-            private set;
+            set;
         }
 
         [JsonProperty]
@@ -158,7 +158,7 @@ namespace RReplay.Model
         {
             this.gameName = gameName;
         }
-        private Player( )
+        public Player( )
         {
         }
     }

@@ -45,7 +45,7 @@ namespace RReplay.ViewModel
         private RelayCommand<Player> openSteamCommunityPageCommand;
         private RelayCommand browseToReplayFileCommand;
         private RelayCommand openReplayJSONView;
-        private RelayCommand<Deck> openDeckViewCommand;
+        private RelayCommand<Player> openDeckViewCommand;
 
         // The Data service that collect and return the Replays
         private readonly IReplayRepository dataService;
@@ -301,18 +301,24 @@ namespace RReplay.ViewModel
             }
         }
 
-        public RelayCommand<Deck> OpenDeckViewCommand
+        public RelayCommand<Player> OpenDeckViewCommand
         {
             get
             {
-                return openDeckViewCommand ?? (openDeckViewCommand = new RelayCommand<Deck>(( value ) =>
+                return openDeckViewCommand ?? (openDeckViewCommand = new RelayCommand<Player>(( value ) =>
                 {
                     DeckView dv = new DeckView();
+                    DeckViewModel dvm = new DeckViewModel()
+                    {
+                        Player = value
+                    };
+
+                    dv.DataContext = dvm;
                     
-                    Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator()
+                    /*Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator()
                     {
                         deck = value
-                    });
+                    });*/
 
                     dv.Show();
                 }));

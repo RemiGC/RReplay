@@ -4,6 +4,6 @@ namespace RReplay.MessageInfrastructure
 {
     public class MessageCommunicator
     {
-        public Deck deck { get; set; }
+        public Player player { get; set; }
     }
 }

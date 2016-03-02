@@ -19,8 +19,10 @@ namespace RReplay.ViewModel
     {
         public const string UnitsCollectionPropertyName = "UnitsCollection";
         public const string UnitsGroupedViewPropertyName = "UnitsGroupedView";
+        public const string PlayerPropertyName = "Player";
 
         private Deck deck;
+        private Player player;
 
         private ObservableCollection<Unit> unitsCollection;
 
@@ -34,12 +36,34 @@ namespace RReplay.ViewModel
         /// </summary>
         public DeckViewModel()
         {
-            //unitInfoRepository = repository;
-            ReceiveDeckInfo();
-            if (IsInDesignMode)
+            if ( IsInDesignMode )
             {
-                Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw=");
+                this.Player = new Player()
+                {
+                    Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw="),
+                    PlayerName = "My Super Name",
+                    PlayerDeckName = "The name of the deck"
+                };
             }
+        }
+
+
+        public Player Player
+        {
+            get
+            {
+                return player;
+            }
+            set
+            {
+                Set(PlayerPropertyName, ref player, value);
+                Deck = value.Deck;
+            }
+        }
+
+        public string Title
+        {
+            get { return string.Format("{0} by {1}", Player.PlayerDeckName, Player.PlayerName); }
         }
 
         public RelayCommand DragAndDropCommand
@@ -84,17 +108,6 @@ namespace RReplay.ViewModel
             }
         }
 
-        void ReceiveDeckInfo()
-        {
-            if ( Deck == null )
-            {
-                Messenger.Default.Register<MessageCommunicator>(this, ( deckMsg ) =>
-                {
-                    Deck = deckMsg.deck;
-                });
-            }
-        }
-
         public Deck Deck
         {
             get
@@ -120,6 +133,7 @@ namespace RReplay.ViewModel
             {
                 Set("UnitsCollection", ref unitsCollection, value);
                 ICollectionView cv = CollectionViewSource.GetDefaultView(value);
+                // Keep the same order as in game
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("Factory");
                 groupDescription.GroupNames.Add(3);
                 groupDescription.GroupNames.Add(6);

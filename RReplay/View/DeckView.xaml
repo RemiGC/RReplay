@@ -10,7 +10,7 @@
         xmlns:local="clr-namespace:RReplay.View" x:Class="RReplay.View.DeckView"
         mc:Ignorable="d ignore"
         Background="{DynamicResource WindowBackgroundBrush}"
-        Icon="{StaticResource ComodoIcon}" d:DesignWidth="1330.686" d:DesignHeight="868.279">
+        Icon="{StaticResource ComodoIcon}" d:DesignWidth="1330.686" d:DesignHeight="868.279" Title="{Binding Title, Mode=OneWay}">
     <Window.Resources>
 
         <Converters:CountryCodeToImageSource x:Key="CountryCodeToImageSource"/>
@@ -26,9 +26,9 @@
 
     </Window.Resources>
 
-    <Window.DataContext>
+    <d:Window.DataContext>
         <Binding Path="Deck" Source="{StaticResource Locator}"/>
-    </Window.DataContext>
+    </d:Window.DataContext>
 
     <Grid>
         <TextBlock Text="{Binding Deck.DeckCode, Mode=OneWay}" Margin="10,5,47,0" VerticalAlignment="Top" Height="31" FontSize="18.667"/>
