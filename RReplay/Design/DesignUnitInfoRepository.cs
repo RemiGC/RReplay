@@ -90,6 +90,7 @@ namespace RReplay.Design
                 ClassNameForDebug = "Unit_2eme_rep",
                 UnitName = "A Super long unit name",
                 Category = possibleFactory[r.Next(0,possibleFactory.Count)],
+                Factory = possibleFactory[r.Next(0, possibleFactory.Count)],
                 MotherCountry = "FR",
                 UnitTypeName = "Main Battle Tank",
                 TypeUnitValue = 3

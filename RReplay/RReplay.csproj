@@ -98,6 +98,10 @@
       <HintPath>..\packages\gong-wpf-dragdrop.0.1.4.3\lib\net40\GongSolutions.Wpf.DragDrop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -124,7 +128,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -150,6 +154,7 @@
     <Compile Include="Converters\ClassNameDebugToImageSource.cs" />
     <Compile Include="Converters\CountryCodeToImageSource.cs" />
     <Compile Include="Converters\EraCodeToImageSource.cs" />
+    <Compile Include="Converters\FactoryNumberToImageSource.cs" />
     <Compile Include="Converters\FactoryNumberToName.cs" />
     <Compile Include="Converters\GameTypeToString.cs" />
     <Compile Include="Converters\GameModeToString.cs" />
@@ -268,19 +273,11 @@
     <Compile Include="View\DetailedView\SmallUnitControl.xaml.cs">
       <DependentUpon>SmallUnitControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="Skins\CustomThemes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Ressources\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Skins\MainSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -376,9 +373,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Ressources\comodo_dragon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Ressources\CopyToClipboard.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -394,17 +388,10 @@
     <Resource Include="Ressources\ItemUpdatedAssociation_16x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\NATO.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Data\PACT.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Ressources\ShowAllCode_16x.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Ressources\comodo_dragon.ico" />
     <Content Include="Units.db.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

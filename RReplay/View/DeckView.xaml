@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,15 @@
         xmlns:m="clr-namespace:RReplay.Model"
         xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         xmlns:Converters="clr-namespace:RReplay.Converters"
-        xmlns:local="clr-namespace:RReplay.View" x:Class="RReplay.View.DeckView"
+        xmlns:local="clr-namespace:RReplay.View"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        x:Class="RReplay.View.DeckView"
         mc:Ignorable="d ignore"
-        Background="{DynamicResource WindowBackgroundBrush}"
+    
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        ResizeMode="CanResizeWithGrip"
+
+        WindowTransitionsEnabled="False"
         Icon="{StaticResource ComodoIcon}" d:DesignWidth="1330.686" d:DesignHeight="868.279" Title="{Binding Title, Mode=OneWay}">
     <Window.Resources>
 
@@ -19,6 +25,7 @@
         <Converters:ClassNameDebugToImageSource x:Key="ClassNameDebugToImageSource" />
         <Converters:VeterancyToImageSource x:Key="VeterancyToImageSource" />
         <Converters:FactoryNumberToName x:Key="FactoryNumberToName" />
+        <Converters:FactoryNumberToImageSource x:Key="FactoryNumberToImageSource" />
 
         <DataTemplate DataType="{x:Type m:Unit}">
             <local:SmallUnitControl />
@@ -64,10 +71,13 @@
 
         <ListView x:Name="unitsListBox" ItemsSource="{Binding UnitsGroupedView}" 
                   dd:DragDrop.DropHandler="{Binding DragAndDropCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" 
-                  MaxWidth="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckView}}}" 
-                  Margin="10,66,10,10" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                  ItemContainerStyle="{DynamicResource ListViewItemStyleDeckView}" Style="{DynamicResource ListViewStyleDeckView}">
+                  Margin="5,66,5,5" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.Resources>
+                <Style x:Key="ToggleSite" TargetType="{x:Type ToggleButton}">
+                    <Setter Property="Height" Value="75"/>
+                </Style>
+            </ListView.Resources>
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
@@ -75,14 +85,27 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="True" Margin="0,0,0,-3" >
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name, Converter={StaticResource FactoryNumberToName}}" VerticalAlignment="Bottom" />
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
+                                        <Border BorderBrush="{DynamicResource AccentColorBrush}"
+                                                SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                                UseLayoutRounding="True" 
+                                                BorderThickness="1">
+                                            <WrapPanel Orientation="Horizontal">
+                                                <DockPanel Width="60" Background="{DynamicResource AccentColorBrush}" >
+                                                    <TextBlock DockPanel.Dock="Top">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0}: {1}">
+                                                                <Binding Path="Name" Converter="{StaticResource FactoryNumberToName}" />
+                                                                <Binding Path="ItemCount" />
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                    <Image VerticalAlignment="Center" Source="{Binding Name, Converter={StaticResource FactoryNumberToImageSource}}" Width="50"/>
+                                                </DockPanel>
+                                                <WrapPanel>
+                                                    <ItemsPresenter />
+                                                </WrapPanel>
+                                            </WrapPanel>
+                                        </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -101,4 +124,4 @@
             <Image Source="/RReplay;component/Ressources/CopyToClipboard.ico" Stretch="UniformToFill"  />
         </Button>
     </Grid>
-</Window>
+</Controls:MetroWindow>

@@ -47,7 +47,7 @@
         <Binding Path="Deck.UnitsCollection[0]" Source="{StaticResource Locator}"/>
     </d:DataContext>
 
-    <Border BorderThickness="1" CornerRadius="0" Width="140" BorderBrush="{StaticResource ListBorder}" >
+    <Border BorderThickness="1" CornerRadius="0" Width="140" >
         <DockPanel>
             <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" ToolTip="{Binding UnitInfo.MotherCountry}" Width="24" Panel.ZIndex="3" Height="16" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,0,0">
             </Image>
