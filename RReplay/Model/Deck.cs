@@ -84,7 +84,7 @@ namespace RReplay.Model
             }
         }
 
-        public Deck(string PlayerDeckContent )
+        public Deck(string PlayerDeckContent, IUnitInfoRepository repository )
         {
             this.deckCode = PlayerDeckContent;
             var base64EncodedBytes = System.Convert.FromBase64String(deckCode);
@@ -109,8 +109,6 @@ namespace RReplay.Model
             }
 
             int posArray = 0;
-
-            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
             // First bit is the coalition
             coalition = (CoalitionEnum)GetBits<byte>(bitArrayInversed, 1, ref posArray);

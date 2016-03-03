@@ -28,7 +28,11 @@
                         <TextBlock DockPanel.Dock="Left" Text="{Binding PlayerRank, Mode=OneWay}"  Padding="5,0,5,0"  />
                         <Label DockPanel.Dock="Left" >ELO: </Label>
                         <TextBlock DockPanel.Dock="Left" Text="{Binding PlayerElo, Mode=OneWay, StringFormat=\{0:F0\}}" Padding="5,0,5,0" />
-                        <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" Height="32" Margin="0,0,0,0" DockPanel.Dock="Right" Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" CommandParameter="{Binding}" ToolTip="Open the Steam Community Page" >
+                        <Button Width="32" Background="Transparent" BorderBrush="{x:Null}" 
+                                Height="32" Margin="0,0,0,0" 
+                                DockPanel.Dock="Right" 
+                                Command="{Binding Main.OpenSteamCommunityPageCommand , Source={StaticResource Locator}}" 
+                                CommandParameter="{Binding}" ToolTip="Open the Steam Community Page" >
                             <Image Source="/RReplay;component/Ressources/Bokehlicia-Pacifica-Steam.ico" Stretch="UniformToFill"  />
                         </Button>
                     </DockPanel>
@@ -70,18 +74,6 @@
                     </DockPanel>
                 </StackPanel>
             </Border>
-            <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding IsAI}" Value="True">
-                    <DataTrigger.Setters>
-                        <Setter Property="Text" Value="{Binding PlayerIALevel, Mode=OneWay}" TargetName="PlayerNameText" />
-                    </DataTrigger.Setters>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding IsAI}" Value="False">
-                    <DataTrigger.Setters>
-                        <Setter Property="Text" Value="{Binding PlayerName, Mode=OneWay}" TargetName="PlayerNameText" />
-                    </DataTrigger.Setters>
-                </DataTrigger>
-            </DataTemplate.Triggers>
         </DataTemplate>
     </UserControl.Resources>
     

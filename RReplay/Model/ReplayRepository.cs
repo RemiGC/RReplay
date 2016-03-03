@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Practices.ServiceLocation;
+using Newtonsoft.Json;
 using RReplay.Properties;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,13 @@ namespace RReplay.Model
                 var replaysFiles = from file in Directory.GetFiles(Settings.Default.replaysFolder, "*.wargamerpl2", SearchOption.TopDirectoryOnly)
                                    select file;
 
+                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
                 foreach ( string file in replaysFiles )
                 {
                     try
                     {
-                        var replay = new Replay(file);
+                        var replay = new Replay(file, repository);
                         replayCollection.Add(replay);
                     }
                     catch ( JsonSerializationException ex )

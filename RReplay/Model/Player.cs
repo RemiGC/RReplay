@@ -7,6 +7,7 @@ namespace RReplay.Model
     {
         private Deck deck;
         private string gameName;
+        private string playerName;
 
         [JsonProperty]
         public ulong PlayerUserId
@@ -68,8 +69,21 @@ namespace RReplay.Model
         [JsonProperty]
         public string PlayerName
         {
-            get;
-            set;
+            get
+            {
+                if(IsAI)
+                {
+                    return string.Format("AI Level: {0}", PlayerIALevel);
+                }
+                else
+                {
+                    return playerName;
+                }
+            }
+            set
+            {
+                playerName = value;
+            }
         }
 
         [JsonProperty]
@@ -133,6 +147,15 @@ namespace RReplay.Model
                 gameName = value;
             }
         }
+
+        public bool IsDeckExist
+        {
+            get
+            {
+                return deck != null;
+            }
+        }
+
         public Deck Deck
         {
             get

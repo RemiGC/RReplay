@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace RReplay.Model
 {
@@ -12,11 +13,13 @@ namespace RReplay.Model
     /// </summary>
     public class Replay
     {
+        public static uint MinimumVersionSupported = 430000610;
+
         public Game Game { get; private set; }
         public DateTime Date { get; private set; }
         public string CompletePath { get; private set; }
 
-        public Replay( string path )
+        public Replay( string path, IUnitInfoRepository repository )
         {
             Players = new List<Player>();
             CompletePath = path;
@@ -32,10 +35,29 @@ namespace RReplay.Model
 
             foreach ( var item in players )
             {
-                Player player = item.First.ToObject<Player>();
-                player.GameName = this.Name;
-                player.Deck = new Deck(player.PlayerDeckContent);
-                Players.Add(player);
+
+                try
+                {
+                    Player player = item.First.ToObject<Player>();
+                    player.GameName = this.Name;
+                    if ( IsVersionSupported ) // we dont support deck string prior to this version
+                    {
+                        player.Deck = new Deck(player.PlayerDeckContent, repository);
+                    }
+                    Players.Add(player);
+                }
+                catch( Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        public bool IsVersionSupported
+        {
+            get
+            {
+                return Game.Version >= MinimumVersionSupported;
             }
         }
 

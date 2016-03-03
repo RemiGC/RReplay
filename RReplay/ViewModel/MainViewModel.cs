@@ -27,7 +27,7 @@ namespace RReplay.ViewModel
         public const string ReplayViewVisiblePropertyName = "ReplayViewVisible";
         public const string AllPlayersDeckVisiblePropertyName = "AllPlayersDeckVisible";
 
-        // The filtered replays View for the main view
+        // The filtered replays View for a all the replays
         private ICollectionView replaysView;
 
         // The filtered players view that appear when the name filter is active
@@ -216,18 +216,24 @@ namespace RReplay.ViewModel
                 {
                     nameFilter = value;
 
-                    ReplaysView = CollectionViewSource.GetDefaultView(Replays);
-                    PlayersView = CollectionViewSource.GetDefaultView(PlayersView);
+                    //ReplaysView = CollectionViewSource.GetDefaultView(Replays);   
+                    
 
                     // If filter is active, show all the deck for the result
                     // otherwise show by team for the selected replay
-                    if(string.IsNullOrEmpty(nameFilter))
+                    if (string.IsNullOrEmpty(nameFilter))
                     {
                         ReplayViewVisible = true;
+                        replaysView.Filter = null;
+                        PlayersView.Filter = null;
+
                     }
                     else
                     {
                         AllPlayersDeckVisible = true;
+                        ReplaysView.Filter = PlayerNameInReplayFilter;
+                        PlayersView.Filter = PlayerNameInGameFilter;
+                        //PlayersView = CollectionViewSource.GetDefaultView(PlayersView);
                     }
 
                     RaisePropertyChanged(NameFilterPropertyName);
@@ -249,6 +255,7 @@ namespace RReplay.ViewModel
             {
                 replaysView = value;
 
+                /*
                 if ( !string.IsNullOrEmpty(NameFilter) )
                 {
                     replaysView.Filter = PlayerNameInReplayFilter;
@@ -257,6 +264,7 @@ namespace RReplay.ViewModel
                 {
                     replaysView.Filter = null;
                 }
+                */
                 RaisePropertyChanged(ReplayViewPropertyName);
             }
         }
@@ -273,6 +281,7 @@ namespace RReplay.ViewModel
             set
             {
                 playersView = value;
+                /*
                 if ( !string.IsNullOrEmpty(NameFilter) )
                 {
                     playersView.Filter = PlayerNameInGameFilter;
@@ -282,6 +291,7 @@ namespace RReplay.ViewModel
                 {
                     playersView.Filter = null;
                 }
+                */
                 RaisePropertyChanged("PlayersView");
             }
         }
@@ -321,6 +331,25 @@ namespace RReplay.ViewModel
                     });*/
 
                     dv.Show();
+                },
+                ( value ) =>
+                {
+                    if ( value is Player )
+                    {
+                        Player player = value as Player;
+                        if ( player.IsDeckExist )
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }));
             }
         }

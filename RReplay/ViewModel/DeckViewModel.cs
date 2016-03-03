@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Practices.ServiceLocation;
 using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using System.Collections.ObjectModel;
@@ -38,9 +39,10 @@ namespace RReplay.ViewModel
         {
             if ( IsInDesignMode )
             {
+                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
                 this.Player = new Player()
                 {
-                    Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw="),
+                    Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw=", repository),
                     PlayerName = "My Super Name",
                     PlayerDeckName = "The name of the deck"
                 };
@@ -57,7 +59,8 @@ namespace RReplay.ViewModel
             set
             {
                 Set(PlayerPropertyName, ref player, value);
-                Deck = new Deck(value.Deck.DeckCode);
+                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
+                Deck = new Deck(value.Deck.DeckCode, repository);
             }
         }
 
