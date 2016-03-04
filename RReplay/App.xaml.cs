@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Threading;
+using Microsoft.Win32;
 using RReplay.Properties;
 using System.IO;
 using System.Windows;
@@ -41,6 +42,12 @@ namespace RReplay
                 {
                     Settings.Default.exeFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 }
+
+                //Introduced in V.0.5
+                if ( string.IsNullOrEmpty(Settings.Default.redDragonExe) )
+                {
+                    Settings.Default.redDragonExe = RedDragonExeFolder.GetPath();
+                }
             }
 
             // First setup
@@ -49,6 +56,8 @@ namespace RReplay
                 Settings.Default.firstRun = false;
                 Settings.Default.replaysFolder = ReplayFolderPicker.GetDefaultReplayGamesFolder();
                 Settings.Default.exeFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                Settings.Default.redDragonExe = RedDragonExeFolder.GetPath();
+                Settings.Default.Save();
             }
 
             // Check if the replays folder we have is good, if not ask for a new one

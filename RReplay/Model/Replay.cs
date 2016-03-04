@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using RReplay.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,6 +51,22 @@ namespace RReplay.Model
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+        }
+        //.ReplayExeVersion, SelectedReplay.ReplayArguments);
+        public string ReplayExeVersion
+        {
+            get
+            {
+                return Path.Combine(Settings.Default.redDragonExe, "DATA", "PC", Game.Version.ToString(), "wargame3.exe"); ;
+            }
+        }
+        
+        public string ReplayArguments
+        {
+            get
+            {
+                return String.Format("/replay {0}",  Name);
             }
         }
 

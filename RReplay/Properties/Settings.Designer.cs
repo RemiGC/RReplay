@@ -8,10 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RReplay.Properties
-{
-
-
+namespace RReplay.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
@@ -69,6 +68,18 @@ namespace RReplay.Properties
             }
             set {
                 this["exeFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string redDragonExe {
+            get {
+                return ((string)(this["redDragonExe"]));
+            }
+            set {
+                this["redDragonExe"] = value;
             }
         }
     }

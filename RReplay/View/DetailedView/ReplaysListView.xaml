@@ -39,6 +39,11 @@
                             <Image Source="{StaticResource RefreshIcon}"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="View Replay" Command="{Binding ViewReplayInGameCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="{StaticResource RefreshIcon}"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="Save JSON..." IsEnabled="False" />
                 </ContextMenu>
             </DataGrid.ContextMenu> 

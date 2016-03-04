@@ -44,6 +44,7 @@ namespace RReplay.ViewModel
         private RelayCommand browseToReplayFileCommand;
         private RelayCommand openReplayJSONView;
         private RelayCommand<Player> openDeckViewCommand;
+        private RelayCommand viewReplayInGameCommand;
 
         // The Data service that collect and return the Replays
         private readonly IReplayRepository dataService;
@@ -310,6 +311,22 @@ namespace RReplay.ViewModel
                 return windowClosingCommand ?? (windowClosingCommand = new RelayCommand<CancelEventArgs>(( value ) =>
                 {
                     Settings.Default.Save();
+                }));
+            }
+        }
+
+        public RelayCommand ViewReplayInGameCommand
+        {
+            get
+            {
+                return viewReplayInGameCommand ?? (viewReplayInGameCommand = new RelayCommand(( ) =>
+                {
+
+                    Process.Start(SelectedReplay.ReplayExeVersion, SelectedReplay.ReplayArguments);
+                },
+                ( ) =>
+                {
+                    return RedDragonExeFolder.GamePathContainsExe(Settings.Default.redDragonExe);
                 }));
             }
         }
