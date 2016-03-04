@@ -16,7 +16,7 @@ namespace RReplay.Model
         /// Replays that couldn't be parsed will be added to a list
         /// </summary>
         /// <param name="callback"></param>
-        public void GetData( Action<ObservableCollection<Replay>, List<Player>, List<Tuple<string, string>>, Exception> callback )
+        public void GetData( Action<ObservableCollection<Replay>, List<Player>, List<Tuple<string, string>>, Exception> callback, IDeckInfoRepository deckService )
         {
             if ( ReplayFolderPicker.ReplaysPathContainsReplay(Settings.Default.replaysFolder) )
             {
@@ -26,13 +26,11 @@ namespace RReplay.Model
                 var replaysFiles = from file in Directory.GetFiles(Settings.Default.replaysFolder, "*.wargamerpl2", SearchOption.TopDirectoryOnly)
                                    select file;
 
-                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
-
                 foreach ( string file in replaysFiles )
                 {
                     try
                     {
-                        var replay = new Replay(file, repository);
+                        var replay = new Replay(file, deckService);
                         replayCollection.Add(replay);
                     }
                     catch ( JsonSerializationException ex )

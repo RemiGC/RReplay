@@ -6,6 +6,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
+                       
         DataContext="{Binding Main.SelectedReplay, Mode=OneWay, Source={StaticResource Locator}}"
         Width="500"
         Height="600"
@@ -14,7 +15,7 @@
         ResizeMode="CanResizeWithGrip"
 
         WindowTransitionsEnabled="False"
-        Icon="{StaticResource ViewJsonIcon}">
+        Icon="{StaticResource ViewJsonIcon}" Title="JSON Data">
 
     <Grid>
         <TextBox x:Name="textBox" Margin="10" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding JSONDumbFromFile, Mode=OneTime}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"/>

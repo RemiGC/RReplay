@@ -45,6 +45,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>true</Prefer32Bit>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -173,7 +175,6 @@
     <Compile Include="MaxDeployableAmount.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MessageInfrastructure\MessageCommunicator.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\IUnitInfoRepository.cs" />

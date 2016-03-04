@@ -32,12 +32,12 @@ namespace RReplay.ViewModel
             if ( ViewModelBase.IsInDesignModeStatic )
             {
                 SimpleIoc.Default.Register<IReplayRepository, Design.DesignReplayRepository>();
-                SimpleIoc.Default.Register<IUnitInfoRepository, Design.DesignUnitInfoRepository>();
+                SimpleIoc.Default.Register<IDeckInfoRepository, Design.DesignDeckInfoRepository>();
             }
             else
             {
                 SimpleIoc.Default.Register<IReplayRepository, ReplayRepository>();
-                SimpleIoc.Default.Register<IUnitInfoRepository, UnitInfoRepository>();
+                SimpleIoc.Default.Register<IDeckInfoRepository, UnitDeckRepository>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

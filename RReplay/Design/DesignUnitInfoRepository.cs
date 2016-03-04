@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RReplay.Design
 {
-    public class DesignUnitInfoRepository : IUnitInfoRepository
+    public class DesignDeckInfoRepository : IDeckInfoRepository
     {
         Dictionary<Tuple<CoalitionEnum, byte>, Nations> nations;
         Dictionary<byte, Era> eras;
@@ -13,7 +13,7 @@ namespace RReplay.Design
 
         List<int> possibleFactory;
 
-        public DesignUnitInfoRepository()
+        public DesignDeckInfoRepository()
         {
             // Specialization data
             specializations = new Dictionary<byte, Specialization>();

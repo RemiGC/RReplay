@@ -19,7 +19,7 @@ namespace RReplay.Model
         public DateTime Date { get; private set; }
         public string CompletePath { get; private set; }
 
-        public Replay( string path, IUnitInfoRepository repository )
+        public Replay( string path, IDeckInfoRepository repository )
         {
             Players = new List<Player>();
             CompletePath = path;

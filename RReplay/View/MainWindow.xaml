@@ -38,7 +38,7 @@
 
         <Grid x:Name="LayoutRoot">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition MinHeight="150"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition MinHeight="350"></RowDefinition>
@@ -49,7 +49,7 @@
                 <ColumnDefinition MaxWidth="225"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-                <Label>Player name :</Label>
+                <Label>Player Name Filter:</Label>
                 <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" Width="125" ></TextBox>
             </StackPanel>
             <Rectangle Name="sizingElement" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="Transparent" Margin="0"/>

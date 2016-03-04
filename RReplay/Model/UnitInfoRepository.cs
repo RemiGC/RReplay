@@ -5,14 +5,14 @@ using System.Windows;
 
 namespace RReplay.Model
 {
-    public class UnitInfoRepository : IUnitInfoRepository
+    public class UnitDeckRepository : IDeckInfoRepository
     {
         Dictionary<Tuple<CoalitionEnum, int>, SimpleUnit> simpleUnits;
         Dictionary<Tuple<CoalitionEnum, byte>, Nations> nations;
         Dictionary<byte, Era> eras;
         Dictionary<byte, Specialization> specializations;
 
-        public UnitInfoRepository()
+        public UnitDeckRepository()
         {
             using ( var unitsContext = new UnitsContext() )
             {

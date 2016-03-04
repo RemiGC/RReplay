@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
-using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,34 +20,43 @@ namespace RReplay.ViewModel
         public const string UnitsGroupedViewPropertyName = "UnitsGroupedView";
         public const string PlayerPropertyName = "Player";
 
+        // The Main deck for this model
         private Deck deck;
+
+        // The player that created the deck
         private Player player;
 
+        // The collection of units from the deck
         private ObservableCollection<Unit> unitsCollection;
 
+        // The grouped collectionview of the units
         private ICollectionView unitsView;
 
         private RelayCommand dragAndDropCommand;
         private RelayCommand refreshCode;
 
+        private readonly IDeckInfoRepository deckInfoRepository;
+
         /// <summary>
         /// Initializes a new instance of the DeckViewModel class.
         /// </summary>
-        public DeckViewModel()
+        public DeckViewModel(IDeckInfoRepository repository)
         {
+            this.deckInfoRepository = repository;
             if ( IsInDesignMode )
             {
-                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
                 this.Player = new Player()
                 {
-                    Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw=", repository),
+                    Deck = new Deck("XPQOsihRZFCjdDOE46kMboULWvgmghBAchlQkDGDNSBVAqgRI0oyUBCk1Kgl6S/qVJhIqsV+T1J6jDw=", this.deckInfoRepository),
                     PlayerName = "My Super Name",
                     PlayerDeckName = "The name of the deck"
                 };
             }
         }
 
-
+        /// <summary>
+        /// The player who own the deck
+        /// </summary>
         public Player Player
         {
             get
@@ -59,16 +66,21 @@ namespace RReplay.ViewModel
             set
             {
                 Set(PlayerPropertyName, ref player, value);
-                IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
-                Deck = new Deck(value.Deck.DeckCode, repository);
+                Deck = new Deck(value.Deck.DeckCode, deckInfoRepository);
             }
         }
 
+        /// <summary>
+        /// The Title for this viewmodel
+        /// </summary>
         public string Title
         {
             get { return string.Format("{0} by {1}", Player.PlayerDeckName, Player.PlayerName); }
         }
 
+        /// <summary>
+        /// Drag & Drop command to move units within the collection
+        /// </summary>
         public RelayCommand DragAndDropCommand
         {
             get
@@ -84,6 +96,9 @@ namespace RReplay.ViewModel
             }
         }
 
+        /// <summary>
+        /// The CollectionView of all the units grouped on factory
+        /// </summary>
         public ICollectionView UnitsGroupedView
         {
             get
@@ -97,6 +112,9 @@ namespace RReplay.ViewModel
             }
         }
 
+        /// <summary>
+        /// Refresh the deck code based on the new order of the units collection
+        /// </summary>
         public RelayCommand RefreshCode
         {
             get
@@ -111,6 +129,9 @@ namespace RReplay.ViewModel
             }
         }
 
+        /// <summary>
+        /// The main Deck for this viewmodel
+        /// </summary>
         public Deck Deck
         {
             get
@@ -124,7 +145,9 @@ namespace RReplay.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// The units collection of the Deck
+        /// </summary>
         public ObservableCollection<Unit> UnitsCollection
         {
             get

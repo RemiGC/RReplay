@@ -11,12 +11,10 @@ namespace RReplay.Model
         // Extented transport property from the XML
         private SimpleUnit landingCraftUnitInfo;
 
-        public TwoTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, ushort secondTransportID )
-            : base(coalition, veterancy, unitID, transportID)
+        public TwoTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, ushort secondTransportID, IDeckInfoRepository repository )
+            : base(coalition, veterancy, unitID, transportID, repository)
         {
             LandingCraftID = secondTransportID;
-
-            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
             LandingCraftUnitInfo = repository.GetUnit(coalition, secondTransportID);
         }

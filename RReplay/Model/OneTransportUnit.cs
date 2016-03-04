@@ -12,12 +12,10 @@ namespace RReplay.Model
         SimpleUnit transportUnitInfo;
 
 
-        public OneTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID )
-            :base(coalition, veterancy, unitID)
+        public OneTransportUnit( CoalitionEnum coalition, byte veterancy, ushort unitID, ushort transportID, IDeckInfoRepository repository )
+            :base(coalition, veterancy, unitID, repository)
         {
             TransportID = transportID;
-
-            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
             TransportUnitInfo = repository.GetUnit(coalition, transportID);
         }

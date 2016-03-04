@@ -12,13 +12,11 @@ namespace RReplay.Model
         // Extented property from the XML
         SimpleUnit unitInfo;
 
-        public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID )
+        public Unit(CoalitionEnum coalition, byte veterancy, ushort unitID, IDeckInfoRepository repository )
         {
             Coalition = coalition;
             Veterancy = veterancy;
             UnitID = unitID;
-
-            IUnitInfoRepository repository = ServiceLocator.Current.GetInstance<IUnitInfoRepository>();
 
             UnitInfo = repository.GetUnit(coalition, unitID);
         }

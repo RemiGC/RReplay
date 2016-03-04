@@ -84,7 +84,7 @@ namespace RReplay.Model
             }
         }
 
-        public Deck(string PlayerDeckContent, IUnitInfoRepository repository )
+        public Deck(string PlayerDeckContent, IDeckInfoRepository repository )
         {
             this.deckCode = PlayerDeckContent;
             var base64EncodedBytes = System.Convert.FromBase64String(deckCode);
@@ -142,7 +142,7 @@ namespace RReplay.Model
 
                 ushort landingCraftID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                UnitsList.Add(new TwoTransportUnit(coalition,veterancy,unitID,transportID,landingCraftID));
+                UnitsList.Add(new TwoTransportUnit(coalition, veterancy, unitID, transportID, landingCraftID, repository));
             }
 
             // 23 bits for each one tansport unit
@@ -154,7 +154,7 @@ namespace RReplay.Model
 
                 ushort transportID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                UnitsList.Add(new OneTransportUnit(coalition, veterancy, unitID, transportID));
+                UnitsList.Add(new OneTransportUnit(coalition, veterancy, unitID, transportID, repository));
             }
 
             units = (byte)((bitArrayInversed.Length - posArray) / 13);
@@ -166,7 +166,7 @@ namespace RReplay.Model
 
                 ushort unitID = GetBits<ushort>(bitArrayInversed, 10, ref posArray);
 
-                UnitsList.Add(new Unit(coalition, veterancy, unitID));
+                UnitsList.Add(new Unit(coalition, veterancy, unitID, repository));
             }
         }
 

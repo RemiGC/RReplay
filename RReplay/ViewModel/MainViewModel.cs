@@ -1,7 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
-using RReplay.MessageInfrastructure;
 using RReplay.Model;
 using RReplay.Properties;
 using RReplay.View;
@@ -50,6 +48,9 @@ namespace RReplay.ViewModel
         // The Data service that collect and return the Replays
         private readonly IReplayRepository dataService;
 
+        // The deck info repository
+        private readonly IDeckInfoRepository deckRepository;
+
         // ObservableCollection of all Replays
         private ObservableCollection<Replay> replaysCollection;
 
@@ -59,10 +60,12 @@ namespace RReplay.ViewModel
         // The Replay currently selected
         private Replay selectedReplay;
 
-        public MainViewModel( IReplayRepository dataService )
+        public MainViewModel( IReplayRepository dataService, IDeckInfoRepository deckService )
         {
             this.dataService = dataService;
-            this.dataService.GetData(this.ReceiveData);
+            this.deckRepository = deckService;
+
+            this.dataService.GetData(this.ReceiveData, this.deckRepository);
 
             if ( IsInDesignMode )
             {
@@ -92,7 +95,7 @@ namespace RReplay.ViewModel
                     if ( ReplayFolderPicker.GetNewReplayFolder(Settings.Default.replaysFolder, out newPath) )
                     {
                         Settings.Default.replaysFolder = newPath;
-                        dataService.GetData(ReceiveData);
+                        dataService.GetData(ReceiveData, this.deckRepository);
                     }
                     else
                     {
@@ -318,7 +321,7 @@ namespace RReplay.ViewModel
                 return openDeckViewCommand ?? (openDeckViewCommand = new RelayCommand<Player>(( value ) =>
                 {
                     DeckView dv = new DeckView();
-                    DeckViewModel dvm = new DeckViewModel()
+                    DeckViewModel dvm = new DeckViewModel(this.deckRepository)
                     {
                         Player = value
                     };
@@ -369,7 +372,7 @@ namespace RReplay.ViewModel
         }
 
         /// <summary>
-        /// Command to open the default browser to the Steam Community Page for that SteamID
+        /// Command to open the default browser to the Steam Community Page for the user SteamID. This command is unavailable for AI
         /// </summary>
         public RelayCommand<Player> OpenSteamCommunityPageCommand
         {
@@ -441,7 +444,7 @@ namespace RReplay.ViewModel
             {
                 return refreshReplays ?? (refreshReplays = new RelayCommand(() =>
                 {
-                    dataService.GetData(ReceiveData);
+                    dataService.GetData(ReceiveData, this.deckRepository);
                 }));
             }
         }
