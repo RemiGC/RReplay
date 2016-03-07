@@ -10,19 +10,15 @@ namespace RReplay.Converters
     {
         public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            string specializationFlagPath = null;
-
             if ( !((string)value).Equals("All",StringComparison.OrdinalIgnoreCase) )
             {
-                string path = Path.Combine(Settings.Default.exeFolder, "Icons", "Deck", (string)value + ".png");
-
-                if ( File.Exists(path) )
-                {
-                    specializationFlagPath = path;
-                }
+                Uri uri = new Uri($"pack://application:,,,/RReplay.Ressources;component/Resources/Icons/Deck/{(string)value}.png", UriKind.Absolute);
+                return uri;
             }
-
-            return specializationFlagPath;
+            else
+            {
+                return null;
+            }
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

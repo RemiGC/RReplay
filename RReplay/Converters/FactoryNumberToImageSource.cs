@@ -42,16 +42,8 @@ namespace RReplay.Converters
                     break;
             }
 
-            string factoryImagePath = Path.Combine(Settings.Default.exeFolder, "Icons", "Hud", name + ".png");
-
-            if ( !File.Exists(factoryImagePath) )
-            {
-                return null;
-            }
-            else
-            {
-                return factoryImagePath;
-            }
+            Uri uri = new Uri($"pack://application:,,,/RReplay.Ressources;component/Resources/Icons/Hud/{name}.png", UriKind.Absolute);
+            return uri;
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

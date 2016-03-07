@@ -18,19 +18,7 @@ namespace RReplay.Converters
         /// <returns></returns>
         public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            string unitImagePath = Path.Combine(Settings.Default.exeFolder, "Icons", "Units", (string)value + ".jpg");
-
-            if ( !File.Exists(unitImagePath) )
-            {
-                unitImagePath = Path.Combine(Settings.Default.exeFolder, "Icons", "Units", "NoImage.jpg");
-            }
-
-            if ( !File.Exists(unitImagePath) )
-            {
-                unitImagePath = null;
-            }
-
-            return unitImagePath;
+            return new Uri($"pack://application:,,,/RReplay.Ressources;component/Resources/Icons/Units/{(string)value}.jpg", UriKind.Absolute); ;
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

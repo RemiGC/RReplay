@@ -10,19 +10,8 @@ namespace RReplay.Converters
     {
         public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
         {
-            string CountryFlagPath = Path.Combine(Settings.Default.exeFolder, "Icons", "Flags", (string)value + "_flag.png");
-
-            if ( !File.Exists(CountryFlagPath) )
-            {
-                CountryFlagPath = Path.Combine(Settings.Default.exeFolder, "Icons", "Flags", "neut_flag.png");
-            }
-
-            if ( !File.Exists(CountryFlagPath) )
-            {
-                CountryFlagPath = null;
-            }
-
-            return CountryFlagPath;
+            Uri uri = new Uri($"pack://application:,,,/RReplay.Ressources;component/Resources/Icons/Flags/{(string)value}_flag.png", UriKind.Absolute);
+            return uri;
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

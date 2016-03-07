@@ -30,9 +30,7 @@ namespace RReplay.Converters
                     break;
             }
 
-            string path = Path.Combine(Settings.Default.exeFolder, "Icons", "Rank", name);
-
-            return path;
+            return new Uri($"pack://application:,,,/RReplay.Ressources;component/Resources/Icons/Rank/{name}", UriKind.Absolute); ;
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

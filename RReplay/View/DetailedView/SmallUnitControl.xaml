@@ -47,21 +47,49 @@
         <Binding Path="Deck.UnitsCollection[0]" Source="{StaticResource Locator}"/>
     </d:DataContext>
 
-    <Border BorderThickness="1" CornerRadius="0" Width="140" >
+    <Border BorderThickness="1" CornerRadius="0" Width="180" >
         <DockPanel>
             <Image Source="{Binding UnitInfo.MotherCountry, Converter={StaticResource CountryCodeToImageSource}}" ToolTip="{Binding UnitInfo.MotherCountry}" Width="24" Panel.ZIndex="3" Height="16" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,0,0">
             </Image>
-            <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" ToolTip="{Binding Veterancy, Converter={StaticResource VeterancyToString}}" DockPanel.Dock="Left" Panel.ZIndex="3" Width="16" Height="25" Margin="-35,15,0,0">
+            <Image Source="{Binding Veterancy, Converter={StaticResource VeterancyToImageSource}}" 
+                   ToolTip="{Binding Veterancy, Converter={StaticResource VeterancyToString}}" 
+                   DockPanel.Dock="Left" Panel.ZIndex="3" Width="16" Height="25" Margin="-35,35,0,0">
                 <Image.Effect>
                     <ts.Effects:InvertColorEffect/>
                 </Image.Effect>
             </Image>
-            <Image Style="{StaticResource UnitMouseOver}" Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}" Width="120" Margin="-21,2,0,0"  HorizontalAlignment="Left" DockPanel.Dock="Top"/>
-            <TextBlock Text="{Binding UnitInfo.UnitName}" ToolTip="{Binding UnitInfo.UnitName}" Panel.ZIndex="1" Margin="-20,0,-36,0" DockPanel.Dock="Bottom" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Width="131" IsHitTestVisible="True" UseLayoutRounding="False"  />
-            <TextBlock Text="{Binding UnitInfo.TypeUnitValue,TargetNullValue='??'}" ToolTip="{Binding UnitInfo.UnitTypeName}" Panel.ZIndex="1" Margin="-15,-110,0,0" DockPanel.Dock="Right" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Width="15" Height="20"  IsHitTestVisible="True" UseLayoutRounding="False" VerticalAlignment="Center"  />
-            <Image x:Name="TransportImage" Style="{StaticResource ImageTransportVisibility}" Width="80" Height="40" Margin="0,-40,-35,0" Panel.ZIndex="1" DockPanel.Dock="Right" >
+            <Image Style="{StaticResource UnitMouseOver}" 
+                   Source="{Binding UnitInfo.ClassNameForDebug, Converter={StaticResource ClassNameDebugToImageSource}}"
+                   Width="164"
+                   Height="84"
+                   Margin="-21,2,0,0"  
+                   HorizontalAlignment="Left" DockPanel.Dock="Top"/>
+            <TextBlock Text="{Binding UnitInfo.UnitName}" 
+                       ToolTip="{Binding UnitInfo.UnitName}" 
+                       Panel.ZIndex="1" 
+                       Margin="-20,0,0,0" 
+                       DockPanel.Dock="Bottom" 
+                       HorizontalAlignment="Left" 
+                       TextTrimming="CharacterEllipsis" 
+                       Width="174" IsHitTestVisible="True" UseLayoutRounding="False"  />
+            <TextBlock Text="{Binding UnitInfo.TypeUnitValue,TargetNullValue='??'}" 
+                       ToolTip="{Binding UnitInfo.UnitTypeName}"
+                       Panel.ZIndex="1"
+                       Margin="-15,-85,0,0" 
+                       DockPanel.Dock="Right" 
+                       HorizontalAlignment="Right" 
+                       Width="10" 
+                       Height="20"
+                       VerticalAlignment="Top"  />
+            <Image x:Name="TransportImage" 
+                   Style="{StaticResource ImageTransportVisibility}" 
+                   Width="80" 
+                   Height="40" 
+                   Margin="0,-40,-75,0" 
+                   Panel.ZIndex="1" 
+                   DockPanel.Dock="Right" >
             </Image>
-            
+
 
         </DockPanel>
     </Border>
