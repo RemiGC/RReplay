@@ -33,7 +33,7 @@ namespace RReplay.Model
             }
         }
 
-        public int Factory
+        public virtual int Factory
         {
             get
             {
@@ -57,7 +57,7 @@ namespace RReplay.Model
             }
         }
 
-        public bool HaveTransport
+        public virtual bool HaveTransport
         {
             get
             {

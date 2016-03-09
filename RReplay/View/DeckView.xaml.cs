@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
+using RReplay.ViewModel;
 
 namespace RReplay.View
 {
@@ -11,8 +12,9 @@ namespace RReplay.View
         /// <summary>
         /// Initializes a new instance of the DeckView class.
         /// </summary>
-        public DeckView()
+        public DeckView(DeckViewModel dataContext)
         {
+            DataContext = dataContext;
             InitializeComponent();
         }
     }

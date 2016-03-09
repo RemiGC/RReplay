@@ -337,20 +337,23 @@ namespace RReplay.ViewModel
             {
                 return openDeckViewCommand ?? (openDeckViewCommand = new RelayCommand<Player>(( value ) =>
                 {
-                    DeckView dv = new DeckView();
+                    
+                    
+
                     DeckViewModel dvm = new DeckViewModel(this.deckRepository)
                     {
                         Player = value
                     };
 
-                    dv.DataContext = dvm;
-                    
+                    DeckView dv = new DeckView(dvm);
+
+                    dv.Show();
                     /*Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator()
                     {
                         deck = value
                     });*/
 
-                    dv.Show();
+
                 },
                 ( value ) =>
                 {

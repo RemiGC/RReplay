@@ -18,7 +18,7 @@ namespace RReplay
         public string ClassNameForDebug { get; set; }
         public string UnitName { get; set; }
         public string MotherCountry { get; set; }
-        public int Category { get; set; }
+        public Nullable<int> Category { get; set; }
         public int Factory { get; set; }
         public string UnitTypeName { get; set; }
         public Nullable<int> TypeUnitValue { get; set; }

@@ -200,7 +200,6 @@
     </Compile>
     <Compile Include="Settings\RedDragonExeFolder.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Settings\exeFolder.cs" />
     <Compile Include="Settings\ReplayFolderPicker.cs" />
     <Compile Include="ShowInMenu.cs">
       <DependentUpon>UnitsModel.tt</DependentUpon>

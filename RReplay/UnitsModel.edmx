@@ -184,25 +184,20 @@
 warning 6002: The table/view 'F:\DEV\REDREPLAY\REDREPLAY\RREPLAY\UNITS.DB.MDF.dbo.MainUnitsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MainUnitsView">
           <Key>
-            <PropertyRef Name="DeckId" />
-            <PropertyRef Name="Coalition" />
+            
+            
+            
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ClassNameForDebug" />
-            <PropertyRef Name="UnitName" />
-            <PropertyRef Name="MotherCountry" />
-            <PropertyRef Name="Category" />
-            <PropertyRef Name="Factory" />
-            <PropertyRef Name="UnitTypeName" />
           </Key>
           <Property Name="DeckId" Type="int" Nullable="false" />
           <Property Name="Coalition" Type="tinyint" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ClassNameForDebug" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="UnitName" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="MotherCountry" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="ClassNameForDebug" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MotherCountry" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Category" Type="int" />
           <Property Name="Factory" Type="int" Nullable="false" />
-          <Property Name="UnitTypeName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="UnitTypeName" Type="nvarchar" MaxLength="1000" />
           <Property Name="TypeUnitValue" Type="int" />
         </EntityType>
         <Association Name="FK_MaxDeployableAmount_TUniteAuSol">
@@ -742,22 +737,14 @@ warning 6002: The table/view 'F:\DEV\REDREPLAY\REDREPLAY\RREPLAY\UNITS.DB.MDF.db
         <EntityType Name="SimpleUnit">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ClassNameForDebug" />
-            <PropertyRef Name="UnitName" />
-            <PropertyRef Name="MotherCountry" />
-            <PropertyRef Name="Category" />
-            <PropertyRef Name="Factory" />
-            <PropertyRef Name="UnitTypeName" />
-            <PropertyRef Name="DeckId" />
-            <PropertyRef Name="Coalition" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ClassNameForDebug" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MotherCountry" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="ClassNameForDebug" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UnitName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MotherCountry" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="Int32" />
           <Property Name="Factory" Type="Int32" Nullable="false" />
-          <Property Name="UnitTypeName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UnitTypeName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="TypeUnitValue" Type="Int32" />
           <Property Name="DeckId" Type="Int32" Nullable="false" />
           <Property Name="Coalition" Type="Byte" Nullable="false" />

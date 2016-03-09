@@ -19,11 +19,11 @@ namespace RReplay.Model
             LandingCraftUnitInfo = repository.GetUnit(coalition, secondTransportID);
         }
 
-        public new int Factory
+        public override int Factory
         {
             get
             {
-                IValueConverter fact = new FactoryNumberToName();
+                var fact = new FactoryNumberToName();
                 if ( landingCraftUnitInfo.Factory == (int)fact.ConvertBack("Naval", typeof(int), null, null) )
                 {
                     return landingCraftUnitInfo.Factory;
@@ -48,7 +48,7 @@ namespace RReplay.Model
             }
         }
 
-        public new bool HaveTransport
+        public override bool HaveTransport
         {
             get
             {
